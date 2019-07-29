@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  evaluation: one
+  extension_activity: one
+  preparation: 9.99
+  implementation: 9.99
+  consultation: 9.99
+  total_credit: 9.99
+  quantity: 9.99
+
+two:
+  evaluation: two
+  extension_activity: two
+  preparation: 9.99
+  implementation: 9.99
+  consultation: 9.99
+  total_credit: 9.99
+  quantity: 9.99

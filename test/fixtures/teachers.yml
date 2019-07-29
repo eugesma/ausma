@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  profile: one
+  user: one
+  employee_num: MyString
+  credit: 9.99
+
+two:
+  profile: two
+  user: two
+  employee_num: MyString
+  credit: 9.99

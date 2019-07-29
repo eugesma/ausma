@@ -1,0 +1,21 @@
+<%= simple_form_for @profile, html: {class: "", role: 'check-modified'} do |f| %>
+  <%= f.error_notification %>
+  <div class='container-fluid'>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :last_name, label: "Apellido" %>
+        <%= f.input :email, placeholder: 'usuario@dominio.com' %>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :first_name, label: "Nombre" %>
+        <%= f.simple_fields_for :teacher do |teacher| %>
+          <%= teacher.input :employee_num,
+            label: "Número de empleado",
+            required: true
+          %>
+          <%= teacher.input :id, :as => :hidden, value: "#{ f.object.teacher.id}" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

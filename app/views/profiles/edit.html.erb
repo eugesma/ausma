@@ -1,0 +1,26 @@
+<style>
+  body {
+    background-image: url("<%= asset_path('bg-signup.jpg') %>");
+  }
+</style>
+<br><br><br><br><br>
+<div class="col-md-6 mx-auto">
+  <div class="card rounded-0">
+    <div class="card-header bg-warning">
+      <h4>
+      <%= fa_icon "user-edit" %> Editando perfil</h4>
+    </div>
+    <div class="card-body">
+      <%= render 'form' %>
+    </div>
+    <div class="card-footer text-right">
+      <%= link_to :root, class: "btn btn-light" do %>
+        Volver
+      <% end %>
+      <button type='submit' name='commit' class='btn btn-success' form='edit_profile_<%= @profile.id %>'>
+        <%= fa_icon "save" %> Guardar cambios
+      </button>
+    </div>
+  </div>
+</div>
+<br><br><br><br><br>

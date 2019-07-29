@@ -1,0 +1,371 @@
+<%= simple_form_for @evaluation do |f| %>
+  <% if evaluation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(evaluation.errors.count, "error") %> prohibited this evaluation from being saved:</h2>
+
+      <ul>
+      <% evaluation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :user_id, value: "#{ f.object.user_id.present? ? f.object.user_id : @user.id }" %>
+  <%= f.hidden_field :teacher_id, value: "#{ f.object.teacher_id.present? ? f.object.teacher_id : @user.teacher.id }" %>
+  <div class="col-md-12">
+    <div class="row"><h5><strong>Actividades registrales</strong></h5></div>
+    <div class="row">
+      <ol>
+        <li>Dictado de materias bimestrales o cuatrimestrales, y talleres (Ingreso Universitario, Integración conceptual).</li>
+        <li>Exámenes finales, clases de consulta y reuniones académicas.</li>
+        <li>Transferencia: curso, taller, seminario, conferencia, etc.</li>
+        <li>Transferencia recibida: congreso, simposio, seminario, curso, taller, charla o debate.</li>
+        <li>Gobierno universitario (CD, Secretaría, Director de área y departamento).</li>
+        <li>Proyectos institucionales I+D+E+i.</li>
+        <li>Publicaciones (sin soporte de proyecto).</li>
+        <li>Participación en tribunales, comités, etc.</li>
+        <li>Formación de Recursos Humanos. Dirección trabajos finales.</li>
+        <li>Otra: para cada nueva actividad se establecerán los créditos por una comisión.</li>
+      </ol>
+    </div>
+    <div class="row"><h5><strong>Acreditación de cada actividad institucional. Asignación de Créditos</strong></h5></div>
+    <p>Se deberá revisar la propuesta y modificar o completar para cada actividad registrable la asignación horaria. Al final, se podrán proponer otras actividades que no han sido tenidas en cuenta.</p>
+    <div class="row">
+      <% if @assignatures.present? %>
+        <h5><strong>1) Dictado de materias curriculares.</strong></h5>
+        <hr>
+        
+        <table class="table table-bordered">
+          <thead>
+            <tr class="table-secondary">
+              <th rowspan="2">Carácter</th>
+              <th colspan="3" class="text-center">Tiempo(h)</th>
+              <th rowspan="2">Crédito</th>
+              <th rowspan="2">Observación</th>
+            </tr>
+            <tr class="table-secondary">
+              <th>Preparación</th>
+              <th>Implementación</th>
+              <th>Consulta (*)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @assignatures.each do |ass| %>
+            <tr>
+              <%= f.simple_fields_for :evaluation_assignature do |e_a| %>
+                <%= e_a.hidden_field :assignature_id, value: "#{ ass.id }" %>
+                <td><%= ass.name %></td>
+                <td>
+                  <%= e_a.input :preparation, label: false, wrapper: :vertical_input_group do %>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><%= number_with_precision(ass.preparation, precision: 2, strip_insignificant_zeros: true) %></span>
+                    </div>
+                    <%= e_a.input_field :preparation, size: 7, class:"form-control" %>
+                  <% end %>
+                </td>                  
+                <td>
+                  <%= e_a.input :implementation, label: false, wrapper: :vertical_input_group do %>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><%= number_with_precision(ass.implementation, precision: 2, strip_insignificant_zeros: true) %></span>
+                    </div>
+                    <%= e_a.input_field :implementation, size: 7, class:"form-control" %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= e_a.input :consultation, label: false, wrapper: :vertical_input_group do %>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><%= number_with_precision(ass.consultation, precision: 2, strip_insignificant_zeros: true) %></span>
+                    </div>
+                    <%= e_a.input_field :consultation, size: 7, class:"form-control" %>
+                  <% end %>
+                </td>
+                <td><%= number_with_precision(ass.credit, precision: 2, strip_insignificant_zeros: true) %></td>
+                <td><%= ass.observation %></td>
+              <% end %>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+    <div class="row">
+      <% if @dedications.present? %>
+        <h5><strong>2) Exámenes finales, consultas de estudiantes y reuniones académicas.</strong></h5>
+        <hr>
+        
+        <table class="table table-bordered">
+          <thead>
+            <tr class="table-secondary">
+              <th>Carácter</th>
+              <th>Cantidad</th>
+              <th>Observación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @dedications.each do |ded| %>
+            <tr>
+              <%= f.simple_fields_for :evaluation_dedication do |e_d| %>
+                <%= e_d.hidden_field :dedication_id, value: "#{ ded.id }" %>
+                <td><%= ded.name %></td>
+                <td><%= e_d.input :quantity, :input_html => {size: 5}, label: false %></td>
+                <td><%= ded.observation %></td>
+              <% end %>
+            </tr>
+            <% end %>
+          </tbody>
+      </table>
+    <% end %>
+    <p>(*) Consulta de alumnos: referidas al curso regular o a los exámenes finales de ese período.</p>
+  </div>
+    <div class="row">
+      <% if @extension_activities.present? %>
+        <h5><strong>3) Extensión universitaria.</strong></h5>
+        <hr>
+        <table class="table table-bordered">
+          <thead>
+            <tr class="table-secondary">
+              <th rowspan="2">Carácter</th>
+              <th colspan="3" class="text-center">Tiempo(h)</th>
+              <th rowspan="2">Crédito</th>
+              <th rowspan="2">Observación</th>
+            </tr>
+            <tr class="table-secondary">
+              <th>Preparación</th>
+              <th>Implementación</th>
+              <th>Evaluación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @extension_activities.each do |ext| %>
+              <tr>
+                <%= f.simple_fields_for :evaluation_extension_activities do |e_e_a| %>
+                  <%= e_e_a.hidden_field :extension_activity_id, value: "#{ ext.id }" %>
+                  <td><%= ext.name %></td>
+                  <td>
+                    <%= e_e_a.input :preparation, label: false, wrapper: :vertical_input_group do %>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><%= number_with_precision(ext.preparation, precision: 2, strip_insignificant_zeros: true) %></span>
+                      </div>
+                      <%= e_e_a.input_field :preparation, size: 7, class:"form-control" %>
+                    <% end %>
+                  </td>                  
+                  <td>
+                    <%= e_e_a.input :implementation, label: false, wrapper: :vertical_input_group do %>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><%= number_with_precision(ext.implementation, precision: 2, strip_insignificant_zeros: true) %></span>
+                      </div>
+                      <%= e_e_a.input_field :implementation, size: 7, class:"form-control" %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= e_e_a.input :evaluation, label: false, wrapper: :vertical_input_group do %>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><%= number_with_precision(ext.evaluation, precision: 2, strip_insignificant_zeros: true) %></span>
+                      </div>
+                      <%= e_e_a.input_field :evaluation, size: 7, class:"form-control" %>
+                    <% end %>
+                  </td>
+                  <td><%= number_with_precision(ext.credit, precision: 2, strip_insignificant_zeros: true) %></td>
+                  <td><%= ext.observation %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <p>Cualquier otro evento de transferencia (Taller, seminario, etc.) se homologa al presente cuadro en la cantidad de horas asignadas y los créditos finales.</p>
+      <% end %>
+    </div>
+    <div class="row">
+      <% if @teacher_formations.present? %>
+        <h5><strong>4) Formación docente.</strong></h5>
+        <hr>
+        <table class="table table-bordered">
+          <thead>
+            <tr class="table-secondary">
+              <th>Carácter</th>
+              <th>Cantidad (h)</th>
+              <th>Crédito por hora</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @teacher_formations.each do |teacher_formation| %>
+            <tr>
+              <%= f.simple_fields_for :evaluation_teacher_formation do |etf| %>
+                <%= etf.hidden_field :teacher_formation_id, value: "#{ teacher_formation.id }" %>
+                <td><%= teacher_formation.name %></td>
+                <td><%= etf.input :quantity, :input_html => {size: 5}, size: 5, label: false %></td>
+                <td><%= teacher_formation.credit %></td>
+              <% end %>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+      <p>(*) Consulta de alumnos: referidas al curso regular o a los exámenes finales de ese período.</p>
+    </div>
+    <div class="row">
+      <% if @governments.present? %>
+        <h5><strong>5) Gobierno.</strong></h5>
+        <hr>
+        <table class="table table-bordered">
+          <thead>
+            <tr class="table-secondary">
+              <th>Función</th>
+              <th>Preparación o Comisión</th>
+              <th>Reunión</th>
+              <th>Créditos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @governments.each do |government| %>
+            <tr>
+              <%= f.simple_fields_for :evaluation_government do |eg| %>
+                <%= eg.hidden_field :government_id, value: "#{ government.id }" %>
+                <td><%= government.name %></td>
+                <td>
+                  <%= eg.input :preparation, label: false, wrapper: :vertical_input_group do %>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><%= number_with_precision(government.preparation, precision: 2, strip_insignificant_zeros: true) %></span>
+                    </div>
+                    <%= eg.input_field :preparation, size: 7, class:"form-control" %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= eg.input :meeting, label: false, wrapper: :vertical_input_group do %>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><%= number_with_precision(government.meeting, precision: 2, strip_insignificant_zeros: true) %></span>
+                    </div>
+                    <%= eg.input_field :meeting, size: 7, class:"form-control" %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= eg.input :credit, label: false, wrapper: :vertical_input_group do %>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><%= number_with_precision(government.credit, precision: 2, strip_insignificant_zeros: true) %></span>
+                    </div>
+                    <%= eg.input_field :credit, size: 7, class:"form-control" %>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+    <div class="row">
+      <% if @projects.present? %>
+        <h5><strong>6) Proyectos I+D+E+i institucionales.</strong></h5>
+        <hr>
+        <p>Se establecen en función de la carga aprobada por Consejo Directivo</p>
+        <div class="col-md-6 mx-auto">
+          <table class="table table-bordered">
+            <thead>
+              <tr class="table-secondary">
+                <th class="col-sm-6">Carácter</th>
+                <th class="col-sm-6">Crédito asignado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @projects.each do |project| %>
+              <tr>
+                <%= f.simple_fields_for :evaluation_project do |ep| %>
+                  <%= ep.hidden_field :project_id, value: "#{ project.id }" %>
+                  <td><%= project.name %></td>
+                  <td><%= ep.input :credit, :input_html => {size: 5}, size: 5, label: false %></td>
+                <% end %>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <% if @posts.present? %>
+        <h5><strong>7) Publicaciones.</strong></h5>
+        <hr>
+          <table class="table table-bordered">
+            <thead>
+              <tr class="table-secondary">
+                <th>Carácter</th>
+                <th>Crédito</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @posts.each do |post| %>
+              <tr>
+                <%= f.simple_fields_for :evaluation_post do |ep| %>
+                  <%= ep.hidden_field :post_id, value: "#{ post.id }" %>
+                  <td><%= post.name %></td>
+                  <td>
+                    <%= ep.input :credit, label: false, wrapper: :vertical_input_group do %>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><%= number_with_precision(post.credit, precision: 2, strip_insignificant_zeros: true) %></span>
+                      </div>
+                      <%= ep.input_field :credit, size: 7, class:"form-control" %>
+                    <% end %>
+                  </td>
+                <% end %>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <p>Si la publicación se corresponde a la producción de un proyecto, los créditos ya se consideran incluidos en la carga horaria asignada del proyecto.</p>
+      <% end %>
+    </div>
+    <div class="row">
+      <% if @participations.present? %>
+        <h5><strong>8) Participación en tribunales, comités, publicaciones, etc.</strong></h5>
+        <hr>
+        <table class="table table-bordered">
+          <thead>
+            <tr class="table-secondary">
+              <th>Carácter</th>
+              <th>Preparación</th>
+              <th>Reunión pd.</th>
+              <th>Créditos</th>
+              <th>Observación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @participations.each do |participation| %>
+              <tr>
+                <%= f.simple_fields_for :evaluation_participation do |ep| %>
+                  <%= ep.hidden_field :participation_id, value: "#{ participation.id }" %>
+                  <td><%= participation.name %></td>
+                  <td>
+                    <%= ep.input :preparation, label: false, wrapper: :vertical_input_group do %>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><%= number_with_precision(participation.preparation, precision: 2, strip_insignificant_zeros: true) %></span>
+                      </div>
+                      <%= ep.input_field :preparation, size: 7, class:"form-control" %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= ep.input :meeting, label: false, wrapper: :vertical_input_group do %>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><%= number_with_precision(participation.meeting, precision: 2, strip_insignificant_zeros: true) %></span>
+                      </div>
+                      <%= ep.input_field :meeting, size: 7, class:"form-control" %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= ep.input :credit, label: false, wrapper: :vertical_input_group do %>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><%= number_with_precision(participation.credit, precision: 2, strip_insignificant_zeros: true) %></span>
+                      </div>
+                      <%= ep.input_field :credit, size: 7, class:"form-control", min: 0, max: 10 %>
+                    <% end %>
+                  </td>
+                  <td><%= participation.observation %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+<% end %>

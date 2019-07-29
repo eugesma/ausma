@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  evaluation: one
+  dedication: one
+  total_credit: 9.99
+  quantity: 1
+
+two:
+  evaluation: two
+  dedication: two
+  total_credit: 9.99
+  quantity: 1

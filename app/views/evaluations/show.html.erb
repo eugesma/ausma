@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Teacher:</strong>
+  <%= @evaluation.teacher %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @evaluation.user %>
+</p>
+
+<p>
+  <strong>Credit:</strong>
+  <%= @evaluation.credit %>
+</p>
+
+<%= link_to 'Edit', edit_evaluation_path(@evaluation) %> |
+<%= link_to 'Back', evaluations_path %>

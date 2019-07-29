@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+# Use simple_form for do forms more easily
+gem 'simple_form'
+gem 'devise'
 gem 'popper_js', '~> 1.14.5'
 # To jquery files
 gem 'jquery-rails'
@@ -48,6 +51,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'binding_of_caller'
+  gem "better_errors"
 end
 
 group :development do

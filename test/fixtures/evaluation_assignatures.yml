@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  quantity: 9.99
+  total_credit: 9.99
+  assignature: one
+  evaluation: one
+
+two:
+  quantity: 9.99
+  total_credit: 9.99
+  assignature: two
+  evaluation: two

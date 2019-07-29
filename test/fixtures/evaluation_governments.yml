@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  evaluation: one
+  government: one
+  preparation: 9.99
+  meeting: 9.99
+  total_credit: 9.99
+
+two:
+  evaluation: two
+  government: two
+  preparation: 9.99
+  meeting: 9.99
+  total_credit: 9.99

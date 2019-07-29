@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  evaluation: one
+  teacher_formation: one
+  quantity: 9.99
+  total_credit: 9.99
+
+two:
+  evaluation: two
+  teacher_formation: two
+  quantity: 9.99
+  total_credit: 9.99

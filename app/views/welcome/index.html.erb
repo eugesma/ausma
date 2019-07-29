@@ -2,9 +2,11 @@
   <header class="masthead">
     <div class="container d-flex h-100 align-items-center">
       <div class="mx-auto text-center">
+        <%= render "layouts/flash_notices" %>
         <h1 class="mx-auto my-0 text-uppercase">AUSMA</h1>
         <h2 class="text-white-50 mx-auto mt-2 mb-5">Universidad Nacional del Comahue</h2>
-        <a href="#about" class="btn btn-primary js-scroll-trigger">Comenzar</a>
+        <%= link_to 'Comenzar', new_evaluation_path, class: "btn btn-primary" %>
+        <!-- <a href="#about" class="btn btn-primary js-scroll-trigger">Comenzar</a> -->
       </div>
     </div>
   </header>

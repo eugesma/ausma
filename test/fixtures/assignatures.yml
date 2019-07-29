@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  preparation: 9.99
+  implementation: 9.99
+  observation: MyText
+  name: MyString
+
+two:
+  preparation: 9.99
+  implementation: 9.99
+  observation: MyText
+  name: MyString
