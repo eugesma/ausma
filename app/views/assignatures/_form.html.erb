@@ -1,0 +1,45 @@
+<%=  simple_form_for(assignature) do |f| %>
+  <div class='row'>
+    <div class='col-md-12'>
+      <div class="row">
+        <div class='col-md-6'>
+          <%= f.input :name, label: 'Nombre' %>
+          <%= f.input :observation, label: 'Observación' %>
+        </div><br>
+        <div class="col-md-6">
+        <table>
+          <thead>
+            <tr>
+              <th>Concepto</th>
+              <th>Mín</th>
+              <th>Máx</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>Preparación</td>
+              <td><%= f.input :min_preparation, label: false %></td>
+              <td><%= f.input :preparation, label: false %></td>
+            </tr>
+            <tr>
+              <td>Implementación</td>
+              <td><%= f.input :min_implementation, label: false %></td>
+              <td><%= f.input :implementation, label: false %></td>
+            </tr>
+            <tr>
+              <td>Consulta</td>
+              <td><%= f.input :min_consultation, label: false %></td>
+              <td><%= f.input :consultation, label: false %></td>
+            </tr>
+            <tr>
+              <td>Crédito</td>
+              <td><%= f.input :min_credit, label: false %></td>
+              <td><%= f.input :credit, label: false %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<% end %>

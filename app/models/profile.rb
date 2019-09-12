@@ -1,6 +1,8 @@
 class Profile < ApplicationRecord
+  # Relaciones
   belongs_to :user
   has_one :teacher
+  has_one_attached :avatar
 
   accepts_nested_attributes_for :teacher,
     :reject_if => :all_blank,

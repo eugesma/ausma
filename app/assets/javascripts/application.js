@@ -18,3 +18,19 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+
+// Se oculta el flash message
+window.setTimeout(function() {
+  $(".alert").fadeTo(500, 0).slideUp(500, function(){
+      $(this).remove();
+  });
+}, 5000);
+
+$(document).on('turbolinks:load', function() {
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+      $(this).remove();
+    });
+  }, 5000);
+});

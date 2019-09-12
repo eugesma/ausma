@@ -1,21 +1,25 @@
   <!-- Header -->
   <header class="masthead">
-    <div class="container d-flex h-100 align-items-center">
-      <% if user_signed_in? %>
-        <div class="mx-auto text-center">
-          <%= render "layouts/flash_notices" %>
-          <h1 class="mx-auto my-0 text-uppercase">AUSMA</h1>
+    <%= render "layouts/flash_notices" %>
+    <% if user_signed_in? %>
+      <br>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="list-group">
+            <%= link_to assignatures_path, class: "list-group-item list-group-item-action justify-content-between align-items-center" do %>
+              Asignaturas
+              <span class="badge badge-primary badge-pill pull-right"><%= Assignature.count %></span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% else %>
+        <div class="d-flex flex-column p-2 mx-auto">
+        <h1 class="d-flex p-2 mx-auto my-0 text-uppercase">AUSMA</h1>
+        <div class="d-flex p-2">
           <h2 class="text-white-50 mx-auto mt-2 mb-5">Universidad Nacional del Comahue</h2>
-          <%= link_to 'Comenzar', new_evaluation_path, class: "btn btn-primary" %>
-          <!-- <a href="#about" class="btn btn-primary js-scroll-trigger">Comenzar</a> -->
         </div>
-      <% else %>
-        <div class="jumbotron">
-          <h3 class="display-4">Bienvenido</h3>
-          <p class="lead">La vida, el espíritu de una institución, se logra cuando los docentes están presentes.</p>
-          
         </div>
-        <%= render "devise/sessions/new_session" %>
-      <% end %>
-    </div>
+      <%= render "devise/sessions/new_session" %>
+    <% end %>
   </header>

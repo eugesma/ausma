@@ -1,0 +1,49 @@
+<ul class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Inicio', root_path %></li>
+  <li class="breadcrumb-item">Asignaturas</li>
+</ul>
+<div class="card">
+  <div class="card-header">
+    <h3 class="title">
+      <%= fa_icon "leaf" %> Asignaturas
+      <%= link_to new_assignature_path, class: "btn btn-outline-primary" do %>
+        <%= fa_icon "plus" %> 
+        Nueva
+      <% end %>
+    </h3>
+  </div>
+  <div class="card-body">
+    <table class="table table-hover table-sm">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Profesores</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @assignatures.each do |assignature| %>
+          <tr>
+            <td><%= assignature.name %></td>
+            <td><%= assignature.teachers.count %></td>
+            <td>
+              <%= link_to assignature_path(assignature), class: 'btn btn-outline-secondary btn-xs', 
+                title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
+                <%= fa_icon "eye" %>
+              <% end %>
+              <%= link_to edit_assignature_path(assignature), class: 'btn btn-outline-warning btn-xs', 
+                title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>
+                <%= fa_icon "edit" %>
+              <% end %>
+              <%= link_to delete_assignature_path(assignature), remote: true,
+                class: 'btn btn-outline-danger btn-xs', title: 'Borrar', data: { toggle: 'tooltip', placement: 'top' } do %>
+                <%= fa_icon "trash" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

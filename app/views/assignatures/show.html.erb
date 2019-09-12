@@ -1,0 +1,44 @@
+<ul class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Inicio', root_path %></li>
+  <li class="breadcrumb-item"><%= link_to 'Asignaturas', assignatures_path %></li>
+  <li class="breadcrumb-item">Viendo asignatura <%= @assignature.name %></li>
+</ul>
+<div class="card">
+  <div class="card-header">
+    <h4><%= fa_icon "eye" %> Viendo asignatura <%= @assignature.name %></h4>
+  </div>
+  <div class="card-body">
+    <p>
+      <strong>Nombre:</strong>
+      <%= @assignature.name %>
+    </p>
+
+    <p>
+      <strong>Preparación mínima / máxima:</strong>
+      <%= @assignature.min_preparation %> - <%= @assignature.preparation %> 
+    </p>
+
+    <p>
+      <strong>Implementación mínima / máxima:</strong>
+      <%= @assignature.min_implementation %> - <%= @assignature.implementation %>
+    </p>
+
+    <p>
+      <strong>Consulta mínima / máxima:</strong>
+      <%= @assignature.min_consultation %> - <%= @assignature.consultation %>
+    </p>
+
+    <p>
+      <strong>Crédito mínimo / máximo:</strong>
+      <%= @assignature.min_credit %> - <%= @assignature.credit %>
+    </p>
+  </div>
+  <div class="card-footer text-right">
+    <%= link_to assignatures_path, class: "btn btn-light" do %>
+      Volver
+    <% end %>
+    <%= link_to edit_assignature_path(@assignature), class: "btn btn-warning" do %>
+      Editar
+    <% end %>
+  </div>
+</div>

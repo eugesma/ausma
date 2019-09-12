@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+# To authorization system
+gem "pundit"
 # Use simple_form for do forms more easily
 gem 'simple_form'
 gem 'devise'
