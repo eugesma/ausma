@@ -1,0 +1,32 @@
+<tr id="user_<%= user.id %>">
+  <td>
+    <% if user.profile.present? %>
+      <span><%= image_tag user_avatar(user, 25), class:"img-circle" %></span>
+    <% end %>
+  </td>
+  <td><%= user.username %></td>
+  <% if user.profile.present? %>
+    <td><%= user.profile.last_name.present? ? user.profile.last_name : '----' %></td>
+    <td><%= user.profile.first_name.present? ? user.profile.first_name : '----'%></td>
+    <td><%= user.profile.email.present? ? user.profile.email : '----' %></td>
+  <% else %>
+    <td>Sin perfil</td>
+    <td>s/p</td>
+    <td>s/p</td>
+  <% end %>
+  <td><%= user.updated_at.strftime("%d/%m/%Y")%> </td>
+  <td>
+    <% if policy(user).show? %>
+      <%= link_to users_admin_path(user), class: 'btn btn-outline-secondary btn-sm', 
+        title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
+        <%= fa_icon "eye" %>
+      <% end %>
+    <% end %>
+    <% if policy(user).edit_permissions? %>
+      <%= link_to edit_permissions_users_admin_path(user), class: 'btn btn-outline-warning btn-sm', 
+        title: 'Editar permisos', data: { toggle: 'tooltip', placement: 'top' } do %>
+        <%= fa_icon "lock" %>
+      <% end %>
+    <% end %>
+  </td>
+</tr>

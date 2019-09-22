@@ -14,7 +14,7 @@
 //= require rails-ujs
 //= require popper
 //= require bootstrap
-//= require grayscale
+//= require bootstrap-select
 //= require activestorage
 //= require turbolinks
 //= require_tree .
@@ -33,4 +33,7 @@ $(document).on('turbolinks:load', function() {
       $(this).remove();
     });
   }, 5000);
+  
+  $('.selectpicker').selectpicker({dropupAuto: false});
 });
+$('.selectpicker').selectpicker({dropupAuto: false});

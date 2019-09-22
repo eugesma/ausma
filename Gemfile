@@ -3,6 +3,22 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+# To resize images
+gem "mini_magick"
+# To administrator side
+gem 'rails_admin', '~> 2.0'
+# To pretty selects Silvio Moreto
+gem 'bootstrap4-select-rails'
+# Bootstrap style to will_paginate 
+gem 'will_paginate-bootstrap4'
+# To paginate
+gem 'will_paginate', '~> 3.1.0'
+# To advanced pg search
+gem 'pg_search'
+# To filter objects
+gem 'filterrific'
+# To roles
+gem "rolify"
 # To authorization system
 gem "pundit"
 # Use simple_form for do forms more easily
@@ -23,8 +39,6 @@ gem 'rails', '~> 5.2.2'
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes

@@ -1,0 +1,29 @@
+// Style modal
+$('.modal-content').addClass('panel-warning');
+
+// Add the dialog title
+$('#dialog h4').html("<i class='glyphicon glyphicon-refresh'></i>  Cambiar sector");
+
+// Render the new form
+$('.modal-body').html('<%= j render("change_form") %>');
+
+// Add form button
+$('.modal-footer').html(
+  "<button type='button' class='btn' data-dismiss='modal'>Volver</button>"+
+  "<button type='submit' name='commit' class='btn btn-success pull-right' form='change_form'><i class='glyphicon glyphicon-refresh'></i> Cambiar</button>"
+);
+
+// Show the dynamic dialog
+$('#dialog').modal("show");
+
+// Set focus to the first element
+$('#dialog').on('shown.bs.modal', function () {
+  $('.first_input').focus();
+});
+
+// Remove style
+$('#dialog').on('hidden.bs.modal', function () {
+  $('.modal-content').removeClass('panel-warning');
+});
+
+$('.selectpicker').selectpicker(); // Se inicializa selectpicker

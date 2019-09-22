@@ -9,9 +9,11 @@ class AssignaturesController < ApplicationController
 
   def new
     @assignature = Assignature.new
+    @teachers = Teacher.all
   end
 
   def edit
+    @teachers = Teacher.all
   end
 
   # POST /assignatures
@@ -70,6 +72,7 @@ class AssignaturesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def assignature_params
-    params.require(:assignature).permit(:name, :observation, :min_preparation, :preparation, :min_implementation, :implementation, :min_consultation, :consultation, :min_credit)
+    params.require(:assignature).permit(:name, :observation, :min_preparation, :preparation, :min_implementation, 
+      :implementation, :min_consultation, :consultation, :min_credit, teacher_ids: [])
   end
 end

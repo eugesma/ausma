@@ -1,0 +1,41 @@
+<ul class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Inicio', root_path %></li>
+  <li class="breadcrumb-item active">Usuarios</li>
+</ul>
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-lg-8 col-md-8">
+        <h3 class="title">
+          <%= fa_icon "address-card" %> Usuarios
+          <%= link_to new_users_admin_path, class: "btn btn-outline-primary" do %>
+            <%= fa_icon "plus" %>
+            Nuevo
+          <% end %>
+        </h3>
+      </div>
+      <div class="col-md-1"><%= render_filterrific_spinner %></div>
+      <div class="col-md-3">
+        <%= form_for_filterrific @filterrific do |f| %>
+          <div class="input-group">
+            <%= f.text_field(
+              :search_by_username,
+              class: 'filterrific-periodically-observed form-control py-2 border-right-0 border',
+              placeholder: 'DNI',
+              autocomplete: 'off',
+              ) %>
+            <span class="input-group-append">
+              <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+            </span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <%= render(
+      partial: 'users/list',
+      locals: { users: @users }
+    ) %>
+  </div>
+</div>

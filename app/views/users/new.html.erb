@@ -1,0 +1,53 @@
+<ul class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Inicio', root_path %></li>
+  <li class="breadcrumb-item"><%= link_to 'Usuarios', users_admin_index_path %></li>
+  <li class="breadcrumb-item active">Nuevo usuario</li>
+</ul>
+<div class="col-md-8 mx-auto">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h4><%= fa_icon "plus" %> Nuevo usuario</h4>
+    </div>
+    <div class="card-body">
+      <%= simple_form_for @user, url: users_admin_index_path, action: :post, html: { role: 'check-modified'} do |f| %>
+        <%= f.error_notification %>
+        <div class="row">
+          <div class="col-md-12"><h4>Usuario</h4></div>
+          <div class="col-md-6">
+            <%= f.input :username, as: :integer, label: "DNI"%>
+          </div>
+          <div class="col-md-6">
+            <%= f.input :password, label: "Contraseña" %>
+          </div>
+        </div>
+        <div class="row">
+          <%= f.simple_fields_for :profile do |profile| %>
+            <div class="col-md-12"><h4>Perfil</h4></div>
+            <div class="col-md-6">
+              <%= image_tag("profile-placeholder.png", size: "300x300", alt: "Perfil", class:"rounded mx-auto d-block") %>
+            </div>  
+            <div class="col-md-6">
+                <%= profile.input :last_name, label: "Apellido" %>
+                <%= profile.input :first_name, label: "Nombre" %>
+                <%= profile.input :email, label: "Email" %>
+                <%= profile.simple_fields_for :teacher do |teacher| %>
+                  <%= teacher.input :employee_num,
+                    label: "Número de empleado",
+                    required: true
+                  %>
+                <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="card-footer">
+      <button type='submit' name='commit' class='btn btn-success pull-right' form='new_user'>
+        <%= content_tag(:span, '', class: 'glyphicon glyphicon-check') %> Crear usuario
+      </button>
+      <%= link_to users_admin_index_path, class: "btn btn-light pull-right" do %>
+        Volver
+      <% end %>
+    </div>
+  </div>
+</div>

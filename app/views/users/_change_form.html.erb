@@ -1,0 +1,18 @@
+<%= simple_form_for @user, url: users_admin_path, remote: true, html: { method: :put, class: 'form-inline', id: 'change_form'} do |f| %>
+  <%= f.input :sector_id, label: 'A cuál sector desea cambiar?',
+    collection: 
+      @sectors.map {
+        |sector| [sector.second, sector.first, data: {'subtext': ""+sector.third+"" }]
+      },
+    :input_html => {
+      required: true,
+      include_blank: false,
+      class: 'selectpicker',
+      "data-width"=>"100%",
+      "data-size"=>"15",
+      "title"=>"Seleccionar sector",
+      "data-live-search"=>true,
+      "data-none-results-text" => "No se encontró el sector"
+    } 
+  %>
+<% end %>

@@ -1,0 +1,70 @@
+<ul class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Inicio', root_path %></li>
+  <li class="breadcrumb-item"><%= link_to 'Usuarios', users_admin_index_path %></li>
+  <li class="breadcrumb-item active">Editando permisos de usuario</li>
+</ul>
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header bg-warning">
+        <h3 class="card-title"><%= fa_icon "lock" %> Editando permisos de <%= @user.fullname%>
+          <%= link_to :back, class: 'btn pull-right close-btn',
+            :title => 'Cerrar', :'data-placement'=>'top', :'data-toggle'=>'tooltip' do %>
+            <%= content_tag(:span, '', class: 'glyphicon glyphicon-remove') %>
+          <% end %>
+        </h3>
+      </div>
+      <div class="card-body" id="panel-body-new">
+        <%= simple_form_for @user, url: update_permissions_users_admin_path, method: :put, html: { role: 'check-modified'} do |f| %>
+          <%= f.error_notification %>
+          <%= f.input :role_ids, label: 'Roles',
+            collection:
+              @roles.map {
+                |role| [role.second.humanize, role.first]
+              },
+            :input_html => {
+              multiple: true,
+              required: true,
+              include_blank: false,
+              class: 'selectpicker',
+              "data-width"=>"100%",
+              "data-size"=>"10",
+              "title"=>"Seleccionar roles",
+              "data-live-search"=>true,
+              "data-none-results-text" => "No se encontró el rol"
+            } 
+          %>
+        <% end %>
+      </div>
+      <div class="card-footer text-right">
+        <%= link_to 'Volver', users_admin_index_path, class: 'btn' %>
+        <button type='submit' name='commit' class='btn btn-success' form='edit_user_<%=@user.id%>'>
+          <%= content_tag(:span, '', class: 'glyphicon glyphicon-floppy-saved') %> Guardar cambios
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header bg-info">
+        <h2>
+          <%= fa_icon "user" %>
+          Perfil del usuario
+        </h2>
+      </div>
+      <div class="card-body text-center">
+        <% if @user.profile.present? %>
+        <%= image_tag user_avatar(@user, 200), class:"img-thumbnail" %>
+        <h5><strong>DNI</strong> <%= @user.username %></h5>
+        <h5><strong><%= @user.last_name %></strong> <%= @user.first_name %></h5>
+      
+        <h5><strong>N° empleado</strong> <%= @user.employee_num%></h5>
+
+        <h5> <%= @user.profile.email %> </h5>
+        <% else %>
+          <h5>Sin perfil</h5>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
