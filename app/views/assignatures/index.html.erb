@@ -17,6 +17,7 @@
       <thead>
         <tr>
           <th>Nombre</th>
+          <th>Carrera</th>
           <th>Docentes</th>
           <th></th>
         </tr>
@@ -26,6 +27,7 @@
         <% @assignatures.each do |assignature| %>
           <tr>
             <td><%= assignature.name %></td>
+            <td><%= assignature.career.present? ? assignature.career_name : "" %></td>
             <td><span class="badge badge-secondary"><%= assignature.teachers.count %></span></td>
             <td>
               <%= link_to assignature_path(assignature), class: 'btn btn-outline-secondary btn-md', 

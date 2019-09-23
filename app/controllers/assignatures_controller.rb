@@ -10,10 +10,12 @@ class AssignaturesController < ApplicationController
   def new
     @assignature = Assignature.new
     @teachers = Teacher.all
+    @careers = Career.all
   end
 
   def edit
     @teachers = Teacher.all
+    @careers = Career.all
   end
 
   # POST /assignatures
@@ -26,7 +28,8 @@ class AssignaturesController < ApplicationController
         format.html { redirect_to @assignature, notice: 'La asignatura se ha creado correctamente.' }
         format.json { render :show, status: :created, location: @assignature }
       else
-        @user = current_user
+        @teachers = Teacher.all
+        @careers = Career.all
         format.html { render :new }
         format.json { render json: @assignature.errors, status: :unprocessable_entity }
       end
@@ -73,6 +76,6 @@ class AssignaturesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def assignature_params
     params.require(:assignature).permit(:name, :observation, :min_preparation, :preparation, :min_implementation, 
-      :implementation, :min_consultation, :consultation, :min_credit, teacher_ids: [])
+      :implementation, :min_consultation, :consultation, :min_credit, :credit, :career_id, teacher_ids: [])
   end
 end

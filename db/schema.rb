@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_16_173709) do
+ActiveRecord::Schema.define(version: 2019_09_23_184103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,25 @@ ActiveRecord::Schema.define(version: 2019_09_16_173709) do
     t.decimal "min_consultation", precision: 9, scale: 2, default: "0.0"
     t.decimal "min_credit", precision: 9, scale: 2, default: "0.0"
     t.integer "teachers_count", default: 0
+    t.bigint "career_id"
+    t.index ["career_id"], name: "index_assignatures_on_career_id"
+  end
+
+  create_table "career_assignatures", force: :cascade do |t|
+    t.bigint "career_id"
+    t.bigint "assignature_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assignature_id"], name: "index_career_assignatures_on_assignature_id"
+    t.index ["career_id"], name: "index_career_assignatures_on_career_id"
+  end
+
+  create_table "careers", force: :cascade do |t|
+    t.string "name"
+    t.integer "year_duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "assignatures_count", default: 0
   end
 
   create_table "dedications", force: :cascade do |t|
@@ -300,6 +319,9 @@ ActiveRecord::Schema.define(version: 2019_09_16_173709) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "assignatures", "careers"
+  add_foreign_key "career_assignatures", "assignatures"
+  add_foreign_key "career_assignatures", "careers"
   add_foreign_key "evaluation_assignatures", "assignatures"
   add_foreign_key "evaluation_assignatures", "evaluations"
   add_foreign_key "evaluation_dedications", "dedications"

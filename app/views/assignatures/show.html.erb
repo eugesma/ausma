@@ -36,10 +36,16 @@
       </p>
       </div>
       <div class="col-md-6">
+        <p>
+          <strong>Carrera:</strong>
+          <%= @assignature.career.name %>
+        </p>
+        <p>
           <strong>Docentes:</strong>
-        <% @assignature.teachers.each do |teacher| %>
-          <%= teacher.fullname %>,
-        <% end %>
+          <% @assignature.teachers.each do |teacher| %>
+            <%= teacher.fullname %><%= teacher == @assignature.teachers.last ? ".": "," %>
+          <% end %>
+        </p>
       </div>
     </div>
   </div>
@@ -48,6 +54,7 @@
       Volver
     <% end %>
     <%= link_to edit_assignature_path(@assignature), class: "btn btn-warning" do %>
+      <%= fa_icon "edit" %>
       Editar
     <% end %>
   </div>

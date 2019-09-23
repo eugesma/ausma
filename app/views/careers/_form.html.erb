@@ -1,0 +1,27 @@
+<%= form_with(model: career, local: true) do |form| %>
+  <% if career.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(career.errors.count, "error") %> prohibited this career from being saved:</h2>
+
+      <ul>
+      <% career.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :year_duration %>
+    <%= form.number_field :year_duration %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
