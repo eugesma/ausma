@@ -28,16 +28,16 @@
             <td><%= assignature.name %></td>
             <td><span class="badge badge-secondary"><%= assignature.teachers.count %></span></td>
             <td>
-              <%= link_to assignature_path(assignature), class: 'btn btn-outline-secondary btn-xs', 
+              <%= link_to assignature_path(assignature), class: 'btn btn-outline-secondary btn-md', 
                 title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
                 <%= fa_icon "eye" %>
               <% end %>
-              <%= link_to edit_assignature_path(assignature), class: 'btn btn-outline-warning btn-xs', 
+              <%= link_to edit_assignature_path(assignature), class: 'btn btn-outline-warning btn-md', 
                 title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>
                 <%= fa_icon "edit" %>
               <% end %>
               <%= link_to delete_assignature_path(assignature), remote: true,
-                class: 'btn btn-outline-danger btn-xs', title: 'Borrar', data: { toggle: 'tooltip', placement: 'top' } do %>
+                class: 'btn btn-outline-danger btn-md', title: 'Borrar', data: { toggle: 'tooltip', placement: 'top' } do %>
                 <%= fa_icon "trash" %>
               <% end %>
             </td>
