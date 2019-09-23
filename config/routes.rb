@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users_admin, :controller => 'users', only: [:index, :update, :show, :new, :create] do
+  resources :users_admin, :controller => 'users' do
     member do
       get "change_sector"
       get "edit_permissions" 

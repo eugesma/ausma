@@ -24,8 +24,8 @@ class UserPolicy < ApplicationPolicy
     self.index?
   end
 
-  def show?
-    self.create?
+  def edit?
+    self.update?
   end
 
   def update_permissions?

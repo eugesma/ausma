@@ -1,5 +1,0 @@
-<%= simple_form_for @user, url: users_admin_index_path, action: :post, html: { role: 'check-modified'} do |f| %>
-  <%= f.error_notification %>
-  <%= f.input :username, as: :integer, label: "Usuario (DNI)"%>
-  <%= f.input :password, label: "Contraseña" %>
-<% end %>

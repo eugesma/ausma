@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :change_sector, :edit_permissions, :update_permissions ]
+  before_action :set_user, only: [:show, :update, :change_sector, :edit, :edit_permissions, :update_permissions ]
 
   def index
     authorize User
@@ -28,6 +28,10 @@ class UsersController < ApplicationController
     @user.profile.build_teacher
   end
 
+  def edit
+    authorize @user
+  end
+
   # POST /users_admin
   # POST /users_admin.json
   def create
@@ -41,6 +45,24 @@ class UsersController < ApplicationController
         @user.build_profile
         @user.profile.build_teacher
         format.html { render :new }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /users/1
+  # PATCH/PUT /users/1.json
+  def update
+    if params[:user][:password].blank?
+        params[:user].delete(:password)
+    end
+
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { render :show, notice: 'El usuario se ha modificado correctamente.' }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -74,20 +96,6 @@ class UsersController < ApplicationController
       else
         flash[:error] = @user.full_name+" no se ha podido modificar."
         format.html { render :edit_permissions }
-      end
-    end
-  end
-
-  def update
-    authorize @user
-
-    respond_to do |format|
-      if @user.update(user_params)
-        flash[:success] = "Ahora estás en "+@user.sector.name
-        format.js {render inline: "location.reload();" }
-      else
-        flash[:error] = "No se ha podido modificar el sector."
-        format.js {render inline: "location.reload();" }
       end
     end
   end

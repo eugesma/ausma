@@ -7,7 +7,6 @@ class User < ApplicationRecord
   has_one :teacher, :dependent => :destroy
 
   validates :username, presence: true, uniqueness: true
-  validates_presence_of :password
 
   after_create :create_profile, :assign_default_role
 
