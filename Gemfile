@@ -3,9 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+# To active storage
 gem "aws-sdk-s3", require: false
-# To resize images
-gem "mini_magick"
+gem 'mini_magick', '~> 4.8'
 # To administrator side
 gem 'rails_admin', '~> 2.0'
 # To pretty selects Silvio Moreto
