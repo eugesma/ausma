@@ -15,7 +15,7 @@
     <td>s/p</td>
   <% end %>
   <td><%= user.updated_at.strftime("%d/%m/%Y")%> </td>
-  <td>
+  <td class="float-right">
     <% if policy(user).show? %>
       <%= link_to users_admin_path(user), class: 'btn btn-outline-secondary btn-md', 
         title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>

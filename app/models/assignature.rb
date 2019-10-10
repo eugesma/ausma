@@ -9,4 +9,8 @@ class Assignature < ApplicationRecord
     :preparation, :min_preparation, :career
 
   delegate :name, to: :career, prefix: :career 
+
+  accepts_nested_attributes_for  :teachers, :teacher_assignatures,
+    :reject_if => :all_blank,
+    :allow_destroy => true
 end

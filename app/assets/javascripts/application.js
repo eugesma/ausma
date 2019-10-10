@@ -13,6 +13,7 @@
 //= require jquery
 //= require rails-ujs
 //= require popper
+//= require font_awesome5
 //= require bootstrap
 //= require bootstrap-select
 //= require activestorage
@@ -26,7 +27,9 @@ window.setTimeout(function() {
       $(this).remove();
   });
 }, 5000);
-
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
 $(document).on('turbolinks:load', function() {
   window.setTimeout(function() {
     $(".alert").fadeTo(500, 0).slideUp(500, function(){
@@ -34,6 +37,10 @@ $(document).on('turbolinks:load', function() {
     });
   }, 5000);
   
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  });
+
   $('.selectpicker').selectpicker({dropupAuto: false});
 });
 $('.selectpicker').selectpicker({dropupAuto: false});

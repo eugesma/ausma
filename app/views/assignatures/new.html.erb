@@ -12,10 +12,10 @@
       <%= render 'form', assignature: @assignature %>
     </div>
     <div class="card-footer">
-      <button type='submit' name='commit' class='btn btn-success pull-right' form='new_assignature'>
+      <button type='submit' name='commit' class='btn btn-success float-right' form='new_assignature'>
         <%= content_tag(:span, '', class: 'glyphicon glyphicon-check') %> Crear asignatura
       </button>
-      <%= link_to assignatures_path, class: "btn btn-light pull-right" do %>
+      <%= link_to assignatures_path, class: "btn btn-light float-right mr-2" do %>
         Volver
       <% end %>
     </div>

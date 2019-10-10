@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :assignatures do
     member do
       get :delete
+      get :assign_dedication
     end
   end
 

@@ -50,12 +50,16 @@
     </div>
   </div>
   <div class="card-footer text-right">
-    <%= link_to assignatures_path, class: "btn btn-light" do %>
+    <%= link_to assignatures_path, class: "btn btn-light mr-1" do %>
       Volver
     <% end %>
-    <%= link_to edit_assignature_path(@assignature), class: "btn btn-warning" do %>
+    <%= link_to edit_assignature_path(@assignature), class: "btn btn-warning mr-1" do %>
       <%= fa_icon "edit" %>
       Editar
+    <% end %>
+    <%= link_to assign_dedication_assignature_path(@assignature), class: 'btn btn-success' do %>
+      <%= fa_icon "business-time" %>
+      Asignar dedicaciones
     <% end %>
   </div>
 </div>

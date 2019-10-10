@@ -1,0 +1,43 @@
+<tr class="nested-fields">
+  <%= f.hidden_field :teacher_id, value: "#{ f.object.teacher.id }" %>
+  <td style="width:25%">
+    <%= f.object.teacher.fullname %>
+  </td>
+  <td>
+    <%= f.input :preparation, label: false, 
+      :input_html => { 
+        class: 'new-cost-price',
+        min: "#{f.object.assignature.min_preparation}",
+        max: "#{f.object.assignature.preparation}",
+        value: "#{number_with_precision(f.object.preparation, precision: 2, strip_insignificant_zeros: true)}"
+      }
+    %> 
+  </td>
+  <td>
+    <%= f.input :implementation, label: false, 
+      :input_html => { 
+        class: 'new-cost-price',
+        min: "#{f.object.assignature.min_implementation}",
+        max: "#{f.object.assignature.implementation}",
+        value: "#{number_with_precision(f.object.implementation, precision: 2, strip_insignificant_zeros: true)}"
+      }
+    %> 
+  </td>
+  <td>
+    <%= f.input :consultation, label: false, 
+      :input_html => { 
+        class: 'new-cost-price',
+        min: "#{f.object.assignature.min_consultation}",
+        max: "#{f.object.assignature.consultation}",
+        value: "#{number_with_precision(f.object.consultation, precision: 2, strip_insignificant_zeros: true)}"
+      }
+    %> 
+  </td>
+  <td>
+    <h4>
+    <span class="badge badge-info">
+      <%= number_with_precision(f.object.total_credit, precision: 2, strip_insignificant_zeros: true) %>
+    </span>
+    </h4>
+  </td>
+</tr>

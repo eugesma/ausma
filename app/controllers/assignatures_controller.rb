@@ -1,5 +1,5 @@
 class AssignaturesController < ApplicationController
-  before_action :set_assignature, only: [:show, :edit, :update, :destroy, :delete]
+  before_action :set_assignature, only: [:show, :edit, :update, :destroy, :delete, :assign_dedication]
   def index
     @assignatures = Assignature.all
   end
@@ -7,12 +7,15 @@ class AssignaturesController < ApplicationController
   def show
   end
 
+  def assign_dedication
+  end
+
   def new
     @assignature = Assignature.new
     @teachers = Teacher.all
     @careers = Career.all
   end
-
+  
   def edit
     @teachers = Teacher.all
     @careers = Career.all
@@ -76,6 +79,8 @@ class AssignaturesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def assignature_params
     params.require(:assignature).permit(:name, :observation, :min_preparation, :preparation, :min_implementation, 
-      :implementation, :min_consultation, :consultation, :min_credit, :credit, :career_id, teacher_ids: [])
+      :implementation, :min_consultation, :consultation, :min_credit, :credit, :career_id, teacher_ids: [],
+      teacher_assignatures_attributes: [:id, :teacher_id, :preparation, :implementation, :consultation] 
+    )
   end
 end

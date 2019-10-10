@@ -29,10 +29,14 @@
             <td><%= assignature.name %></td>
             <td><%= assignature.career.present? ? assignature.career_name : "" %></td>
             <td><span class="badge badge-secondary"><%= assignature.teachers.count %></span></td>
-            <td>
+            <td class="float-right">
               <%= link_to assignature_path(assignature), class: 'btn btn-outline-secondary btn-md', 
                 title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
                 <%= fa_icon "eye" %>
+              <% end %>
+              <%= link_to assign_dedication_assignature_path(assignature), class: 'btn btn-outline-success btn-md', 
+                title: 'Asignar dedicaciones', data: { toggle: 'tooltip', placement: 'top' } do %>
+                <%= fa_icon "business-time" %>
               <% end %>
               <%= link_to edit_assignature_path(assignature), class: 'btn btn-outline-warning btn-md', 
                 title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>
