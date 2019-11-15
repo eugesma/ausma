@@ -83,7 +83,7 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
-    bootstrap4-select-rails (2.0.0)
+    bootstrap-select-rails (1.13.8)
     builder (3.2.3)
     byebug (11.0.1)
     capybara (3.25.0)
@@ -99,6 +99,7 @@ GEM
     chromedriver-helper (2.1.1)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
+    cocoon (1.2.14)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -310,10 +311,11 @@ DEPENDENCIES
   binding_of_caller
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.3.1)
-  bootstrap4-select-rails
+  bootstrap-select-rails
   byebug
   capybara (>= 2.15)
   chromedriver-helper
+  cocoon
   coffee-rails (~> 4.2)
   devise
   filterrific

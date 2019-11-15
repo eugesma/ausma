@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :dedications do
+    member do
+      get :delete
+      get :assign_dedication
+    end
+  end
   resources :careers
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :evaluations

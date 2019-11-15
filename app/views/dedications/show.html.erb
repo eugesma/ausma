@@ -1,0 +1,65 @@
+<ul class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Inicio', root_path %></li>
+  <li class="breadcrumb-item"><%= link_to 'Dedicaciones', dedications_path %></li>
+  <li class="breadcrumb-item active">Viendo <%= @dedication.name %></li>
+</ul>
+<div class="card">
+  <div class="card-header">
+    <h4><%= fa_icon "eye" %> Viendo <%= @dedication.name %></h4>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <p class="col-md-3">
+        <strong>Nombre:</strong>
+        <%= @dedication.name %>
+      </p>
+      <p class="col-md-3">
+        <strong>Duración:</strong>
+        <%= format_number(@dedication.duration) %> <%= @dedication.unity.downcase.pluralize(@dedication.duration) %>
+      </p>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <% if @dedication.teachers.present? %>
+          <table class="table table-hover table-sm">
+            <thead>
+              <tr>
+                <th>Docente</th>
+                <th><%= @dedication.unity.humanize.pluralize %></th>
+                <th>Asistencia</th>
+                <th>Crédito</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @dedication.teacher_dedications.each do |teacher_dedication| %>
+                <tr>
+                  <td><%= teacher_dedication.teacher_fullname %></td>
+                  <td><%= format_number(teacher_dedication.quantity) %></td>
+                  <td><%= teacher_dedication.assistance_status.present? ? teacher_dedication.assistance_status.name : "---" %></td>
+                  <td><%= format_number(teacher_dedication.total_credit) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <% if @dedication.observation.present? %>
+      <% end %>
+    </div>
+  </div>
+  <div class="card-footer text-right">
+    <%= link_to dedications_path, class: "btn btn-light mr-1" do %>
+      Volver
+    <% end %>
+    <%= link_to edit_dedication_path(@dedication), class: "btn btn-warning mr-1" do %>
+      <%= fa_icon "edit" %>
+      Editar
+    <% end %>
+    <%= link_to assign_dedication_dedication_path(@dedication), class: 'btn btn-success' do %>
+      <%= fa_icon "business-time" %>
+      Asignar dedicaciones
+    <% end %>
+  </div>
+</div>

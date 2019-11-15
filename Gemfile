@@ -3,13 +3,15 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+# To nested forms
+gem "cocoon"
 # To active storage
 gem "aws-sdk-s3", require: false
 gem 'mini_magick', '~> 4.8'
 # To administrator side
 gem 'rails_admin', '~> 2.0'
-# To pretty selects Silvio Moreto
-gem 'bootstrap4-select-rails'
+# For pretty selects Silvio Moreto
+gem 'bootstrap-select-rails'
 # Bootstrap style to will_paginate 
 gem 'will_paginate-bootstrap4'
 # To paginate

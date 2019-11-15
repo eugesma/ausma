@@ -47,4 +47,8 @@ module ApplicationHelper
       main_app.url_for(user.profile.avatar.variant(resize: "#{size}x#{size}^", gravity: "center", crop: "#{size}x#{size}+0+0"))
     end
   end
+
+  def format_number(a_number)
+    number_with_delimiter(number_with_precision(a_number, precision: 0, strip_insignificant_zeros: true), :delimiter => ".", :separator => ",")
+  end
 end

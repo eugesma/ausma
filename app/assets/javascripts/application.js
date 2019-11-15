@@ -16,6 +16,7 @@
 //= require font_awesome5
 //= require bootstrap
 //= require bootstrap-select
+//= require cocoon
 //= require activestorage
 //= require turbolinks
 //= require_tree .
@@ -44,3 +45,8 @@ $(document).on('turbolinks:load', function() {
   $('.selectpicker').selectpicker({dropupAuto: false});
 });
 $('.selectpicker').selectpicker({dropupAuto: false});
+
+$(document)
+.on('cocoon:after-insert', '.teacher_dedications', function(e, added_task) {
+  $('.selectpicker').selectpicker({dropupAuto: false});
+})

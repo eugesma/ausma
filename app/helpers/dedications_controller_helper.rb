@@ -1,0 +1,2 @@
+module DedicationsControllerHelper
+end

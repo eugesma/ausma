@@ -8,7 +8,7 @@ class Assignature < ApplicationRecord
   validates_presence_of :name, :min_credit, :credit, :min_implementation, :implementation, :consultation, :min_consultation,
     :preparation, :min_preparation, :career
 
-  delegate :name, to: :career, prefix: :career 
+  delegate :name, to: :career, prefix: :career
 
   accepts_nested_attributes_for  :teachers, :teacher_assignatures,
     :reject_if => :all_blank,
