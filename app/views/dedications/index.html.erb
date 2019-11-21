@@ -1,11 +1,11 @@
 <ul class="breadcrumb">
   <li class="breadcrumb-item"><%= link_to 'Inicio', root_path %></li>
-  <li class="breadcrumb-item active">Dedicaciones</li>
+  <li class="breadcrumb-item active">Reuniones</li>
 </ul>
 <div class="card">
   <div class="card-header">
     <h3 class="title">
-      <%= fa_icon "leaf" %> Dedicaciones
+      <%= fa_icon "leaf" %> Reuniones
       <%= link_to new_dedication_path, class: "btn btn-outline-primary" do %>
         <%= fa_icon "plus" %> 
         Nueva
@@ -38,7 +38,7 @@
                 <%= fa_icon "eye" %>
               <% end %>
               <%= link_to assign_dedication_dedication_path(dedication), class: 'btn btn-outline-success btn-md', 
-                title: 'Asignar dedicaciones', data: { toggle: 'tooltip', placement: 'top' } do %>
+                title: 'Asignar crédito', data: { toggle: 'tooltip', placement: 'top' } do %>
                 <%= fa_icon "business-time" %>
               <% end %>
               <%= link_to edit_dedication_path(dedication), class: 'btn btn-outline-warning btn-md', 

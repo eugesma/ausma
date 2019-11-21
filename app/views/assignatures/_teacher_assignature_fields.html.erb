@@ -6,37 +6,37 @@
   <td>
     <%= f.input :preparation, label: false, 
       :input_html => { 
-        class: 'new-cost-price',
+        class: 'preparation',
         min: "#{f.object.assignature.min_preparation}",
         max: "#{f.object.assignature.preparation}",
-        value: "#{number_with_precision(f.object.preparation, precision: 2, strip_insignificant_zeros: true)}"
+        value: "#{f.object.preparation == 0 ? format_number(f.object.assignature.preparation) : format_number(f.object.preparation)}"
       }
     %> 
   </td>
   <td>
     <%= f.input :implementation, label: false, 
       :input_html => { 
-        class: 'new-cost-price',
+        class: 'implementation',
         min: "#{f.object.assignature.min_implementation}",
         max: "#{f.object.assignature.implementation}",
-        value: "#{number_with_precision(f.object.implementation, precision: 2, strip_insignificant_zeros: true)}"
+        value: "#{f.object.implementation == 0 ? format_number(f.object.assignature.implementation) : format_number(f.object.implementation)}"
       }
     %> 
   </td>
   <td>
     <%= f.input :consultation, label: false, 
-      :input_html => { 
-        class: 'new-cost-price',
+      :input_html => {
+        class: 'consultation',
         min: "#{f.object.assignature.min_consultation}",
         max: "#{f.object.assignature.consultation}",
-        value: "#{number_with_precision(f.object.consultation, precision: 2, strip_insignificant_zeros: true)}"
+        value: "#{f.object.consultation == 0 ? format_number(f.object.assignature.consultation) : format_number(f.object.consultation)}"
       }
     %> 
   </td>
   <td>
     <h4>
-    <span class="badge badge-info">
-      <%= number_with_precision(f.object.total_credit, precision: 2, strip_insignificant_zeros: true) %>
+    <span class="badge badge-info total-credit">
+      <%= f.object.new_record? ? format_number(@dedication.credit * @dedication.duration) : format_number(f.object.total_credit) %>
     </span>
     </h4>
   </td>
