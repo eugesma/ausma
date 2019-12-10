@@ -8,6 +8,7 @@ class AssignaturesController < ApplicationController
   end
 
   def assign_dedication
+    @teachers = Teacher.all
   end
 
   def new

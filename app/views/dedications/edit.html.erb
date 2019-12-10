@@ -1,12 +1,12 @@
 <ul class="breadcrumb">
   <li class="breadcrumb-item"><%= link_to 'Inicio', root_path %></li>
   <li class="breadcrumb-item"><%= link_to 'Dedicaciones', dedications_path %></li>
-  <li class="breadcrumb-item active">Editando dedicación</li>
+  <li class="breadcrumb-item active">Editando reunión</li>
 </ul>
 <div class="col-md-8 mx-auto">
   <div class="card">
     <div class="card-header bg-warning">
-      <h4><%= fa_icon "edit" %> Editando dedicación</h4>
+      <h4><%= fa_icon "edit" %> Editando reunión</h4>
     </div>
     <div class="card-body">
       <%= render 'form', dedication: @dedication %>

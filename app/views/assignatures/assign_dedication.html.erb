@@ -16,6 +16,7 @@
               <th rowspan="2">Profesor</th>
               <th colspan="3" class="text-center">Tiempo(h)</th>
               <th rowspan="2">Crédito</th>
+              <th rowspan="2"></th>
             </tr>
             <tr class="table-bordered">
               <th>Preparación</th>
@@ -29,6 +30,11 @@
             <% end %>
           </tbody>
         </table>
+        <%= link_to_add_association f, :teacher_assignatures, class: 'btn btn-primary btn-sm', id: 'add-nested',
+          data: {"association-insertion-node" => "tbody.teacher_assignatures", "association-insertion-method" => "append"} do %>
+          <%= fa_icon "plus" %>
+          Agregar docente
+        <% end %> 
       <% end %>
       <p>
         <strong>Observación:</strong>

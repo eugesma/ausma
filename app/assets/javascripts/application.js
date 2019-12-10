@@ -45,8 +45,3 @@ $(document).on('turbolinks:load', function() {
   $('.selectpicker').selectpicker({dropupAuto: false});
 });
 $('.selectpicker').selectpicker({dropupAuto: false});
-
-$(document)
-.on('cocoon:after-insert', '.teacher_dedications', function(e, added_task) {
-  $('.selectpicker').selectpicker({dropupAuto: false});
-})

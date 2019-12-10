@@ -1,19 +1,19 @@
 <ul class="breadcrumb">
   <li class="breadcrumb-item"><%= link_to 'Inicio', root_path %></li>
-  <li class="breadcrumb-item"><%= link_to 'Dedicaciones', dedications_path %></li>
-  <li class="breadcrumb-item active">Nueva dedicación</li>
+  <li class="breadcrumb-item"><%= link_to 'Reuniones', dedications_path %></li>
+  <li class="breadcrumb-item active">Nueva reunión</li>
 </ul>
 <div class="col-md-8 mx-auto">
   <div class="card">
     <div class="card-header bg-primary text-white">
-      <h4><%= fa_icon "plus" %> Nueva dedicación</h4>
+      <h4><%= fa_icon "plus" %> Nueva reunión</h4>
     </div>
     <div class="card-body">
       <%= render 'form', dedication: @dedication %>
     </div>
     <div class="card-footer">
       <button type='submit' name='commit' class='btn btn-success float-right' form='new_dedication'>
-        <%= fa_icon "check" %> Crear dedicación
+        <%= fa_icon "check" %> Crear reunión
       </button>
       <%= link_to dedications_path, class: "btn btn-light float-right mr-2" do %>
         Volver

@@ -1,7 +1,11 @@
 <tr class="nested-fields">
-  <%= f.hidden_field :teacher_id, value: "#{ f.object.teacher.id }" %>
   <td style="width:25%">
-    <%= f.object.teacher.fullname %>
+    <%= f.collection_select :teacher_id, @teachers, :id, :fullname, {label: false }, 
+      { class: "selectpicker", size: 6, :data => {width: "250px"},
+        "data-none-results-text" => "No se encontró docente", "data-live-search"=>true,
+        "title"=>"Seleccionar", value: "#{ f.object.teacher.present? ? f.object.teacher.id : "" }"
+      }
+    %>
   </td>
   <td>
     <%= f.input :preparation, label: false, 
@@ -36,8 +40,14 @@
   <td>
     <h4>
     <span class="badge badge-info total-credit">
-      <%= f.object.new_record? ? format_number(@dedication.credit * @dedication.duration) : format_number(f.object.total_credit) %>
+      <%= f.object.new_record? ? format_number(f.object.assignature.preparation + f.object.assignature.implementation + f.object.assignature.consultation) : format_number(f.object.total_credit) %>
     </span>
     </h4>
+  </td>
+  <td>
+    <%= link_to_remove_association  f, class: 'remove-tag btn btn-warning btn-sm', tabindex: -1,
+      title: 'Quitar', data: { toggle: 'tooltip', placement: 'top' } do %>
+        <%= fa_icon "minus" %>
+    <% end %>
   </td>
 </tr>
