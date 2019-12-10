@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2019_11_14_123719) do
 
   create_table "assignatures", force: :cascade do |t|
     t.decimal "preparation", precision: 9, scale: 2, default: "0.0"
+    t.decimal "decimal", precision: 9, scale: 2, default: "0.0"
     t.decimal "implementation", precision: 9, scale: 2, default: "0.0"
     t.decimal "consultation", precision: 9, scale: 2, default: "0.0"
     t.decimal "credit", precision: 9, scale: 2, default: "0.0"
@@ -60,15 +61,6 @@ ActiveRecord::Schema.define(version: 2019_11_14_123719) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "career_assignatures", force: :cascade do |t|
-    t.bigint "career_id"
-    t.bigint "assignature_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["assignature_id"], name: "index_career_assignatures_on_assignature_id"
-    t.index ["career_id"], name: "index_career_assignatures_on_career_id"
-  end
-
   create_table "careers", force: :cascade do |t|
     t.string "name"
     t.integer "year_duration"
@@ -86,11 +78,9 @@ ActiveRecord::Schema.define(version: 2019_11_14_123719) do
     t.decimal "min_credit", precision: 9, scale: 2, default: "0.0"
     t.integer "hours_per_week", default: 0
     t.integer "hours_per_year", default: 0
-    t.bigint "career_id"
     t.string "unity"
     t.decimal "duration", precision: 9, scale: 2, default: "0.0"
     t.decimal "min_duration", precision: 9, scale: 2, default: "0.0"
-    t.index ["career_id"], name: "index_dedications_on_career_id"
   end
 
   create_table "evaluation_assignatures", force: :cascade do |t|
@@ -350,9 +340,6 @@ ActiveRecord::Schema.define(version: 2019_11_14_123719) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "assignatures", "careers"
-  add_foreign_key "career_assignatures", "assignatures"
-  add_foreign_key "career_assignatures", "careers"
-  add_foreign_key "dedications", "careers"
   add_foreign_key "evaluation_assignatures", "assignatures"
   add_foreign_key "evaluation_assignatures", "evaluations"
   add_foreign_key "evaluation_dedications", "dedications"
