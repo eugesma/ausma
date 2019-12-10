@@ -12,3 +12,6 @@ eugeUser = User.new(
 )
 eugeUser.add_role :admin
 eugeUser.save!
+
+Career.create(name: "TUEV", year_duration: 3)
+Career.create(name: "TUF", year_duration: 3)
