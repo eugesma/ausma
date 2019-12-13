@@ -2,7 +2,12 @@
   <header class="masthead">
     <% if user_signed_in? %>
       <br>
-      <%= render "secretary_dashboard" %>
+      <% if current_user.has_any_role?(:admin, :secretaria) %>
+        <%= render "secretary_dashboard" %>
+      <% end %>
+      <% if current_user.has_any_role?(:docente)%>
+        <%= render "teacher_dashboard"%>
+      <% end %>
     <% else %>
         <div class="d-flex flex-column p-2 mx-auto">
           <h1 class="d-flex p-2 mx-auto my-0 text-uppercase">AUSMA</h1>

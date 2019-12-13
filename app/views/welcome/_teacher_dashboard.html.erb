@@ -1,0 +1,13 @@
+<div class="card col-md-3">
+  <%= image_tag user_avatar(current_user, 300), class:"img-thumbnail card-img-top" %>
+  <div class="card-body">
+    <h4 class="card-title"><%= current_user.fullname %></h5>
+    <p class="card-text">
+      <h5>Email</h5>
+      <%= current_user.profile.email %>
+
+      <h5>N° Empleado</h5>
+      <%= current_user.employee_num %>
+    </p>
+  </div>
+</div>

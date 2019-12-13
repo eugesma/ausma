@@ -1,11 +1,11 @@
 class UserPolicy < ApplicationPolicy
 
   def index?
-    index_user.any? { |role| user.has_role?(role) }
+    user.has_any_role?(:admin, :secretaria)
   end
 
   def create?
-    create_user.any? { |role| user.has_role?(role) }
+    user.has_any_role?(:admin, :secretaria)
   end
 
   def new?
@@ -13,7 +13,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    record == user || update.any? { |role| user.has_role?(role) }
+    user.has_any_role?(:admin, :secretaria)
   end
 
   def edit_permissions?
@@ -40,24 +40,5 @@ class UserPolicy < ApplicationPolicy
 
   def edit_permissions?
     self.update_permissions?
-  end
-
-
-  private
-
-  def index_user
-    [ :admin, :gestor_usuarios, :secretaria ]
-  end
-
-  def create_user
-    [ :admin, :gestor_usuarios, :secretaria ]
-  end
-
-  def update
-    [ :admin, :gestor_usuarios, :secretaria ]
-  end
-
-  def update_permissions
-    [ :admin, :gestor_usuarios ]
   end
 end
