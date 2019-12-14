@@ -1,0 +1,70 @@
+<ul class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Inicio', root_path %></li>
+  <li class="breadcrumb-item"><%= link_to 'Actividades de extensión', extension_activities_path %></li>
+  <li class="breadcrumb-item active">Viendo actividad <%= @extension_activity.name %></li>
+</ul>
+<div class="card">
+  <div class="card-header">
+    <h4><%= fa_icon "eye" %> Viendo actividad <%= @extension_activity.name %></h4>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+      <p>
+        <strong>Código de referencia</strong>
+        <%= @extension_activity.code %>
+      </p>
+
+      <p>
+        <strong>Nombre:</strong>
+        <%= @extension_activity.name %>
+      </p>
+
+      <p>
+        <strong>Preparación mínima / máxima:</strong>
+        <%= @extension_activity.min_preparation %> - <%= @extension_activity.preparation %> 
+      </p>
+
+      <p>
+        <strong>Implementación mínima / máxima:</strong>
+        <%= @extension_activity.min_implementation %> - <%= @extension_activity.implementation %>
+      </p>
+
+      <p>
+        <strong>Evaluación mínima / máxima:</strong>
+        <%= @extension_activity.min_evaluation %> - <%= @extension_activity.evaluation %>
+      </p>
+
+      <p>
+        <strong>Crédito mínimo / máximo:</strong>
+        <%= @extension_activity.min_credit %> - <%= @extension_activity.credit %>
+      </p>
+      </div>
+      <div class="col-md-6">
+        <p>
+          <strong>Carrera:</strong>
+          <%= @extension_activity.career.name %>
+        </p>
+        <p>
+          <strong>Docentes:</strong>
+          <% @extension_activity.teachers.each do |teacher| %>
+            <%= teacher.fullname %><%= teacher == @extension_activity.teachers.last ? ".": "," %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-right">
+    <%= link_to extension_activities_path, class: "btn btn-light mr-1" do %>
+      Volver
+    <% end %>
+    <%= link_to edit_extension_activity_path(@extension_activity), class: "btn btn-warning mr-1" do %>
+      <%= fa_icon "edit" %>
+      Editar
+    <% end %>
+    <%= link_to assign_dedication_extension_activity_path(@extension_activity), class: 'btn btn-success' do %>
+      <%= fa_icon "business-time" %>
+      Asignar dedicaciones
+    <% end %>
+  </div>
+</div>

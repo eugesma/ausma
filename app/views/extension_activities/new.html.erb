@@ -1,0 +1,23 @@
+<ul class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Inicio', root_path %></li>
+  <li class="breadcrumb-item"><%= link_to 'Actividades de extensión', extension_activities_path %></li>
+  <li class="breadcrumb-item active">Nueva actividad</li>
+</ul>
+<div class="col-md-8 mx-auto">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h4><%= fa_icon "plus" %> Nueva actividad</h4>
+    </div>
+    <div class="card-body">
+      <%= render 'form', extension_activity: @extension_activity %>
+    </div>
+    <div class="card-footer">
+      <button type='submit' name='commit' class='btn btn-success float-right' form='new_extension_activity'>
+        <%= fa_icon "check" %> Crear actividad
+      </button>
+      <%= link_to extension_activities_path, class: "btn btn-light float-right mr-2" do %>
+        Volver
+      <% end %>
+    </div>
+  </div>
+</div>

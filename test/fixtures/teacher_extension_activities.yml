@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  teacher: one
+  extension_activity: one
+  duration: 1
+  total_credit: 9.99
+
+two:
+  teacher: two
+  extension_activity: two
+  duration: 1
+  total_credit: 9.99

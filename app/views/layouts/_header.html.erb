@@ -25,6 +25,13 @@
             <% end %>
           </li>
         <% end %>
+        <% if policy(ExtensionActivity).index? %>
+          <li class="nav-item <%= active_class('extension_activities') %>">
+            <%= link_to extension_activities_path, class: 'nav-link' do %>
+              <%= fa_icon "hiking" %> Actividades
+            <% end %>
+          </li>
+        <% end %>
         <% if policy(User).index? %>
           <li class="nav-item <%= active_class('users') %>">
             <%= link_to users_admin_index_path, class: 'nav-link' do %>

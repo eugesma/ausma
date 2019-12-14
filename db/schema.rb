@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_14_123719) do
+ActiveRecord::Schema.define(version: 2019_12_14_000739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2019_11_14_123719) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "assignatures_count", default: 0
+    t.integer "extension_activities_count", default: 0
   end
 
   create_table "dedications", force: :cascade do |t|
@@ -204,6 +205,10 @@ ActiveRecord::Schema.define(version: 2019_11_14_123719) do
     t.decimal "min_implementation", precision: 9, scale: 2, default: "0.0"
     t.decimal "min_evaluation", precision: 9, scale: 2, default: "0.0"
     t.decimal "min_credit", precision: 9, scale: 2, default: "0.0"
+    t.bigint "career_id"
+    t.string "code"
+    t.index ["career_id"], name: "index_extension_activities_on_career_id"
+    t.index ["code"], name: "index_extension_activities_on_code", unique: true
   end
 
   create_table "governments", force: :cascade do |t|
@@ -297,6 +302,20 @@ ActiveRecord::Schema.define(version: 2019_11_14_123719) do
     t.index ["teacher_id"], name: "index_teacher_dedications_on_teacher_id"
   end
 
+  create_table "teacher_extension_activities", force: :cascade do |t|
+    t.bigint "teacher_id"
+    t.bigint "extension_activity_id"
+    t.integer "duration", default: 0
+    t.decimal "total_credit", precision: 9, default: "0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "preparation", precision: 9, scale: 2, default: "0.0"
+    t.decimal "implementation", precision: 9, scale: 2, default: "0.0"
+    t.decimal "evaluation", precision: 9, scale: 2, default: "0.0"
+    t.index ["extension_activity_id"], name: "index_teacher_extension_activities_on_extension_activity_id"
+    t.index ["teacher_id"], name: "index_teacher_extension_activities_on_teacher_id"
+  end
+
   create_table "teacher_formations", force: :cascade do |t|
     t.string "name"
     t.decimal "credit", precision: 9, scale: 2, default: "0.0"
@@ -358,12 +377,15 @@ ActiveRecord::Schema.define(version: 2019_11_14_123719) do
   add_foreign_key "evaluation_teacher_formations", "teacher_formations"
   add_foreign_key "evaluations", "teachers"
   add_foreign_key "evaluations", "users"
+  add_foreign_key "extension_activities", "careers"
   add_foreign_key "profiles", "users"
   add_foreign_key "teacher_assignatures", "assignatures"
   add_foreign_key "teacher_assignatures", "teachers"
   add_foreign_key "teacher_dedications", "assistance_statuses"
   add_foreign_key "teacher_dedications", "dedications"
   add_foreign_key "teacher_dedications", "teachers"
+  add_foreign_key "teacher_extension_activities", "extension_activities"
+  add_foreign_key "teacher_extension_activities", "teachers"
   add_foreign_key "teachers", "profiles"
   add_foreign_key "teachers", "users"
 end

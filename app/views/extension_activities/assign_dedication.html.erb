@@ -1,0 +1,53 @@
+<ul class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Inicio', root_path %></li>
+  <li class="breadcrumb-item"><%= link_to 'Actividades de extensión', extension_activities_path %></li>
+  <li class="breadcrumb-item active">Asignar dedicación</li>
+</ul>
+<div class="col-md-9 mx-auto">
+  <div class="card">
+    <div class="card-header bg-success text-white">
+      <h4><%= fa_icon "business-time" %> Asignar dedicación de <%= @extension_activity.name %></h4>
+    </div>
+    <div class="card-body">
+      <%=  simple_form_for(@extension_activity) do |f| %>
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr class="table-bordered">
+              <th rowspan="2">Profesor</th>
+              <th colspan="3" class="text-center">Tiempo(h)</th>
+              <th rowspan="2">Crédito</th>
+              <th rowspan="2"></th>
+            </tr>
+            <tr class="table-bordered">
+              <th>Preparación</th>
+              <th>Dictado</th>
+              <th>Consulta/exámen</th>
+            </tr>
+          </thead>
+          <tbody class="teacher_extension_activities">
+            <%= f.simple_fields_for :teacher_extension_activities, @extension_activity.teacher_extension_activities.joins(teacher: :profile).order("profiles.last_name") do |form_quantity| %>
+              <%= render "teacher_extension_activity_fields", f: form_quantity %>
+            <% end %>
+          </tbody>
+        </table>
+        <%= link_to_add_association f, :teacher_extension_activities, class: 'btn btn-primary btn-sm', id: 'add-nested',
+          data: {"association-insertion-node" => "tbody.teacher_extension_activities", "association-insertion-method" => "append"} do %>
+          <%= fa_icon "plus" %>
+          Agregar docente
+        <% end %> 
+      <% end %>
+      <p>
+        <strong>Observación:</strong>
+        <%= @extension_activity.observation %>
+      </p>
+    </div>
+    <div class="card-footer">
+      <button type='submit' name='commit' class='btn btn-success float-right' form='edit_extension_activity_<%= @extension_activity.id %>'>
+        <%= fa_icon "save" %> Guardar cambios
+      </button>
+      <%= link_to extension_activities_path, class: "btn btn-light float-right mr-2" do %>
+        Volver
+      <% end %>
+    </div>
+  </div>
+</div>

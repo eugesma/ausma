@@ -1,0 +1,53 @@
+<tr class="nested-fields">
+  <td style="width:25%">
+    <%= f.collection_select :teacher_id, @teachers, :id, :fullname, {label: false }, 
+      { class: "selectpicker", size: 6, :data => {width: "250px"},
+        "data-none-results-text" => "No se encontró docente", "data-live-search"=>true,
+        "title"=>"Seleccionar", value: "#{ f.object.teacher.present? ? f.object.teacher.id : "" }"
+      }
+    %>
+  </td>
+  <td>
+    <%= f.input :preparation, label: false, 
+      :input_html => { 
+        class: 'preparation',
+        min: "#{f.object.extension_activity.min_preparation}",
+        max: "#{f.object.extension_activity.preparation}",
+        value: "#{f.object.preparation == 0 ? format_number(f.object.extension_activity.preparation) : format_number(f.object.preparation)}"
+      }
+    %> 
+  </td>
+  <td>
+    <%= f.input :implementation, label: false, 
+      :input_html => { 
+        class: 'implementation',
+        min: "#{f.object.extension_activity.min_implementation}",
+        max: "#{f.object.extension_activity.implementation}",
+        value: "#{f.object.implementation == 0 ? format_number(f.object.extension_activity.implementation) : format_number(f.object.implementation)}"
+      }
+    %> 
+  </td>
+  <td>
+    <%= f.input :evaluation, label: false, 
+      :input_html => {
+        class: 'evaluation',
+        min: "#{f.object.extension_activity.min_evaluation}",
+        max: "#{f.object.extension_activity.evaluation}",
+        value: "#{f.object.evaluation == 0 ? format_number(f.object.extension_activity.evaluation) : format_number(f.object.evaluation)}"
+      }
+    %> 
+  </td>
+  <td>
+    <h4>
+    <span class="badge badge-info total-credit">
+      <%= f.object.new_record? ? format_number(f.object.extension_activity.preparation + f.object.extension_activity.implementation + f.object.extension_activity.evaluation) : format_number(f.object.total_credit) %>
+    </span>
+    </h4>
+  </td>
+  <td>
+    <%= link_to_remove_association  f, class: 'remove-tag btn btn-warning btn-sm', tabindex: -1,
+      title: 'Quitar', data: { toggle: 'tooltip', placement: 'top' } do %>
+        <%= fa_icon "minus" %>
+    <% end %>
+  </td>
+</tr>
