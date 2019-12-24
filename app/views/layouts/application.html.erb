@@ -15,19 +15,31 @@
   </head>
 
   <body>
-    <!-- Navigation -->
-    <%= render "layouts/header"%>
+    <div class="d-flex" id="wrapper">
     <div class="corner-ribbon bottom-right sticky orange shadow">ALFA</div>
-    <style>
-      body {
-        background-image: url("<%= asset_path('bg-masthead.jpg') %>");
-        background-repeat: no-repeat;
-      }
-    </style>
-    <div class="container<%= yield :container %>">
-      <%= render "layouts/flash_notices" %>
-      <%= render "shared/dialog" %>
-      <%= yield %>
+      <!-- Sidebar -->
+      <% if user_signed_in? %>
+        <%= render 'layouts/side_navigation' %>
+      <% end %>
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+        <%= render 'layouts/navigation' %>
+
+        <div class="container-fluid">
+          <%= render "layouts/flash_notices" %>
+          <% if user_signed_in? %>
+            <style>
+              body {
+                background-image: url("<%= asset_path('bg-masthead.jpg') %>");
+                background-repeat: no-repeat;
+              }
+            </style>
+          <% end %>
+          <%= yield %>
+          <%= render "shared/dialog" %>
+        </div>
+      </div>
     </div>
   </body>
 </html>

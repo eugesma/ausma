@@ -33,8 +33,6 @@ class UserPolicy < ApplicationPolicy
       return true
     elsif record.has_role? :admin
       return false
-    else
-      update_permissions.any? { |role| user.has_role?(role) }     
     end
   end
 
