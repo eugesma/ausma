@@ -53,3 +53,14 @@
   background-color: lightgray!important;
   color: black!important;
 }
+.list-custom.active:hover{
+  background-color: lightgray!important;  
+}
+
+.list-custom{
+  color: lightgray;
+}
+
+.list-custom:hover{
+  color: lightgray;
+}

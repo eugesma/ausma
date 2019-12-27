@@ -24,18 +24,18 @@
 
       <!-- Page Content -->
       <div id="page-content-wrapper">
-        <%= render 'layouts/navigation' %>
-
+        <% if user_signed_in? %>
+          <%= render 'layouts/navigation' %>
+        <% end %>
         <div class="container-fluid">
           <%= render "layouts/flash_notices" %>
-          <% if user_signed_in? %>
-            <style>
-              body {
-                background-image: url("<%= asset_path('bg-masthead.jpg') %>");
-                background-repeat: no-repeat;
-              }
-            </style>
-          <% end %>
+          <style>
+            body {
+              background-image: url("<%= asset_path('bg-masthead.jpg') %>");
+              background-repeat: no-repeat;
+            }
+          </style>
+          <br>
           <%= yield %>
           <%= render "shared/dialog" %>
         </div>
