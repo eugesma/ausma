@@ -1,0 +1,43 @@
+<div class="col-md-9 mx-auto">
+  <div class="card">
+    <div class="card-header bg-success text-white">
+      <h4><%= fa_icon "business-time" %> Asignar dedicación de <%= @formation.name %></h4>
+    </div>
+    <div class="card-body">
+      <%=  simple_form_for(@formation) do |f| %>
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr>
+              <th>Profesor</th>
+              <th>Rol</th>
+              <th>Crédito</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody class="teacher_formations">
+            <%= f.simple_fields_for :teacher_formations, @formation.teacher_formations.joins(teacher: :profile).order("profiles.last_name") do |form_quantity| %>
+              <%= render "teacher_formation_fields", f: form_quantity %>
+            <% end %>
+          </tbody>
+        </table>
+        <%= link_to_add_association f, :teacher_formations, class: 'btn btn-primary btn-sm', id: 'add-nested',
+          data: {"association-insertion-node" => "tbody.teacher_formations", "association-insertion-method" => "append"} do %>
+          <%= fa_icon "plus" %>
+          Agregar docente
+        <% end %> 
+      <% end %>
+      <p>
+        <strong>Observación:</strong>
+        <%= @formation.observation %>
+      </p>
+    </div>
+    <div class="card-footer">
+      <button type='submit' name='commit' class='btn btn-success float-right' form='edit_formation_<%= @formation.id %>'>
+        <%= fa_icon "save" %> Guardar cambios
+      </button>
+      <%= link_to formations_path, class: "btn btn-light float-right mr-2" do %>
+        Volver
+      <% end %>
+    </div>
+  </div>
+</div>

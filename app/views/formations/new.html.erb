@@ -1,0 +1,18 @@
+<div class="col-md-8 mx-auto">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h4><%= fa_icon "plus" %> Nueva formación</h4>
+    </div>
+    <div class="card-body">
+      <%= render 'form', formation: @formation %>
+    </div>
+    <div class="card-footer">
+      <button type='submit' name='commit' class='btn btn-success float-right' form='new_formation'>
+        <%= fa_icon "check" %> Crear formación
+      </button>
+      <%= link_to formations_path, class: "btn btn-light float-right mr-2" do %>
+        Volver
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="col-md-8 mx-auto">
+<div class="card">
+  <div class="card-header bg-warning">
+    <h4><%= fa_icon "edit" %> Editando formación</h4>
+  </div>
+  <div class="card-body">
+    <%= render 'form', formation: @formation %>
+  </div>
+  <div class="card-footer text-right">
+    <%= link_to formations_path, class: "btn btn-light" do %>
+      Volver
+    <% end %>
+    <%= link_to @formation, class: "btn btn-secondary" do %>
+      <%= fa_icon "eye" %> Ver
+    <% end %>
+    <button type='submit' name='commit' class='btn btn-success' form='edit_formation_<%= @formation.id %>'>
+      <%= fa_icon "save" %> Guardar cambios
+    </button>
+  </div>
+</div>
+</div>

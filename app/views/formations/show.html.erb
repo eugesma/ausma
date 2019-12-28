@@ -1,0 +1,61 @@
+<div class="card">
+  <div class="card-header">
+    <h4><%= fa_icon "eye" %> Viendo <%= @formation.formation_type_name.downcase %> <%= @formation.name %></h4>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <p class="col-4">
+        <strong>Nombre:</strong>
+        <%= @formation.name %>
+      </p>
+
+      <p class="col-4">
+        <strong>Tipo:</strong>
+        <%= @formation.formation_type_name %>
+      </p>
+      
+      <p class="col-4">
+        <strong>Duración:</strong>
+        <%= pluralize(format_number(@formation.hours), "hora") %>
+      </p>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <p>
+          <table class="table table-hover table-sm">
+            <thead>
+              <tr>
+                <th>Docente</th>
+                <th>Rol</th>
+                <th>Crédito</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @formation.teacher_formations.each do |t_f| %>
+                <tr>
+                  <td><%= t_f.teacher_fullname %></td>
+                  <td><%= t_f.teacher_formation_role_name %></td>
+                  <td><%= format_number(t_f.total_credit)%></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-right">
+    <%= link_to formations_path, class: "btn btn-light mr-1" do %>
+      Volver
+    <% end %>
+    <%= link_to edit_formation_path(@formation), class: "btn btn-warning mr-1" do %>
+      <%= fa_icon "edit" %>
+      Editar
+    <% end %>
+    <%= link_to assign_dedication_formation_path(@formation), class: 'btn btn-success' do %>
+      <%= fa_icon "business-time" %>
+      Asignar dedicaciones
+    <% end %>
+  </div>
+</div>
