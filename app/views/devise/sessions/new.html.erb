@@ -7,9 +7,10 @@
 <div class="col-md-3 mx-auto">
   <div class="card rounded-0">
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
-      <div class="card-header">
+      <div class="card-header text-center">
         <%= image_tag("uncoma-1.png", size: "100x100", alt: "Logo Sifaho", class:"mx-auto d-block") %>
-        <h3>Iniciar sesión</h3>
+        <br>
+        <h4>Sistema Evaluación Docente</h4>
       </div>
       <%= devise_error_messages! %>
       <div class="card-body">
