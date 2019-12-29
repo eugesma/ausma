@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_28_020338) do
+
+ActiveRecord::Schema.define(version: 2019_12_28_022825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -253,12 +254,17 @@ ActiveRecord::Schema.define(version: 2019_12_28_020338) do
     t.decimal "min_credit", precision: 9, scale: 2, default: "0.0"
   end
 
+  create_table "post_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "credit", null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "name"
-    t.decimal "credit", precision: 9, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "min_credit", precision: 9, scale: 2, default: "0.0"
+    t.bigint "post_type_id", null: false
+    t.index ["post_type_id"], name: "index_posts_on_post_type_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -324,11 +330,11 @@ ActiveRecord::Schema.define(version: 2019_12_28_020338) do
     t.bigint "extension_activity_id"
     t.integer "duration", default: 0
     t.decimal "total_credit", precision: 9, default: "0"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.decimal "preparation", precision: 9, scale: 2, default: "0.0"
     t.decimal "implementation", precision: 9, scale: 2, default: "0.0"
     t.decimal "evaluation", precision: 9, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["extension_activity_id"], name: "index_teacher_extension_activities_on_extension_activity_id"
     t.index ["teacher_id"], name: "index_teacher_extension_activities_on_teacher_id"
   end
@@ -360,6 +366,13 @@ ActiveRecord::Schema.define(version: 2019_12_28_020338) do
     t.index ["teacher_formation_role_id"], name: "index_teacher_formations_on_teacher_formation_role_id"
     t.index ["teacher_formation_type_id"], name: "index_teacher_formations_on_teacher_formation_type_id"
     t.index ["teacher_id"], name: "index_teacher_formations_on_teacher_id"
+  end
+
+  create_table "teacher_posts", id: false, force: :cascade do |t|
+    t.bigint "post_id", null: false
+    t.bigint "teacher_id", null: false
+    t.index ["post_id", "teacher_id"], name: "index_teacher_posts_on_post_id_and_teacher_id"
+    t.index ["teacher_id", "post_id"], name: "index_teacher_posts_on_teacher_id_and_post_id"
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -416,6 +429,7 @@ ActiveRecord::Schema.define(version: 2019_12_28_020338) do
   add_foreign_key "evaluations", "teachers"
   add_foreign_key "evaluations", "users"
   add_foreign_key "extension_activities", "careers"
+  add_foreign_key "posts", "post_types"
   add_foreign_key "formations", "formation_types"
   add_foreign_key "profiles", "users"
   add_foreign_key "teacher_assignatures", "assignatures"

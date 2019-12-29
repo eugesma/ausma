@@ -1,0 +1,27 @@
+<div id="filterrific_results">
+  <% if @posts.present? %>
+    <div class="panel panel-default">
+
+      <table class="table table-hover table-striped table-condensed">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="users">
+          <%= render @posts %>
+        </tbody>
+      </table>
+    </div>
+    <div id="page_links">
+      <%# <%= will_paginate @posts, list_classes: %w(pagination justify-content-center), renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+    </div>
+  <% else %>
+    <%# <%= render(
+      partial: 'shared/not_found_filter',
+      locals: { object_name: 'usuarios' }
+    ) %>
+  <% end %>
+</div>

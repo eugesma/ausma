@@ -1,0 +1,36 @@
+<div class="card">
+  <div class="card-header">
+    <h4><%= fa_icon "eye" %> Viendo publicación: <%= @post.name %></h4>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+      <p>
+        <strong>Nombre:</strong>
+        <%= @post.name %>
+      </p>
+
+      <p>
+        <strong>Tipo:</strong>
+        <%= @post.post_type.name %> 
+      </p>
+
+      <p>
+        <strong>Docentes:</strong>
+          <% @post.teachers.each do |teacher| %>
+            <%= teacher.fullname %><%= teacher == @post.teachers.last ? ".": "," %>
+          <% end %>
+      </p>
+      </div>      
+    </div>
+  </div>
+  <div class="card-footer text-right">
+    <%= link_to posts_path, class: "btn btn-light mr-1" do %>
+      Volver
+    <% end %>
+    <%= link_to edit_post_path(@post), class: "btn btn-warning mr-1" do %>
+      <%= fa_icon "edit" %>
+      Editar
+    <% end %>
+  </div>
+</div>
