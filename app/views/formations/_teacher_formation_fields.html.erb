@@ -1,0 +1,30 @@
+<tr class="nested-fields">
+  <td style="width:25%">
+    <%= f.collection_select :teacher_id, @teachers, :id, :fullname, {label: false }, 
+      { class: "selectpicker", size: 6, :data => {width: "250px"},
+        "data-none-results-text" => "No se encontró docente", "data-live-search"=>true,
+        "title"=>"Seleccionar", value: "#{ f.object.teacher.present? ? f.object.teacher.id : "" }"
+      }
+    %>
+  </td>
+  <td>
+    <%= f.collection_select :teacher_formation_role_id, @teacher_formation_roles, :id, :name, {label: "Rol en #{f.object.formation.formation_type.name}" }, 
+      { class: "selectpicker", size: 6, :data => {width: "320px"},
+        "title"=>"Seleccionar rol",
+      }
+    %>
+  </td>
+  <td>
+    <h4>
+    <span class="badge badge-info total-credit">
+      <%= format_number(f.object.total_credit) %>
+    </span>
+    </h4>
+  </td>
+  <td>
+    <%= link_to_remove_association  f, class: 'remove-tag btn btn-warning btn-sm', tabindex: -1,
+      title: 'Quitar', data: { toggle: 'tooltip', placement: 'top' } do %>
+        <%= fa_icon "minus" %>
+    <% end %>
+  </td>
+</tr>

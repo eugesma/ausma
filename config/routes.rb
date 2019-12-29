@@ -1,17 +1,28 @@
 Rails.application.routes.draw do
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root "welcome#index"
+  
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  
+  devise_for :users
+  
+  resources :formations do
+    member do
+      get :delete
+      get :assign_dedication
+    end
+  end
+  
   resources :dedications do
     member do
       get :delete
       get :assign_dedication
     end
   end
-  resources :careers
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  resources :evaluations
   
-  devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root "welcome#index"
+  resources :careers
+
+  resources :evaluations
   
   resources :profiles, only: [ :edit, :update ]
   

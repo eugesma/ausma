@@ -1,0 +1,21 @@
+<%=  simple_form_for(formation) do |f| %>
+  <div class='row'>
+    <div class='col-md-12'>
+      <div class="row">
+        <div class='col-md-6'>
+          <%= f.input :name, label: 'Nombre' %>
+          <%= f.input :observation, label: 'Observación' %>
+        </div><br>
+        <div class="col-md-6">
+          <%= f.label :formation, "Tipo de formación" %>
+            <%= f.collection_select :formation_type_id, @formation_types, :id, :name, {label: "Tipo de formación" }, 
+              { class: "selectpicker", size: 6, :data => {width: "100%"},
+                "title"=>"Seleccionar tipo",
+              }
+            %>
+          <%= f.input :hours, label: "Horas" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -22,6 +22,11 @@
           <%= fa_icon "hiking" %> Actividades
         <% end %>
     <% end %>
+    <% if policy(Formation).index? %>
+        <%= link_to formations_path, class: "list-group-item list-group-item-action list-custom bg-dark #{active_class('formations')}" do %>
+          <%= fa_icon "user-graduate" %> Formaciones
+        <% end %>
+    <% end %>
     <% if policy(User).index? %>
         <%= link_to users_admin_index_path, class: "list-group-item list-group-item-action list-custom bg-dark #{active_class('users')}" do %>
           <%= fa_icon "user-tie" %> Docentes
