@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root "welcome#index"
-
+  
   resources :profiles, only: [ :edit, :update ]
   
   resources :assignatures do
@@ -21,14 +21,14 @@ Rails.application.routes.draw do
       get :assign_dedication
     end
   end
-
+  
   resources :extension_activities do
     member do
       get :delete
       get :assign_dedication
     end
   end
-
+  
   resources :users_admin, :controller => 'users' do
     member do
       get "change_sector"
@@ -36,4 +36,7 @@ Rails.application.routes.draw do
       put "update_permissions"
     end
   end
+  
+  resources :posts
+
 end
