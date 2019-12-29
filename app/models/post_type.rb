@@ -1,0 +1,2 @@
+class PostType < ApplicationRecord
+end
