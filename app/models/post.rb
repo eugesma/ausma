@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
     include PgSearch::Model
     
+    # Relations
     belongs_to :post_type
     has_many :teacher_posts
     has_many :teachers, :through => :teacher_posts
@@ -9,8 +10,12 @@ class Post < ApplicationRecord
     :reject_if => :all_blank,
     :allow_destroy => true
     
+    # Delegates
     delegate :name, to: :post_type, prefix: :post_type
     
+    # Validations
+    validates_presence_of :name, :post_type
+
     filterrific(
         default_filter_params: { sorted_by: 'created_at_desc' },
         available_filters: [
@@ -19,6 +24,7 @@ class Post < ApplicationRecord
         ]
     )
     
+    # Scopes
     pg_search_scope :search_by_name,
     against: :name,
     :using => { :tsearch => {:prefix => true} }, # Buscar coincidencia desde las primeras letras.
