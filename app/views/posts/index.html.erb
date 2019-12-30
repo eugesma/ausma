@@ -30,10 +30,17 @@
     </div>
   </div>
   <div class="card-body">
-    <%= render(
-      partial: 'posts/list',
-      locals: { posts: @posts }
-    ) %>
+    <% if @posts.present? %>
+      <%= render(
+        partial: 'posts/list',
+        locals: { posts: @posts }
+      ) %>
+    <% else %>
+      <%= render(
+        partial: 'shared/not_found',
+        locals: { object_name: 'publicaciones' }
+      ) %>
+    <% end %>
   </div>
 </div>
 
