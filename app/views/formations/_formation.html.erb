@@ -1,0 +1,24 @@
+<tr id="formation_<%=formation.id%>">
+  <td><%= formation.name %></td>
+  <td><%= formation.formation_type_name %></td>
+  <td><span class="badge badge-secondary"><%= formation.teachers.count %></span></td>
+  <td><%= pluralize(format_number(formation.hours), "hora")%></td>
+  <td class="float-right">
+    <%= link_to formation_path(formation), class: 'btn btn-outline-secondary btn-md', 
+      title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
+      <%= fa_icon "eye" %>
+    <% end %>
+    <%= link_to assign_dedication_formation_path(formation), class: 'btn btn-outline-success btn-md', 
+      title: 'Asignar dedicaciones', data: { toggle: 'tooltip', placement: 'top' } do %>
+      <%= fa_icon "business-time" %>
+    <% end %>
+    <%= link_to edit_formation_path(formation), class: 'btn btn-outline-warning btn-md', 
+      title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>
+      <%= fa_icon "edit" %>
+    <% end %>
+    <%= link_to delete_formation_path(formation), remote: true,
+      class: 'btn btn-outline-danger btn-md', title: 'Borrar', data: { toggle: 'tooltip', placement: 'top' } do %>
+      <%= fa_icon "trash" %>
+    <% end %>
+  </td>
+</tr>

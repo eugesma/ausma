@@ -1,5 +1,5 @@
 <div id="filterrific_results">
-  <% if @posts.present? %>
+  <% if @formations.present? %>
     <div class="card">
       <table class="table table-hover table-striped">
         <thead>
@@ -7,22 +7,22 @@
             <th>Nombre</th>
             <th>Tipo</th>
             <th>Docentes</th>
-            <th>Créditos</th>
+            <th>Duración</th>
             <th></th>
           </tr>
         </thead>
-        <tbody id="users">
-          <%= render @posts %>
+        <tbody id="formations">
+          <%= render @formations %>
         </tbody>
       </table>
     </div>
     <div id="page_links">
-      <%= will_paginate @posts, list_classes: %w(pagination justify-content-center), renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+      <%= will_paginate @formations, list_classes: %w(pagination justify-content-center), renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
     </div>
   <% else %>
     <%= render(
       partial: 'shared/not_found_filter',
-      locals: { object_name: 'publicaciones' }
+      locals: { object_name: 'formaciones' }
     ) %>
   <% end %>
 </div>

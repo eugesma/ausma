@@ -4,7 +4,17 @@ class FormationsController < ApplicationController
   # GET /formations
   # GET /formations.json
   def index
-    @formations = Formation.all
+    @filterrific = initialize_filterrific(
+      Formation,
+      params[:filterrific],
+      persistence_id: false,
+      default_filter_params: { sorted_by: 'name_at_asc' },
+      available_filters: [
+        :search_by_name,
+        :sorted_by
+      ],
+    ) or return
+    @formations = @filterrific.find.page(params[:page]).per_page(15)
   end
 
   # GET /formations/1
