@@ -13,6 +13,7 @@
 //= require jquery
 //= require rails-ujs
 //= require popper
+//= require filterrific/filterrific-jquery
 //= require font_awesome5
 //= require bootstrap
 //= require bootstrap-select
