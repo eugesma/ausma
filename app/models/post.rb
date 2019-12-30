@@ -12,6 +12,7 @@ class Post < ApplicationRecord
     
     # Delegates
     delegate :name, to: :post_type, prefix: :post_type
+    delegate :credit, to: :post_type
     
     # Validations
     validates_presence_of :name, :post_type

@@ -7,6 +7,8 @@
           <tr>
             <th>Nombre</th>
             <th>Tipo</th>
+            <th>Docentes</th>
+            <th>Créditos</th>
             <th></th>
           </tr>
         </thead>
@@ -16,12 +18,12 @@
       </table>
     </div>
     <div id="page_links">
-      <%# <%= will_paginate @posts, list_classes: %w(pagination justify-content-center), renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+      <%= will_paginate @posts, list_classes: %w(pagination justify-content-center), renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
     </div>
   <% else %>
-    <%# <%= render(
+    <%= render(
       partial: 'shared/not_found_filter',
-      locals: { object_name: 'usuarios' }
+      locals: { object_name: 'publicaciones' }
     ) %>
   <% end %>
 </div>
