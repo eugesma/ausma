@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_30_141026) do
+ActiveRecord::Schema.define(version: 2020_02_17_125619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -284,6 +284,8 @@ ActiveRecord::Schema.define(version: 2019_12_30_141026) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "min_credit", precision: 9, scale: 2, default: "0.0"
+    t.string "code"
+    t.integer "project_type", default: 0
   end
 
   create_table "roles", force: :cascade do |t|
@@ -376,6 +378,16 @@ ActiveRecord::Schema.define(version: 2019_12_30_141026) do
     t.index ["teacher_id", "post_id"], name: "index_teacher_posts_on_teacher_id_and_post_id"
   end
 
+  create_table "teacher_projects", force: :cascade do |t|
+    t.bigint "teacher_id"
+    t.bigint "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "role", default: 0
+    t.index ["project_id"], name: "index_teacher_projects_on_project_id"
+    t.index ["teacher_id"], name: "index_teacher_projects_on_teacher_id"
+  end
+
   create_table "teachers", force: :cascade do |t|
     t.bigint "profile_id"
     t.bigint "user_id"
@@ -444,6 +456,8 @@ ActiveRecord::Schema.define(version: 2019_12_30_141026) do
   add_foreign_key "teacher_formations", "teacher_formation_roles"
   add_foreign_key "teacher_formations", "teacher_formation_types"
   add_foreign_key "teacher_formations", "teachers"
+  add_foreign_key "teacher_projects", "projects"
+  add_foreign_key "teacher_projects", "teachers"
   add_foreign_key "teachers", "profiles"
   add_foreign_key "teachers", "users"
 end

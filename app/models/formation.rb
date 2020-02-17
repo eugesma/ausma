@@ -1,6 +1,6 @@
 class Formation < ApplicationRecord
   include PgSearch::Model
-  
+    
   # Relations
   belongs_to :formation_type
   has_many :teacher_formations, dependent: :destroy

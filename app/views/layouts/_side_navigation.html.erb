@@ -37,6 +37,11 @@
           <%= fa_icon "user-tie" %> Docentes
         <% end %>
     <% end %>
+    <% if policy(Project).index? %>
+        <%= link_to projects_path, class: "list-group-item list-group-item-action list-custom bg-dark #{active_class('projects')}" do %>
+          <%= fa_icon "user-tie" %> Projectos
+        <% end %>
+    <% end %>
     
   </div>
 </div>

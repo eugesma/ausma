@@ -40,6 +40,13 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :projects do
+    member do
+      get :delete
+      get :assign_dedication
+    end
+  end
+  
   resources :users_admin, :controller => 'users' do
     member do
       get "change_sector"
