@@ -41,3 +41,10 @@ body{
   z-index:9999; 
   border-radius:0px
 }
+
+/* Show full size card */
+.full-height {
+  /* height: 480px; */
+  height: calc(100vh);
+  overflow-y: auto; 
+}

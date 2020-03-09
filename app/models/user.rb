@@ -13,7 +13,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :profile,  reject_if: :all_blank, allow_destroy: true
   validates_associated :profile, :teacher
 
-  delegate :employee_num, :email, :fullname, :first_name, :last_name, to: :profile
+  delegate :employee_num, :email, :fullname, :first_name, :last_name, :email, to: :profile
 
   filterrific(
     default_filter_params: { sorted_by: 'created_at_desc' },

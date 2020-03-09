@@ -19,7 +19,9 @@
     <div class="corner-ribbon bottom-right sticky orange shadow">ALFA</div>
       <!-- Sidebar -->
       <% if user_signed_in? %>
-        <%= render 'layouts/side_navigation' %>
+        <% unless current_user.has_role?(:docente)%>
+          <%= render 'layouts/side_navigation' %>
+        <% end %>
       <% end %>
 
       <!-- Page Content -->
@@ -27,7 +29,7 @@
         <% if user_signed_in? %>
           <%= render 'layouts/navigation' %>
         <% end %>
-        <div class="container-fluid">
+        <div class="container-fluid mt-3">
           <%= render "layouts/flash_notices" %>
           <style>
             body {
@@ -35,7 +37,6 @@
               background-repeat: no-repeat;
             }
           </style>
-          <br>
           <%= yield %>
           <%= render "shared/dialog" %>
         </div>

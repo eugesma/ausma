@@ -9,6 +9,7 @@ class TeacherDedication < ApplicationRecord
     :reject_if => :all_blank,
     :allow_destroy => true
 
+  delegate :name, to: :dedication 
   delegate :fullname, to: :teacher, prefix: :teacher
   
   scope :with_status, lambda { |a_status|

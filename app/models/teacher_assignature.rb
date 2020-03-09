@@ -8,6 +8,8 @@ class TeacherAssignature < ApplicationRecord
     :reject_if => :all_blank,
     :allow_destroy => true
 
+  delegate :name, to: :assignature
+
   def calc_total_credit
     self.total_credit = self.preparation + self.implementation + self.consultation
   end
