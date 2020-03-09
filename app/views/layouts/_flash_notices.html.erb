@@ -1,5 +1,8 @@
 <div id="alert-fixed" class="mx-auto col-6 d-block">
-    <% flash.each do |type, message| %>
-      <div class='alert <%= bootstrap_class_for(type) %> alert-dismissible' role='alert'><button class='close' data-dismiss='alert'>×</button><%= message.html_safe %></div>
-    <% end %>
+  <% flash.each do |type, message| %>
+    <div class='alert <%= bootstrap_class_for(type) %> alert-dismissible fade show' role='alert'>
+      <button class='close' data-dismiss='alert'>×</button>
+      <%= message.html_safe %>
+    </div>
+  <% end %>
 </div>

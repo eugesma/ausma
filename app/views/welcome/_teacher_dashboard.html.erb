@@ -1,13 +1,157 @@
-<div class="card col-md-3">
-  <%= image_tag user_avatar(current_user, 300), class:"img-thumbnail card-img-top" %>
-  <div class="card-body">
-    <h4 class="card-title"><%= current_user.fullname %></h5>
-    <p class="card-text">
-      <h5>Email</h5>
-      <%= current_user.profile.email %>
+<div class="mx-auto col-10">
+  <div class="card">
+    <div class="card-header">
+      <h3><%= fa_icon "file-alt"%> Mi currículum anual</h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-3 rounded full-height bg-info text-center pt-3">
+          <%= image_tag asset_path('profile-placeholder.png'), class:"img-thumbnail rounded-circle card-img-top" %>
+          <p>
+            <h4 class="text-white"><%= current_user.fullname %></h4>
+          </p>
+          <p>
+            <% if current_user.email.present? %>
+              <h5 class="text-white">
+                <%=fa_icon "envelope" %> <%= current_user.email %>
+              </h5>
+            <% end %>
+          </p>
+          <p>
+            <% if current_user.employee_num.present? %>
+              <h5 class="text-white">
+                N° Empleado <%= current_user.employee_num %>
+              </h5>
+            <% end %>
+          </p>
+        </div>
+        <div class="col-9">
+          <!-- Asignatures -->
+          <h4 class="row mb-0 pb-0">
+            <div class="col-8 mb-0 pb-0"><%= fa_icon "chalkboard-teacher" %> Académicas</div>
+            <div class="col-4 text-right mb-0 pb-0">
+              <%= link_to 'Registrar asignatura', new_dedication_path(), class: "btn btn-ight text-primary" %>
+            </div>
+          </h4>
+          <hr class="mt-0">
+          <div class="col-10 mx-auto">
+            <% if @assignatures.present? %>
+              <div class="row border-bottom">
+                <div class="col">
+                  Asignatura
+                </div>
+                <div class="col">
+                  Preparación
+                </div>
+                <div class="col">
+                  Implementación
+                </div>
+                <div class="col">
+                  Consultas
+                </div>
+                <div class="col">
+                  Crédito
+                </div>
+              </div>
+              <% @assignatures.each do |assignature| %>
+                <div class="row">
+                  <div class="col">
+                    <%= assignature.name %>
+                  </div>
+                  <div class="col">
+                    <%= number_to_currency(assignature.preparation, unit: "hrs", format: "%n %u") %>
+                  </div>
+                  <div class="col">
+                    <%= number_to_currency(assignature.implementation, unit: "hrs", format: "%n %u") %>
+                  </div>
+                  <div class="col">
+                    <%= number_to_currency(assignature.consultation, unit: "hrs", format: "%n %u") %>
+                  </div>
+                  <div class="col">
+                    <%= assignature.total_credit %>
+                  </div>
+                </div>
+              <% end %>
+              <div class="row table-info">
+                <div class="col">
+                  Total
+                </div>
+                <div class="col">
+                  <%= number_to_currency(@assignatures.sum(:preparation), unit: "hrs", format: "%n %u") %>
+                </div>
+                <div class="col">
+                  <%= number_to_currency(@assignatures.sum(:implementation), unit: "hrs", format: "%n %u") %>
+                </div>
+                <div class="col">
+                  <%= number_to_currency(@assignatures.sum(:consultation), unit: "hrs", format: "%n %u") %>
+                </div>
+                <div class="col">
+                  <%= number_to_currency(@assignatures.sum(:total_credit), unit: "créditos", format: "%n %u") %>
+                </div>
+              </div>
+            <% end %>
+          </div>
 
-      <h5>N° Empleado</h5>
-      <%= current_user.employee_num %>
-    </p>
+
+          <h4 class="row mt-3 mb-0 pb-0">
+            <div class="col-8 mb-0 pb-0"><%= fa_icon "users" %> Reuniones</div>
+            <div class="col-4 text-right mb-0 pb-0">
+              <%= link_to 'Registrar asistencia', new_dedication_path(), class: "btn btn-ight text-primary" %>
+            </div>
+          </h4>
+          <hr class="mt-0">
+          <div class="col-10 mx-auto">
+            <% if @dedications.present? %>
+              <div class="row border-bottom">
+                <div class="col">
+                  Nombre
+                </div>
+                <div class="col">
+                  Crédito
+                </div>
+              </div>
+            <% end %>
+            <% @dedications.each do |dedication| %>
+              <div class="row">
+                <div class="col">
+                  <%= dedication.name %>
+                </div>
+                <div class="col">
+                  <%= dedication.total_credit %>
+                </div>
+              </div>
+            <% end %>
+            <div class="row table-info">
+              <div class="col">
+                Total
+              </div>
+              <div class="col">
+                <%= number_to_currency(@dedications.sum(:total_credit), unit: "créditos", format: "%n %u") %>
+              </div>
+            </div>
+          </div>
+
+          <h4 class="row mt-3 mb-0 pb-0">
+            <div class="col-8 mb-0 pb-0"><%= fa_icon "hiking" %> Actividades de extensión</div>
+            <div class="col-4 text-right mb-0 pb-0">
+              <%= link_to 'Registrar actividad', new_dedication_path(), class: "btn btn-ight text-primary" %>
+            </div>
+          </h4>
+          <hr class="mt-0">
+
+          <h4 class="row mt-3 mb-0 pb-0">
+            <div class="col-8 mb-0 pb-0"><%= fa_icon "user-graduate" %> Formaciones</div>
+            <div class="col-4 text-right mb-0 pb-0">
+              <%= link_to 'Registrar formación', new_dedication_path(), class: "btn btn-ight text-primary" %>
+            </div>
+          </h4>
+          <hr class="mt-0">
+            
+          <p>
+            <h3>Total:</h3>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
