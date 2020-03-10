@@ -3,8 +3,8 @@
     <div class='col-md-12'>
       <div class="row">
         <div class='col-md-6'>
+          <%= f.input :code, label: 'Código' %>
           <%= f.input :name, label: 'Nombre' %>
-          <%= f.input :observation, label: 'Observación' %>
           <%= f.label :teachers, "Docentes citados" %>
           <%= f.collection_select :teacher_ids, @teachers, :id, :fullname, {label: "Docentes" }, 
             { class: "selectpicker", multiple: true, size: 6, :data => {width: "320px"},
@@ -16,7 +16,6 @@
         <div class="col-md-6">
           <%= f.input :credit, label: "Crédito", :input_html => { min: 0, value: "#{format_number(project.credit)}" } %>
           <%= f.input :duration, label: "Duración máx", :input_html => { min: 0, value: "#{format_number(project.credit)}" } %>
-          <%= f.input :unity, label: "Unidad (singular)", placeholder: "Ej: Hora" %>
         </div>
       </div>
     </div>

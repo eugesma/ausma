@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_17_125619) do
+ActiveRecord::Schema.define(version: 2020_03_09_151417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -242,6 +242,14 @@ ActiveRecord::Schema.define(version: 2020_02_17_125619) do
     t.decimal "min_credit", precision: 9, scale: 2, default: "0.0"
   end
 
+  create_table "month_presences", force: :cascade do |t|
+    t.bigint "created_by_id"
+    t.datetime "month_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_month_presences_on_created_by_id"
+  end
+
   create_table "participations", force: :cascade do |t|
     t.string "name"
     t.decimal "preparation", precision: 9, scale: 2, default: "0.0"
@@ -371,6 +379,16 @@ ActiveRecord::Schema.define(version: 2020_02_17_125619) do
     t.index ["teacher_id"], name: "index_teacher_formations_on_teacher_id"
   end
 
+  create_table "teacher_month_presences", force: :cascade do |t|
+    t.bigint "teacher_id"
+    t.bigint "month_presence_id"
+    t.decimal "presence_time", precision: 9, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["month_presence_id"], name: "index_teacher_month_presences_on_month_presence_id"
+    t.index ["teacher_id"], name: "index_teacher_month_presences_on_teacher_id"
+  end
+
   create_table "teacher_posts", id: false, force: :cascade do |t|
     t.bigint "post_id", null: false
     t.bigint "teacher_id", null: false
@@ -456,6 +474,8 @@ ActiveRecord::Schema.define(version: 2020_02_17_125619) do
   add_foreign_key "teacher_formations", "teacher_formation_roles"
   add_foreign_key "teacher_formations", "teacher_formation_types"
   add_foreign_key "teacher_formations", "teachers"
+  add_foreign_key "teacher_month_presences", "month_presences"
+  add_foreign_key "teacher_month_presences", "teachers"
   add_foreign_key "teacher_projects", "projects"
   add_foreign_key "teacher_projects", "teachers"
   add_foreign_key "teachers", "profiles"

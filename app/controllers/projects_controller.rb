@@ -24,7 +24,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
-    @project = Post.new
+    @project = Project.new
     @teachers = Teacher.all
     @project_types = PostType.all
   end

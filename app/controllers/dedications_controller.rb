@@ -62,9 +62,6 @@ class DedicationsController < ApplicationController
 
   # GET /dedication/1/delete
   def delete
-    respond_to do |format|
-      format.js
-    end
   end
 
   def assign_dedication

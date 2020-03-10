@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  teacher: one
+  month_presence: one
+  presence_time: 9.99
+
+two:
+  teacher: two
+  month_presence: two
+  presence_time: 9.99
