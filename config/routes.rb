@@ -57,4 +57,6 @@ Rails.application.routes.draw do
   
   resources :posts
 
+  resources :month_presences
+
 end

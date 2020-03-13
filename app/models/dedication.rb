@@ -1,7 +1,7 @@
 class Dedication < ApplicationRecord
   has_many :evaluation_dedications
   has_many :evaluations, through: :evaluation_dedications
-  has_many :teacher_dedications
+  has_many :teacher_dedications, dependent: :destroy
   has_many :teachers, through: :teacher_dedications
 
   validates_presence_of :name, :credit, :unity, :duration

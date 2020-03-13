@@ -12,9 +12,7 @@
       <%= link_to dedications_path, class: "btn btn-light mr-2" do %>
         Volver
       <% end %>
-      <button type='submit' name='commit' class='btn btn-danger' form='new_dedication'>
-        <%= fa_icon "check" %> Confirmar
-      </button>
+      <a data-remote='true' data-method='delete' href='/dedications/<%= @dedication.id %>>' data-dismiss='modal' class='btn commit btn-danger pull-right' rel='nofollow'>Confirmar</a>
     </div>
   </div>
 </div>

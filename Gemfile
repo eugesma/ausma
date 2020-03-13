@@ -3,6 +3,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+# To datepickers
+gem 'datetime_picker_input' 
+gem 'bootstrap4-datetime-picker-rails'
+gem 'momentjs-rails', '>= 2.9.0'
 # To nested forms
 gem "cocoon"
 # To active storage

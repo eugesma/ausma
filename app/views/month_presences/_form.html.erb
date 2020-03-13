@@ -1,0 +1,15 @@
+<%=  simple_form_for(month_presence) do |f| %>
+  <%= f.error_notification %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :month_date, as: :string,
+        label: false,
+        placeholder: "Fecha",
+        input_html: {
+          class: "input-sm",
+        },
+        html5: false 
+      %>
+    </div>
+  </div>
+<% end %>

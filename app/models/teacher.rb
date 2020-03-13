@@ -16,6 +16,7 @@ class Teacher < ApplicationRecord
   has_many :extension_activities, through: :teacher_extension_activities
 
   delegate :fullname, to: :profile
+  delegate :total_dedication, to: :teacher_assignatures
 
   def total_credit_assignatures
     self.teacher_assignatures.sum(:total_credit)

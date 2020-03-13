@@ -1,0 +1,36 @@
+<div class="card">
+  <div class="card-header">
+    <h4><%= fa_icon "eye" %> Viendo formulario de asistencia: <%= @month_presence.name %></h4>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+      <p>
+        <strong>Nombre:</strong>
+        <%= @month_presence.name %>
+      </p>
+
+      <p>
+        <strong>Tipo:</strong>
+        <%= @month_presence.month_presence_type.name %> 
+      </p>
+
+      <p>
+        <strong>Docentes:</strong>
+          <% @month_presence.teachers.each do |teacher| %>
+            <%= teacher.fullname %><%= teacher == @month_presence.teachers.last ? ".": "," %>
+          <% end %>
+      </p>
+      </div>      
+    </div>
+  </div>
+  <div class="card-footer text-right">
+    <%= link_to month_presences_path, class: "btn btn-light mr-1" do %>
+      Volver
+    <% end %>
+    <%= link_to edit_month_presence_path(@month_presence), class: "btn btn-warning mr-1" do %>
+      <%= fa_icon "edit" %>
+      Editar
+    <% end %>
+  </div>
+</div>

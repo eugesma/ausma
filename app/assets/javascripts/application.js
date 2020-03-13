@@ -10,13 +10,19 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery3
 //= require jquery
 //= require rails-ujs
-//= require popper
+//= require moment
+//= require moment-timezone-with-data
+//= require tempusdominus-bootstrap-4
+//= require moment/es.js
+//= require popper  
 //= require filterrific/filterrific-jquery
 //= require font_awesome5
 //= require bootstrap
 //= require bootstrap-select
+//= require bootstrap-datetimepicker
 //= require cocoon
 //= require activestorage
 //= require turbolinks
@@ -44,5 +50,22 @@ $(document).on('turbolinks:load', function() {
   });
 
   $('.selectpicker').selectpicker({dropupAuto: false});
+  
+  $('#month_presence_month_date')
+    .datetimepicker({
+      format: 'MM/YY',
+      viewMode: 'months',
+      locale: 'es',
+      useCurrent: false
+    })
 });
+
 $('.selectpicker').selectpicker({dropupAuto: false});
+
+$('#month_presence_month_date')
+  .datetimepicker({
+    format: 'MM/YY',
+    viewMode: 'months',
+    locale: 'es',
+    useCurrent: false
+  })

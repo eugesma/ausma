@@ -26,7 +26,7 @@ class DedicationsController < ApplicationController
 
     respond_to do |format|
       if @dedication.save
-        format.html { redirect_to @dedication, notice: 'La dedicación se ha creado correctamente.' }
+        format.html { redirect_to @dedication, notice: 'La reunión se ha creado correctamente.' }
         format.json { render :show, status: :created, location: @dedication }
       else
         @teachers = Teacher.all
@@ -41,7 +41,7 @@ class DedicationsController < ApplicationController
   def update
     respond_to do |format|
       if @dedication.update!(dedication_params)
-        format.html { redirect_to @dedication, notice: 'La dedicación se ha modificado correctamente.' }
+        format.html { redirect_to @dedication, notice: 'La reunión se ha modificado correctamente.' }
         format.json { render :show, status: :ok, location: @dedication }
       else
         format.html { render :edit }
@@ -55,7 +55,7 @@ class DedicationsController < ApplicationController
   def destroy
     @dedication.destroy
     respond_to do |format|
-      format.html { redirect_to dedications_url, notice: 'La dedicación de ha eliminado correctamente.' }
+      format.html { redirect_to dedications_url, notice: 'La reunión de ha eliminado correctamente.' }
       format.json { head :no_content }
     end
   end

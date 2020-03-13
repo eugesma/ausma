@@ -42,6 +42,11 @@
           <%= fa_icon "user-tie" %> Projectos
         <% end %>
     <% end %>
+    <% if policy(MonthPresence).index? %>
+      <%= link_to month_presences_path, class: "list-group-item list-group-item-action list-custom bg-dark #{active_class('month_presence')}" do %>
+        <%= fa_icon "clipboard-check" %> Asistencias
+      <% end %>
+    <% end %>
     
   </div>
 </div>

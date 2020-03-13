@@ -13,4 +13,8 @@ class TeacherAssignature < ApplicationRecord
   def calc_total_credit
     self.total_credit = self.preparation + self.implementation + self.consultation
   end
+
+  def total_hours
+    self.preparation + self.implementation + self.consultation
+  end
 end
