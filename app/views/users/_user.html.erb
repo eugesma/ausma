@@ -13,19 +13,19 @@
   <td><%= user.updated_at.strftime("%d/%m/%Y")%> </td>
   <td class="float-right">
     <% if policy(user).show? %>
-      <%= link_to users_admin_path(user), class: 'btn btn-outline-secondary btn-sm', 
+      <%= link_to users_admin_path(user), class: 'btn btn-secondary btn-sm', 
         title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
         <%= fa_icon "eye" %>
       <% end %>
     <% end %>
     <% if policy(user).edit? %>
-      <%= link_to edit_users_admin_path(user), class: 'btn btn-outline-warning btn-sm', 
+      <%= link_to edit_users_admin_path(user), class: 'btn btn-warning btn-sm', 
         title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>
         <%= fa_icon "edit" %>
       <% end %>
     <% end %>
     <% if policy(user).edit_permissions? %>
-      <%= link_to edit_permissions_users_admin_path(user), class: 'btn btn-outline-warning btn-sm', 
+      <%= link_to edit_permissions_users_admin_path(user), class: 'btn btn-warning btn-sm', 
         title: 'Editar permisos', data: { toggle: 'tooltip', placement: 'top' } do %>
         <%= fa_icon "lock" %>
       <% end %>

@@ -49,9 +49,20 @@ $(document).on('turbolinks:load', function() {
   }, 5000);
   
   $(function () {
+
     $('[data-toggle="tooltip"]').tooltip()
+
     $("#meeting_since_date").datetimepicker({
       format: 'DD/MM/YYYY HH:mm',
+      locale: 'es',
+      icons: {
+        time: "fa fa-clock",
+      }
+    });
+
+    $("#month_presence_month_date").datetimepicker({
+      viewMode: 'months',
+      format: 'MM/YYYY',
       locale: 'es',
       icons: {
         time: "fa fa-clock",

@@ -2,53 +2,55 @@
   <div class="card-header">
     <h3 class="title">
       <%= fa_icon "users" %> Projectos
-      <%= link_to new_project_path, class: "btn btn-outline-primary" do %>
+      <%= link_to new_project_path, class: "btn btn-primary" do %>
         <%= fa_icon "plus" %> 
         Nuevo
       <% end %>
     </h3>
   </div>
   <div class="card-body">
-    <table class="table table-hover table-sm">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Docentes invitados</th>
-          <th>Presentes</th>
-          <th>Ausentes</th>
-          <th>Ausentes s/a</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @projects.each do |project| %>
+    <div class="card">
+      <table class="table table-hover table-sm">
+        <thead>
           <tr>
-            <td><%= project.name %></td>
-            <td><span class="badge badge-secondary"><%= project.teachers.count %></span></td>
-            <td><span class="badge badge-success"><%= project.count_assist %></span></td>
-            <td><span class="badge badge-secondary"><%= project.count_not_assist %></span></td>
-            <td><span class="badge badge-danger"><%= project.count_not_assist_without %></span></td>
-            <td class="float-right">
-              <%= link_to project_path(project), class: 'btn btn-outline-secondary btn-md', 
-                title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
-                <%= fa_icon "eye" %>
-              <% end %>
-              <%= link_to assign_project_project_path(project), class: 'btn btn-outline-success btn-md', 
-                title: 'Asignar crédito', data: { toggle: 'tooltip', placement: 'top' } do %>
-                <%= fa_icon "business-time" %>
-              <% end %>
-              <%= link_to edit_project_path(project), class: 'btn btn-outline-warning btn-md', 
-                title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>
-                <%= fa_icon "edit" %>
-              <% end %>
-              <%= link_to delete_project_path(project), remote: true,
-                class: 'btn btn-outline-danger btn-md', title: 'Borrar', data: { toggle: 'tooltip', placement: 'top' } do %>
-                <%= fa_icon "trash" %>
-              <% end %>
-            </td>
+            <th>Nombre</th>
+            <th>Docentes invitados</th>
+            <th>Presentes</th>
+            <th>Ausentes</th>
+            <th>Ausentes s/a</th>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @projects.each do |project| %>
+            <tr>
+              <td><%= project.name %></td>
+              <td><span class="badge badge-secondary"><%= project.teachers.count %></span></td>
+              <td><span class="badge badge-success"><%= project.count_assist %></span></td>
+              <td><span class="badge badge-secondary"><%= project.count_not_assist %></span></td>
+              <td><span class="badge badge-danger"><%= project.count_not_assist_without %></span></td>
+              <td class="float-right">
+                <%= link_to project_path(project), class: 'btn btn-secondary btn-md', 
+                  title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
+                  <%= fa_icon "eye" %>
+                <% end %>
+                <%= link_to assign_project_project_path(project), class: 'btn btn-success btn-md', 
+                  title: 'Asignar crédito', data: { toggle: 'tooltip', placement: 'top' } do %>
+                  <%= fa_icon "business-time" %>
+                <% end %>
+                <%= link_to edit_project_path(project), class: 'btn btn-warning btn-md', 
+                  title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>
+                  <%= fa_icon "edit" %>
+                <% end %>
+                <%= link_to delete_project_path(project), remote: true,
+                  class: 'btn btn-danger btn-md', title: 'Borrar', data: { toggle: 'tooltip', placement: 'top' } do %>
+                  <%= fa_icon "trash" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

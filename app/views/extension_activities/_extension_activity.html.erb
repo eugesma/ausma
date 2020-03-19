@@ -3,20 +3,20 @@
   <td><%= extension_activity.career.present? ? extension_activity.career_name : "" %></td>
   <td><span class="badge badge-secondary"><%= extension_activity.teachers.count %></span></td>
   <td class="float-right">
-    <%= link_to extension_activity_path(extension_activity), class: 'btn btn-outline-secondary btn-md', 
+    <%= link_to extension_activity_path(extension_activity), class: 'btn btn-secondary btn-md', 
       title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
       <%= fa_icon "eye" %>
     <% end %>
-    <%= link_to assign_dedication_extension_activity_path(extension_activity), class: 'btn btn-outline-success btn-md', 
+    <%= link_to assign_dedication_extension_activity_path(extension_activity), class: 'btn btn-success btn-md', 
       title: 'Asignar dedicaciones', data: { toggle: 'tooltip', placement: 'top' } do %>
       <%= fa_icon "business-time" %>
     <% end %>
-    <%= link_to edit_extension_activity_path(extension_activity), class: 'btn btn-outline-warning btn-md', 
+    <%= link_to edit_extension_activity_path(extension_activity), class: 'btn btn-warning btn-md', 
       title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>
       <%= fa_icon "edit" %>
     <% end %>
     <%= link_to delete_extension_activity_path(extension_activity), remote: true,
-      class: 'btn btn-outline-danger btn-md', title: 'Borrar', data: { toggle: 'tooltip', placement: 'top' } do %>
+      class: 'btn btn-danger btn-md', title: 'Borrar', data: { toggle: 'tooltip', placement: 'top' } do %>
       <%= fa_icon "trash" %>
     <% end %>
   </td>
