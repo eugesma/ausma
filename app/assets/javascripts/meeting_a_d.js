@@ -8,7 +8,7 @@ $(document)
       quant.val('0');
       nested_form.find('.total-credit').html('0');
     }else{
-      nested_form.find('.total-credit').html(quant = quant.val() * $("#dedication_credit").val());
+      nested_form.find('.total-credit').html(quant = quant.val() * $("#meeting_credit").val());
     }
   });
 });
@@ -32,6 +32,6 @@ $(document)
 });
 
 $(document)
-.on('cocoon:after-insert', '.teacher_dedications', function(e, added_task) {
+.on('cocoon:after-insert', '.teacher_meetings', function(e, added_task) {
   $('.selectpicker').selectpicker({dropupAuto: false});
 })

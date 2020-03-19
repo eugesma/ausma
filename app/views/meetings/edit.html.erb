@@ -4,13 +4,13 @@
       <h4><%= fa_icon "edit" %> Editando reunión</h4>
     </div>
     <div class="card-body">
-      <%= render 'form', dedication: @dedication %>
+      <%= render 'form', meeting: @meeting %>
     </div>
     <div class="card-footer">
-      <button type='submit' name='commit' class='btn btn-success float-right' form='edit_dedication_<%= @dedication.id %>'>
+      <button type='submit' name='commit' class='btn btn-success float-right' form='edit_meeting_<%= @meeting.id %>'>
         <%= fa_icon "save" %> Guardar cambios
       </button>
-      <%= link_to dedications_path, class: "btn btn-light float-right mr-2" do %>
+      <%= link_to meetings_path, class: "btn btn-light float-right mr-2" do %>
         Volver
       <% end %>
     </div>

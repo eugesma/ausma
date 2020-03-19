@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :dedications do
+  resources :meetings do
     member do
       get :delete
       get :assign_dedication

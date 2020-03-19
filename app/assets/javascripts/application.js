@@ -13,16 +13,16 @@
 //= require jquery3
 //= require jquery
 //= require rails-ujs
+//= require font_awesome5
+//= require popper
 //= require moment
 //= require moment-timezone-with-data
-//= require tempusdominus-bootstrap-4
+//= require tempusdominus-bootstrap-4.js
 //= require moment/es.js
-//= require popper  
 //= require filterrific/filterrific-jquery
-//= require font_awesome5
 //= require bootstrap
+//= require bootstrap-sprockets
 //= require bootstrap-select
-//= require bootstrap-datetimepicker
 //= require cocoon
 //= require activestorage
 //= require turbolinks
@@ -35,9 +35,12 @@ window.setTimeout(function() {
       $(this).remove();
   });
 }, 5000);
+
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 });
+
+
 $(document).on('turbolinks:load', function() {
   window.setTimeout(function() {
     $(".alert").fadeTo(500, 0).slideUp(500, function(){
@@ -47,25 +50,32 @@ $(document).on('turbolinks:load', function() {
   
   $(function () {
     $('[data-toggle="tooltip"]').tooltip()
+    $("#meeting_since_date").datetimepicker({
+      format: 'DD/MM/YYYY HH:mm',
+      locale: 'es',
+      icons: {
+        time: "fa fa-clock",
+      }
+    });
   });
 
+  $('#meeting_since_date').on('dp.change', function (e) { console.log(e.date); })
+
   $('.selectpicker').selectpicker({dropupAuto: false});
-  
-  $('#month_presence_month_date')
-    .datetimepicker({
-      format: 'MM/YY',
-      viewMode: 'months',
-      locale: 'es',
-      useCurrent: false
-    })
 });
 
-$('.selectpicker').selectpicker({dropupAuto: false});
+$(function () {
+  $('.datetimepicker-input').datetimepicker({
+    locale: 'es'
+  });
+});
+$(function () {
+  $('#datetimepicker2').datetimepicker({
+    format: 'L', // or 'l' (lowercase L) for non-zero-padded
+    date: moment()
+  });
+});
 
-$('#month_presence_month_date')
-  .datetimepicker({
-    format: 'MM/YY',
-    viewMode: 'months',
-    locale: 'es',
-    useCurrent: false
-  })
+$("#datetimepicker2").on("dp.change", function (e) {
+  $('#datetimepicker1').datetimepicker('maxDate', e.date);
+});

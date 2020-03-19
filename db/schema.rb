@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_09_151417) do
+ActiveRecord::Schema.define(version: 2020_03_18_185435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -70,20 +70,6 @@ ActiveRecord::Schema.define(version: 2020_03_09_151417) do
     t.datetime "updated_at", null: false
     t.integer "assignatures_count", default: 0
     t.integer "extension_activities_count", default: 0
-  end
-
-  create_table "dedications", force: :cascade do |t|
-    t.string "name"
-    t.decimal "credit", precision: 9, scale: 2, default: "0.0"
-    t.text "observation"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.decimal "min_credit", precision: 9, scale: 2, default: "0.0"
-    t.integer "hours_per_week", default: 0
-    t.integer "hours_per_year", default: 0
-    t.string "unity"
-    t.decimal "duration", precision: 9, scale: 2, default: "0.0"
-    t.decimal "min_duration", precision: 9, scale: 2, default: "0.0"
   end
 
   create_table "evaluation_assignatures", force: :cascade do |t|
@@ -242,6 +228,20 @@ ActiveRecord::Schema.define(version: 2020_03_09_151417) do
     t.decimal "min_credit", precision: 9, scale: 2, default: "0.0"
   end
 
+  create_table "meetings", force: :cascade do |t|
+    t.string "name"
+    t.decimal "credit", precision: 9, scale: 2, default: "0.0"
+    t.text "observation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "min_credit", precision: 9, scale: 2, default: "0.0"
+    t.integer "hours_per_week", default: 0
+    t.integer "hours_per_year", default: 0
+    t.string "unity"
+    t.decimal "min_duration", precision: 9, scale: 2, default: "0.0"
+    t.datetime "since_date"
+  end
+
   create_table "month_presences", force: :cascade do |t|
     t.bigint "created_by_id"
     t.datetime "month_date"
@@ -320,22 +320,6 @@ ActiveRecord::Schema.define(version: 2020_03_09_151417) do
     t.index ["teacher_id"], name: "index_teacher_assignatures_on_teacher_id"
   end
 
-  create_table "teacher_dedications", force: :cascade do |t|
-    t.bigint "teacher_id"
-    t.bigint "dedication_id"
-    t.decimal "quantity", precision: 9, scale: 2, default: "0.0"
-    t.decimal "total_credit", precision: 9, scale: 2, default: "0.0"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "assist"
-    t.boolean "not_assist"
-    t.boolean "not_assist_without"
-    t.bigint "assistance_status_id"
-    t.index ["assistance_status_id"], name: "index_teacher_dedications_on_assistance_status_id"
-    t.index ["dedication_id"], name: "index_teacher_dedications_on_dedication_id"
-    t.index ["teacher_id"], name: "index_teacher_dedications_on_teacher_id"
-  end
-
   create_table "teacher_extension_activities", force: :cascade do |t|
     t.bigint "teacher_id"
     t.bigint "extension_activity_id"
@@ -377,6 +361,22 @@ ActiveRecord::Schema.define(version: 2020_03_09_151417) do
     t.index ["teacher_formation_role_id"], name: "index_teacher_formations_on_teacher_formation_role_id"
     t.index ["teacher_formation_type_id"], name: "index_teacher_formations_on_teacher_formation_type_id"
     t.index ["teacher_id"], name: "index_teacher_formations_on_teacher_id"
+  end
+
+  create_table "teacher_meetings", force: :cascade do |t|
+    t.bigint "teacher_id"
+    t.bigint "meeting_id"
+    t.decimal "quantity", precision: 9, scale: 2, default: "0.0"
+    t.decimal "total_credit", precision: 9, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "assist"
+    t.boolean "not_assist"
+    t.boolean "not_assist_without"
+    t.bigint "assistance_status_id"
+    t.index ["assistance_status_id"], name: "index_teacher_meetings_on_assistance_status_id"
+    t.index ["meeting_id"], name: "index_teacher_meetings_on_meeting_id"
+    t.index ["teacher_id"], name: "index_teacher_meetings_on_teacher_id"
   end
 
   create_table "teacher_month_presences", force: :cascade do |t|
@@ -443,8 +443,8 @@ ActiveRecord::Schema.define(version: 2020_03_09_151417) do
   add_foreign_key "assignatures", "careers"
   add_foreign_key "evaluation_assignatures", "assignatures"
   add_foreign_key "evaluation_assignatures", "evaluations"
-  add_foreign_key "evaluation_dedications", "dedications"
   add_foreign_key "evaluation_dedications", "evaluations"
+  add_foreign_key "evaluation_dedications", "meetings", column: "dedication_id"
   add_foreign_key "evaluation_extension_activities", "evaluations"
   add_foreign_key "evaluation_extension_activities", "extension_activities"
   add_foreign_key "evaluation_governments", "evaluations"
@@ -465,15 +465,15 @@ ActiveRecord::Schema.define(version: 2020_03_09_151417) do
   add_foreign_key "profiles", "users"
   add_foreign_key "teacher_assignatures", "assignatures"
   add_foreign_key "teacher_assignatures", "teachers"
-  add_foreign_key "teacher_dedications", "assistance_statuses"
-  add_foreign_key "teacher_dedications", "dedications"
-  add_foreign_key "teacher_dedications", "teachers"
   add_foreign_key "teacher_extension_activities", "extension_activities"
   add_foreign_key "teacher_extension_activities", "teachers"
   add_foreign_key "teacher_formations", "formations"
   add_foreign_key "teacher_formations", "teacher_formation_roles"
   add_foreign_key "teacher_formations", "teacher_formation_types"
   add_foreign_key "teacher_formations", "teachers"
+  add_foreign_key "teacher_meetings", "assistance_statuses"
+  add_foreign_key "teacher_meetings", "meetings"
+  add_foreign_key "teacher_meetings", "teachers"
   add_foreign_key "teacher_month_presences", "month_presences"
   add_foreign_key "teacher_month_presences", "teachers"
   add_foreign_key "teacher_projects", "projects"

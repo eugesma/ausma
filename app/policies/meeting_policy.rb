@@ -1,4 +1,4 @@
-class DedicationPolicy < ApplicationPolicy
+class MeetingPolicy < ApplicationPolicy
   def index?
     user.has_any_role?(:admin, :secretaria)
   end

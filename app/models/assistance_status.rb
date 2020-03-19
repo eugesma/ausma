@@ -1,3 +1,3 @@
 class AssistanceStatus < ApplicationRecord
-  has_many :teacher_dedications
+  has_many :teacher_meetings
 end

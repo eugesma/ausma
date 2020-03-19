@@ -12,8 +12,8 @@
           <%= fa_icon "chalkboard-teacher" %> Asignaturas
         <% end %>
     <% end %>
-    <% if policy(Dedication).index? %>
-        <%= link_to dedications_path, class: "list-group-item list-group-item-action list-custom bg-dark #{active_class('dedications')}" do %>
+    <% if policy(Meeting).index? %>
+        <%= link_to meetings_path, class: "list-group-item list-group-item-action list-custom bg-dark #{active_class('meetings')}" do %>
           <%= fa_icon "users" %> Reuniones
         <% end %>
     <% end %>

@@ -16,7 +16,7 @@ class EvaluationsController < ApplicationController
   def new
     @evaluation = Evaluation.new
     @user = current_user
-    @dedications = Dedication.all
+    @meetings = Meeting.all
     @assignatures = Assignature.all
     @extension_activities = ExtensionActivity.all
     @teacher_formations = TeacherFormation.all

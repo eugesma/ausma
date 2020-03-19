@@ -9,8 +9,8 @@ class Teacher < ApplicationRecord
   has_many :teacher_assignatures
   has_many :assignatures, through: :teacher_assignatures
 
-  has_many :teacher_dedications
-  has_many :dedications, through: :teacher_dedications
+  has_many :teacher_meetings
+  has_many :meetings, through: :teacher_meetings
 
   has_many :teacher_extension_activities
   has_many :extension_activities, through: :teacher_extension_activities

@@ -1,4 +1,4 @@
-<%=  simple_form_for(dedication) do |f| %>
+<%=  simple_form_for(meeting) do |f| %>
   <div class='row'>
     <div class='col-md-12'>
       <div class="row">
@@ -14,8 +14,19 @@
           %>
         </div><br>
         <div class="col-md-6">
-          <%= f.input :credit, label: "Crédito", :input_html => { min: 0, value: "#{format_number(dedication.credit)}" } %>
-          <%= f.input :duration, label: "Duración máx", :input_html => { min: 0, value: "#{format_number(dedication.credit)}" } %>
+          <div class="row">
+            <div class="col-6">
+              <%= f.input :since_date,  as: :tempus_dominus, label: 'Fecha',
+                :placeholder => "Seleccionar fecha",
+                input_html: {
+                  autocomplete: 'off', 
+                  required: true
+                },
+                html5: false
+              %>
+            </div>
+          </div>
+          <%= f.input :credit, label: "Crédito / duración", :input_html => { min: 0, value: "#{format_number(meeting.credit)}" } %>
           <%= f.input :unity, label: "Unidad (singular)", placeholder: "Ej: Hora" %>
         </div>
       </div>
