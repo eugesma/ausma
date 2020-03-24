@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  credit: 9.99
+  hours: 9.99
 
 two:
   name: MyString
-  credit: 9.99
+  hours: 9.99

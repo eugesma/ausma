@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Dedications</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Hours</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dedications.each do |dedication| %>
+      <tr>
+        <td><%= dedication.name %></td>
+        <td><%= dedication.hours %></td>
+        <td><%= link_to 'Show', dedication %></td>
+        <td><%= link_to 'Edit', edit_dedication_path(dedication) %></td>
+        <td><%= link_to 'Destroy', dedication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Dedication', new_dedication_path %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @dedication.name %>
+</p>
+
+<p>
+  <strong>Hours:</strong>
+  <%= @dedication.hours %>
+</p>
+
+<%= link_to 'Edit', edit_dedication_path(@dedication) %> |
+<%= link_to 'Back', dedications_path %>

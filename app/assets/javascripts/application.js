@@ -72,7 +72,7 @@ $(document).on('turbolinks:load', function() {
 
   $('#meeting_since_date').on('dp.change', function (e) { console.log(e.date); })
 
-  $('.selectpicker').selectpicker({dropupAuto: false});
+  $('.selectpicker').selectpicker();
 });
 
 $(function () {

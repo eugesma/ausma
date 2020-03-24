@@ -1,0 +1,2 @@
+class Dedication < ApplicationRecord
+end

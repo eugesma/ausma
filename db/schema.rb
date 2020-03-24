@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_18_185435) do
+ActiveRecord::Schema.define(version: 2020_03_19_124641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -70,6 +70,13 @@ ActiveRecord::Schema.define(version: 2020_03_18_185435) do
     t.datetime "updated_at", null: false
     t.integer "assignatures_count", default: 0
     t.integer "extension_activities_count", default: 0
+  end
+
+  create_table "dedications", force: :cascade do |t|
+    t.string "name"
+    t.decimal "hours", precision: 9, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "evaluation_assignatures", force: :cascade do |t|
