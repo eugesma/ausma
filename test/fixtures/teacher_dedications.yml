@@ -3,11 +3,9 @@
 one:
   teacher: one
   dedication: one
-  quantity: 9.99
-  total_credit: 9.99
+  quantity: 1
 
 two:
   teacher: two
   dedication: two
-  quantity: 9.99
-  total_credit: 9.99
+  quantity: 1

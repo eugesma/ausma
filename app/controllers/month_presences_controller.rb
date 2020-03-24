@@ -45,7 +45,6 @@ class MonthPresencesController < ApplicationController
         format.json { render :show, status: :created, location: @month_presence }
       else
         @teachers = Teacher.all
-        @month_presence_types = month_presenceType.all
         format.html { render :new }
         format.json { render json: @month_presence.errors, status: :unprocessable_entity }
       end

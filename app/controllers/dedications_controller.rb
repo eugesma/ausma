@@ -1,5 +1,5 @@
 class DedicationsController < ApplicationController
-  before_action :set_dedication, only: [:show, :edit, :update, :destroy]
+  before_action :set_dedication, only: [:show, :edit, :update, :destroy, :assign_dedication]
 
   # GET /dedications
   # GET /dedications.json
@@ -21,6 +21,10 @@ class DedicationsController < ApplicationController
   def edit
   end
 
+  def assign_dedication
+    @teachers = Teacher.all
+  end
+
   # POST /dedications
   # POST /dedications.json
   def create
@@ -28,7 +32,7 @@ class DedicationsController < ApplicationController
 
     respond_to do |format|
       if @dedication.save
-        format.html { redirect_to @dedication, notice: 'Dedication was successfully created.' }
+        format.html { redirect_to @dedication, notice: 'La dedicación se ha creado correctamente.' }
         format.json { render :show, status: :created, location: @dedication }
       else
         format.html { render :new }
@@ -42,7 +46,7 @@ class DedicationsController < ApplicationController
   def update
     respond_to do |format|
       if @dedication.update(dedication_params)
-        format.html { redirect_to @dedication, notice: 'Dedication was successfully updated.' }
+        format.html { redirect_to @dedication, notice: 'La dedicación se ha modificado correctamente.' }
         format.json { render :show, status: :ok, location: @dedication }
       else
         format.html { render :edit }
@@ -56,7 +60,7 @@ class DedicationsController < ApplicationController
   def destroy
     @dedication.destroy
     respond_to do |format|
-      format.html { redirect_to dedications_url, notice: 'Dedication was successfully destroyed.' }
+      format.html { redirect_to dedications_url, notice: 'La dedicación se ha eliminado correctamente.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +73,6 @@ class DedicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dedication_params
-      params.require(:dedication).permit(:name, :hours)
+      params.require(:dedication).permit(:name, :hours, teacher_dedications_attributes: [:id, :teacher_id, :quantity])
     end
 end

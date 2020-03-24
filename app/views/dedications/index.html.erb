@@ -1,29 +1,52 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Dedications</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Hours</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @dedications.each do |dedication| %>
-      <tr>
-        <td><%= dedication.name %></td>
-        <td><%= dedication.hours %></td>
-        <td><%= link_to 'Show', dedication %></td>
-        <td><%= link_to 'Edit', edit_dedication_path(dedication) %></td>
-        <td><%= link_to 'Destroy', dedication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Dedication', new_dedication_path %>
+<div class="card">
+  <div class="card-header">
+    <h3 class="title">
+      <%= fa_icon "users" %> Dedicaciones
+      <%= link_to new_dedication_path, class: "btn btn-primary" do %>
+        <%= fa_icon "plus" %> 
+        Nueva
+      <% end %>
+    </h3>
+  </div>
+  <div class="card-body fixed-panel-index">
+    <div class="card fixed-panel-list">
+      <table class="table table-hover table-sm">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Horas</th>
+            <th>Docentes</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @dedications.each do |dedication| %>
+            <tr>
+              <td><%= dedication.name %></td>
+              <td><%= format_number(dedication.hours) %></td>
+              <td><span class="badge badge-secondary"><%= dedication.teachers.count %></span></td>
+              <td class="float-right">
+                <%= link_to dedication_path(dedication), class: 'btn btn-secondary btn-sm', 
+                  title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
+                  <%= fa_icon "eye" %>
+                <% end %>
+                <%= link_to assign_dedication_dedication_path(dedication), class: 'btn btn-success btn-sm', 
+                  title: 'Asignar crédito', data: { toggle: 'tooltip', placement: 'top' } do %>
+                  <%= fa_icon "business-time" %>
+                <% end %>
+                <%= link_to edit_dedication_path(dedication), class: 'btn btn-warning btn-sm', 
+                  title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>
+                  <%= fa_icon "edit" %>
+                <% end %>
+                <%= link_to delete_dedication_path(dedication),
+                  class: 'btn btn-danger btn-sm', title: 'Borrar', data: { toggle: 'tooltip', placement: 'top' } do %>
+                  <%= fa_icon "trash" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

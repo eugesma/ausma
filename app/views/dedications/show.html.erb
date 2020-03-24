@@ -1,14 +1,57 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @dedication.name %>
-</p>
-
-<p>
-  <strong>Hours:</strong>
-  <%= @dedication.hours %>
-</p>
-
-<%= link_to 'Edit', edit_dedication_path(@dedication) %> |
-<%= link_to 'Back', dedications_path %>
+<div class="card">
+  <div class="card-header">
+    <h4><%= fa_icon "eye" %> Viendo dedicación <%= @dedication.name %></h4>
+  </div>
+  <div class="card-body fixed-panel">
+    <div class="row">
+      <div class="col-4">
+        <p>
+          <strong>Nombre:</strong>
+          <%= @dedication.name %>
+        </p>
+      </div>
+      <div class="col-4">
+        <p>
+          <strong>Horas:</strong>
+          <%= format_number(@dedication.hours) %> 
+        </p>
+      </div>
+      <div class="col-4">
+        <p>
+          <strong>Docentes:</strong> <%= @dedication.teachers.count %>
+        </p>
+      </div>
+    </div>   
+    <div class="row">   
+      <div class="col-md-6 mx-auto">
+        <div class="card">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Profesor</th>
+                <th>Cantidad</th>
+              </tr>
+            </thead>
+            <tbody class="teacher_dedications">
+              <% @dedication.teacher_dedications.each do |dedication| %>
+                <tr>
+                  <td><%= dedication.teacher_fullname %></td>
+                  <td><%= dedication.quantity %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-right">
+    <%= link_to dedications_path, class: "btn btn-light mr-1" do %>
+      Volver
+    <% end %>
+    <%= link_to edit_dedication_path(@dedication), class: "btn btn-warning mr-1" do %>
+      <%= fa_icon "edit" %>
+      Editar
+    <% end %>
+  </div>
+</div>

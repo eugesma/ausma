@@ -3,11 +3,11 @@
     <div class="card-header bg-primary text-white">
       <h4><%= fa_icon "plus" %> Nuevo docente</h4>
     </div>
-    <div class="card-body">
+    <div class="card-body fixed-panel">
       <%= simple_form_for @user, url: users_admin_index_path, action: :post, html: { role: 'check-modified'} do |f| %>
         <%= f.error_notification %>
         <div class="row">
-          <div class="col-md-12"><h4>Usuario</h4></div>
+          <div class="col-md-12"><h4>Usuario</h4><hr></div>
           <div class="col-md-6">
             <%= f.input :username, as: :integer, label: "DNI"%>
           </div>
@@ -17,7 +17,7 @@
         </div>
         <div class="row">
           <%= f.simple_fields_for :profile do |profile| %>
-            <div class="col-md-12"><h4>Perfil</h4></div>
+            <div class="col-md-12"><h4>Perfil</h4><hr></div>
             <div class="col-md-6">
               <%= image_tag("profile-placeholder.png", size: "300x300", alt: "Perfil", class:"rounded mx-auto d-block") %>
             </div>  
@@ -36,13 +36,13 @@
         </div>
       <% end %>
     </div>
-    <div class="card-footer">
-      <button type='submit' name='commit' class='btn btn-success pull-right' form='new_user'>
-        <%= fa_icon "check" %> Crear usuario
-      </button>
-      <%= link_to users_admin_index_path, class: "btn btn-light pull-right" do %>
+    <div class="card-footer text-right">
+      <%= link_to users_admin_index_path, class: "btn btn-light mr-2" do %>
         Volver
       <% end %>
+      <button type='submit' name='commit' class='btn btn-success' form='new_user'>
+        <%= fa_icon "check" %> Crear usuario
+      </button>
     </div>
   </div>
 </div>

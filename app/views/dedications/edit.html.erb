@@ -1,6 +1,18 @@
-<h1>Editing Dedication</h1>
-
-<%= render 'form', dedication: @dedication %>
-
-<%= link_to 'Show', @dedication %> |
-<%= link_to 'Back', dedications_path %>
+<div class="col-lg-8 col-md-12 mx-auto">
+  <div class="card">
+    <div class="card-header bg-warning">
+    <h4><%= fa_icon "plus" %> Editando dedicación</h4>
+    </div>
+    <div class="card-body">
+      <%= render 'form', dedication: @dedication %>
+    </div>
+    <div class="card-footer">
+      <button type='submit' name='commit' class='btn btn-success float-right' form='edit_dedication_<%= @dedication.id %>'>
+        <%= fa_icon "save" %> Guardar cambios
+      </button>
+      <%= link_to dedications_path, class: "btn btn-light float-right mr-2" do %>
+        Volver
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -20,7 +20,6 @@
 //= require tempusdominus-bootstrap-4.js
 //= require moment/es.js
 //= require filterrific/filterrific-jquery
-//= require bootstrap
 //= require bootstrap-sprockets
 //= require bootstrap-select
 //= require cocoon

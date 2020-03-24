@@ -15,6 +15,9 @@ class Teacher < ApplicationRecord
   has_many :teacher_extension_activities
   has_many :extension_activities, through: :teacher_extension_activities
 
+  has_many :teacher_dedications
+  has_many :dedications, through: :teacher_dedications
+
   delegate :fullname, to: :profile
   delegate :total_dedication, to: :teacher_assignatures
 

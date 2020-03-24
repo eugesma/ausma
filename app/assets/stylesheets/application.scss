@@ -44,6 +44,10 @@
 @import "ribbon";
 @import "sidebar_menu";
 
+// Variables
+$min-height-index: calc(100vh - (60px + 63px + 2rem));
+$min-height-list: calc(100vh - 225px);
+
 body{
   background-repeat: no-repeat;
   background-position: center;
@@ -60,12 +64,12 @@ body{
 }
 
 .alert-fixed {
-  position:fixed; 
-  top: 0px; 
-  left: 0px; 
-  width: 100%;
-  z-index:9999; 
-  border-radius:0px
+  position: relative;
+  text-align: center;
+}
+.alert{ 
+  position:absolute;
+  top: 0;
 }
 
 /* Show full size card */
@@ -73,4 +77,19 @@ body{
   /* height: 480px; */
   height: calc(100vh);
   overflow-y: auto; 
+}
+
+.fixed-panel-index {
+  height: $min-height-index;
+  overflow-y: auto;
+  padding-bottom: 0;
+  .fixed-panel-list {
+    height: $min-height-list;
+    overflow-y: auto;
+  }
+}
+
+.fixed-panel {
+  height: calc(100vh - 216px);
+  overflow-y: scroll;
 }
