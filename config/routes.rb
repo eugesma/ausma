@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   resources :evaluations
   
   resources :profiles, only: [ :edit, :update ]
+
+  resources :configs, only: [ :show, :edit, :update ]
   
   resources :assignatures do
     member do

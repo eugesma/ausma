@@ -52,5 +52,10 @@
         <%= fa_icon "clipboard-check" %> Asistencias
       <% end %>
     <% end %>
+    <% if policy(Config).show? %>
+      <%= link_to config_path(Config.first), class: "list-group-item list-group-item-action list-custom bg-dark #{active_class('month_presences')}" do %>
+        <%= fa_icon "cog" %> Configuración
+      <% end %>
+    <% end %>
   </div>
 </div>

@@ -90,6 +90,6 @@ body{
 }
 
 .fixed-panel {
-  height: calc(100vh - 216px);
-  overflow-y: scroll;
+  height: calc(78vh);
+  overflow-y: auto;
 }

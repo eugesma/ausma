@@ -6,18 +6,15 @@
           <%= f.input :name, label: 'Nombre' %>
           <%= f.input :observation, label: 'Observación' %>
           <%=f.label :careers, "Carreras" %>
-          <%= f.collection_select :career_id, @careers, :id, :name, {label: "Carrera" }, 
-            { class: "selectpicker", size: 6, :data => {width: "320px"},
-              "title"=>"Seleccionar carrera",
-            }%>
-          <%=f.label :teachers, "Docentes" %>
-          <%= f.collection_select :teacher_ids, @teachers, :id, :fullname, {label: "Docentes" }, 
-            { class: "selectpicker", multiple: true, size: 6, :data => {width: "320px"},
-              "data-none-results-text" => "No se encontró docente", "data-live-search"=>true,
-              "title"=>"Seleccionar docentes",
-            }
-          %>
-        </div><br>
+          <p>
+            <%= f.collection_select :career_id, @careers, :id, :name, {label: "Carrera" }, 
+              { class: "selectpicker", size: 6, :data => {width: "320px"},
+                "title"=>"Seleccionar carrera",
+              }
+            %>
+          </p>
+        </div>
+        <br>
         <div class="col-md-6">
           <table>
             <thead>

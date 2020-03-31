@@ -8,22 +8,22 @@
     %>
   </td>
   <td>
-    <%= f.input :preparation, label: false, 
-      :input_html => { 
-        class: 'preparation',
-        min: "#{f.object.assignature.min_preparation}",
-        max: "#{f.object.assignature.preparation}",
-        value: "#{f.object.preparation == 0 ? format_number(f.object.assignature.preparation) : format_number(f.object.preparation)}"
-      }
-    %> 
-  </td>
-  <td>
     <%= f.input :implementation, label: false, 
       :input_html => { 
         class: 'implementation',
         min: "#{f.object.assignature.min_implementation}",
         max: "#{f.object.assignature.implementation}",
         value: "#{f.object.implementation == 0 ? format_number(f.object.assignature.implementation) : format_number(f.object.implementation)}"
+      }
+    %> 
+  </td>
+  <td>
+    <%= f.input :preparation, label: false, 
+      :input_html => { 
+        class: 'preparation',
+        min: "#{f.object.assignature.min_preparation}",
+        max: "#{f.object.assignature.preparation}",
+        value: "#{f.object.preparation == 0 ? format_number(f.object.assignature.preparation) : format_number(f.object.preparation)}"
       }
     %> 
   </td>

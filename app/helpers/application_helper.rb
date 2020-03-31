@@ -51,4 +51,8 @@ module ApplicationHelper
   def format_number(a_number)
     number_with_delimiter(number_with_precision(a_number, precision: 0, strip_insignificant_zeros: true), :delimiter => ".", :separator => ",")
   end
+
+  def number_to_percent(a_number)
+    number_to_currency(a_number, unit: "%", precision: 0, format: "%n %")
+  end
 end

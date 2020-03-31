@@ -3,38 +3,40 @@
     <div class="card-header bg-success text-white">
       <h4><%= fa_icon "business-time" %> Asignar dedicación de <%= @assignature.name %></h4>
     </div>
-    <div class="card-body">
-      <%=  simple_form_for(@assignature) do |f| %>
-        <table class="table table-hover table-sm">
-          <thead>
-            <tr class="table-bordered">
-              <th rowspan="2">Profesor</th>
-              <th colspan="3" class="text-center">Tiempo(h)</th>
-              <th rowspan="2">Crédito</th>
-              <th rowspan="2"></th>
-            </tr>
-            <tr class="table-bordered">
-              <th>Preparación</th>
-              <th>Dictado</th>
-              <th>Consulta/exámen</th>
-            </tr>
-          </thead>
-          <tbody class="teacher_assignatures">
-            <%= f.simple_fields_for :teacher_assignatures, @assignature.teacher_assignatures.joins(teacher: :profile).order("profiles.last_name") do |form_quantity| %>
-              <%= render "teacher_assignature_fields", f: form_quantity %>
-            <% end %>
-          </tbody>
-        </table>
-        <%= link_to_add_association f, :teacher_assignatures, class: 'btn btn-primary btn-sm', id: 'add-nested',
-          data: {"association-insertion-node" => "tbody.teacher_assignatures", "association-insertion-method" => "append"} do %>
-          <%= fa_icon "plus" %>
-          Agregar docente
-        <% end %> 
-      <% end %>
+    <div class="card-body fixed-panel">
       <p>
         <strong>Observación:</strong>
         <%= @assignature.observation %>
       </p>
+      <%=  simple_form_for(@assignature) do |f| %>
+        <div class="card">
+          <table class="table table-hover table-sm">
+            <thead>
+              <tr class="table-bordered">
+                <th rowspan="2">Profesor</th>
+                <th colspan="3" class="text-center">Tiempo(h)</th>
+                <th rowspan="2">Crédito</th>
+                <th rowspan="2"></th>
+              </tr>
+              <tr class="table-bordered">
+                <th>Dictado</th>
+                <th>Preparación</th>
+                <th>Consulta/exámen</th>
+              </tr>
+            </thead>
+            <tbody class="teacher_assignatures">
+              <%= f.simple_fields_for :teacher_assignatures, @assignature.teacher_assignatures.joins(teacher: :profile).order("profiles.last_name") do |form_quantity| %>
+                <%= render "teacher_assignature_fields", f: form_quantity %>
+              <% end %>
+            </tbody>
+          </table>
+          <%= link_to_add_association f, :teacher_assignatures, class: 'btn btn-primary btn-sm', id: 'add-nested',
+            data: {"association-insertion-node" => "tbody.teacher_assignatures", "association-insertion-method" => "append"} do %>
+            <%= fa_icon "plus" %>
+            Agregar docente
+          <% end %>
+        </div> 
+      <% end %>
     </div>
     <div class="card-footer">
       <button type='submit' name='commit' class='btn btn-success float-right' form='edit_assignature_<%= @assignature.id %>'>

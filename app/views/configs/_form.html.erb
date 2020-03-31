@@ -1,0 +1,13 @@
+<%=  simple_form_for(config) do |f| %>
+  <div class='row'>
+    <div class="col-12">
+      <h5 class="border-bottom pb-2">Asignaturas</h5>
+    </div>
+    <div class='col-md-6'>
+      <%= f.input :assignature_preparation_percentage, label: "% Preparación" %></td>
+    </div>
+    <div class='col-md-6'>
+      <%= f.input :assignature_consultation_percentage, label: "% Consulta" %></td>
+    </div>
+  </div>
+<% end %>

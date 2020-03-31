@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-header">
+    <h4><%= fa_icon "cog" %> Configuración</h4>
+  </div>
+  <div class="card-body fixed-panel">
+    <div class="row">
+      <div class="col-12">
+      <h4 class="border-bottom pb-2">Asignaturas</h4>
+      </div>
+      <div class="col-4">
+        <p>
+          <strong>% Preparación:</strong>
+          <%= number_to_percent(@config.assignature_preparation_percentage) %>
+        </p>
+      </div>
+      <div class="col-4">
+        <p>
+          <strong>% Consulta:</strong>
+          <%= number_to_percent(@config.assignature_consultation_percentage) %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-right">
+    <%= link_to edit_config_path(@config), class: "btn btn-warning" do %>
+      <%= fa_icon "edit" %>
+      Editar
+    <% end %>
+  </div>
+</div>
