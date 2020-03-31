@@ -19,7 +19,7 @@
     <% end %>
     <% if policy(ExtensionActivity).index? %>
         <%= link_to extension_activities_path, class: "list-group-item list-group-item-action list-custom bg-dark #{active_class('extension_activities')}" do %>
-          <%= fa_icon "hiking" %> Actividades
+          <%= fa_icon "hiking" %> Extensión
         <% end %>
     <% end %>
     <% if policy(Formation).index? %>
