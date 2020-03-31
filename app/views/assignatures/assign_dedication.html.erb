@@ -8,20 +8,22 @@
         <strong>Observación:</strong>
         <%= @assignature.observation %>
       </p>
+      <%= hidden_field_tag 'preparation_percent', "#{Config.first.assignature_preparation_percentage}"  %>
+      <%= hidden_field_tag 'consultation_percent', "#{Config.first.assignature_consultation_percentage}"  %>
       <%=  simple_form_for(@assignature) do |f| %>
         <div class="card">
           <table class="table table-hover table-sm">
             <thead>
               <tr class="table-bordered">
                 <th rowspan="2">Profesor</th>
-                <th colspan="3" class="text-center">Tiempo(h)</th>
+                <th colspan="4" class="text-center">Tiempo(h)</th>
                 <th rowspan="2">Crédito</th>
-                <th rowspan="2"></th>
               </tr>
               <tr class="table-bordered">
                 <th>Dictado</th>
-                <th>Preparación</th>
-                <th>Consulta/exámen</th>
+                <th>Preparación <small><%= number_to_percent(Config.first.assignature_preparation_percentage) %></small></th>
+                <th>Semanas/cursado</th>
+                <th>Consulta/Exámen <small><%= number_to_percent(Config.first.assignature_consultation_percentage) %></small></th>
               </tr>
             </thead>
             <tbody class="teacher_assignatures">

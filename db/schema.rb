@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_31_155459) do
+ActiveRecord::Schema.define(version: 2020_03_31_171428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -328,6 +328,7 @@ ActiveRecord::Schema.define(version: 2020_03_31_155459) do
     t.decimal "preparation", precision: 9, scale: 2, default: "0.0"
     t.decimal "implementation", precision: 9, scale: 2, default: "0.0"
     t.decimal "consultation", precision: 9, scale: 2, default: "0.0"
+    t.integer "weeks"
     t.index ["assignature_id"], name: "index_teacher_assignatures_on_assignature_id"
     t.index ["teacher_id"], name: "index_teacher_assignatures_on_teacher_id"
   end

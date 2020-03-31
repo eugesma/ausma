@@ -2,45 +2,58 @@
   <div class="card-header">
     <h4><%= fa_icon "eye" %> Viendo asignatura <%= @assignature.name %></h4>
   </div>
-  <div class="card-body">
+  <div class="card-body fixed-panel">
     <div class="row">
-      <div class="col-md-6">
-      <p>
-        <strong>Nombre:</strong>
-        <%= @assignature.name %>
-      </p>
-
-      <p>
-        <strong>Preparación mínima / máxima:</strong>
-        <%= @assignature.min_preparation %> - <%= @assignature.preparation %> 
-      </p>
-
-      <p>
-        <strong>Implementación mínima / máxima:</strong>
-        <%= @assignature.min_implementation %> - <%= @assignature.implementation %>
-      </p>
-
-      <p>
-        <strong>Consulta mínima / máxima:</strong>
-        <%= @assignature.min_consultation %> - <%= @assignature.consultation %>
-      </p>
-
-      <p>
-        <strong>Crédito mínimo / máximo:</strong>
-        <%= @assignature.min_credit %> - <%= @assignature.credit %>
-      </p>
+      <div class="col-4">
+        <p>
+          <strong>Nombre:</strong>
+          <%= @assignature.name %>
+        </p>
       </div>
-      <div class="col-md-6">
+      <div class="col-5">
+        <p>
+          <strong>Observaciones: </strong>
+          <%= @assignature.observation %>
+        </p>
+      </div>
+      <div class="col-3">
         <p>
           <strong>Carrera:</strong>
           <%= @assignature.career.name %>
         </p>
-        <p>
-          <strong>Docentes:</strong>
-          <% @assignature.teachers.each do |teacher| %>
-            <%= teacher.fullname %><%= teacher == @assignature.teachers.last ? ".": "," %>
-          <% end %>
-        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 mx-auto">
+        <div class="card">
+          <table class="table table-hover table-sm">
+            <thead>
+              <tr class="table-bordered">
+                <th rowspan="2">Profesor</th>
+                <th colspan="4" class="text-center">Tiempo(h)</th>
+                <th rowspan="2">Crédito</th>
+              </tr>
+              <tr class="table-bordered">
+                <th>Dictado</th>
+                <th>Preparación <small><%= number_to_percent(Config.first.assignature_preparation_percentage) %></small></th>
+                <th>Semanas/cursado</th>
+                <th>Consulta/Exámen <small><%= number_to_percent(Config.first.assignature_consultation_percentage) %></small></th>
+              </tr>
+            </thead>
+            <tbody class="teacher_assignatures">
+              <% @assignature.teacher_assignatures.each do |ta| %>
+                <tr>
+                  <td><%= ta.teacher_fullname %></td>
+                  <td><%= format_number(ta.implementation) %></td>
+                  <td><%= format_number(ta.preparation) %></td>
+                  <td><%= format_number(ta.consultation) %></td>
+                  <td><%= format_number(ta.weeks) %></td>
+                  <td><%= format_number(ta.total_credit) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

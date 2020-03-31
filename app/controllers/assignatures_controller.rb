@@ -81,7 +81,7 @@ class AssignaturesController < ApplicationController
   def assignature_params
     params.require(:assignature).permit(:name, :observation, :min_preparation, :preparation, :min_implementation, 
       :implementation, :min_consultation, :consultation, :min_credit, :credit, :career_id, teacher_ids: [],
-      teacher_assignatures_attributes: [:id, :teacher_id, :preparation, :implementation, :consultation] 
+      teacher_assignatures_attributes: [:id, :teacher_id, :preparation, :implementation, :weeks, :consultation, :_destroy] 
     )
   end
 end

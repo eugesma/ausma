@@ -19,9 +19,13 @@ class Teacher < ApplicationRecord
   has_many :dedications, through: :teacher_dedications
 
   delegate :fullname, to: :profile
-  delegate :total_dedication, to: :teacher_assignatures
 
   def total_credit_assignatures
     self.teacher_assignatures.sum(:total_credit)
+  end
+
+
+  def total_dedication_hours
+    self.teacher_dedications.sum(:total_credit)
   end
 end

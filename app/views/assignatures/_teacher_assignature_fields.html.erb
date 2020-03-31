@@ -1,47 +1,61 @@
 <tr class="nested-fields">
   <td style="width:25%">
-    <%= f.collection_select :teacher_id, @teachers, :id, :fullname, {label: false }, 
-      { class: "selectpicker", size: 6, :data => {width: "250px"},
-        "data-none-results-text" => "No se encontró docente", "data-live-search"=>true,
-        "title"=>"Seleccionar", value: "#{ f.object.teacher.present? ? f.object.teacher.id : "" }"
+    <%= f.select :teacher_id, options_for_select(@teachers.map {|teacher| [teacher.fullname, teacher.id, {'data-total-dedication' => teacher.total_dedication_hours }]}, f.object.teacher_id), {},
+      {
+        class: "selectpicker", 
+        :data => {width: "250px"}, 
+        "data-none-results-text" => "No se encontró docente", 
+        "data-live-search"=>true,
+        "title"=>"Seleccionar",
+        value: 1
       }
     %>
   </td>
   <td>
     <%= f.input :implementation, label: false, 
       :input_html => { 
-        class: 'implementation',
+        class: 'assignature-implementation',
         min: "#{f.object.assignature.min_implementation}",
         max: "#{f.object.assignature.implementation}",
-        value: "#{f.object.implementation == 0 ? format_number(f.object.assignature.implementation) : format_number(f.object.implementation)}"
+        value: "#{f.object.implementation == 0 ? 0 : format_number(f.object.implementation)}"
       }
     %> 
   </td>
   <td>
     <%= f.input :preparation, label: false, 
       :input_html => { 
-        class: 'preparation',
+        readonly: true,
+        class: 'assignature-preparation',
         min: "#{f.object.assignature.min_preparation}",
         max: "#{f.object.assignature.preparation}",
-        value: "#{f.object.preparation == 0 ? format_number(f.object.assignature.preparation) : format_number(f.object.preparation)}"
+        value: "#{f.object.preparation == 0 ? 0 : format_number(f.object.preparation)}"
       }
     %> 
   </td>
   <td>
+    <%= f.input :weeks, as: :integer, label: false, 
+      :input_html => { 
+        class: 'assignature-weeks',
+        value: "#{f.object.weeks == 0 ? 0 : format_number(f.object.weeks)}"
+      }
+    %>
+  </td>
+  <td>
     <%= f.input :consultation, label: false, 
       :input_html => {
-        class: 'consultation',
+        readonly: true,
+        class: 'assignature-consultation',
         min: "#{f.object.assignature.min_consultation}",
         max: "#{f.object.assignature.consultation}",
-        value: "#{f.object.consultation == 0 ? format_number(f.object.assignature.consultation) : format_number(f.object.consultation)}"
+        value: "#{f.object.consultation == 0 ? 0 : format_number(f.object.consultation)}"
       }
     %> 
   </td>
   <td>
     <h4>
-    <span class="badge badge-info total-credit">
-      <%= f.object.new_record? ? format_number(f.object.assignature.preparation + f.object.assignature.implementation + f.object.assignature.consultation) : format_number(f.object.total_credit) %>
-    </span>
+      <span class="badge badge-info assignature-total-credit">
+        <%= f.object.total_credit == 0 ? 0 : format_number(f.object.total_credit) %>
+      </span>
     </h4>
   </td>
   <td>

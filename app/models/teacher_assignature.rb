@@ -9,6 +9,7 @@ class TeacherAssignature < ApplicationRecord
     :allow_destroy => true
 
   delegate :name, to: :assignature
+  delegate :fullname, to: :teacher, prefix: true
 
   def calc_total_credit
     self.total_credit = self.preparation + self.implementation + self.consultation
