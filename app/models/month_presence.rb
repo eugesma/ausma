@@ -1,8 +1,13 @@
 class MonthPresence < ApplicationRecord
   belongs_to :created_by, class_name: "User"
 
-  has_many :teacher_month_presences
+  has_many :teacher_month_presences, dependent: :destroy
   has_many :teachers, through: :teacher_month_presences
+
+  accepts_nested_attributes_for  :teacher_month_presences,
+    :reject_if => :all_blank
+
+  validates_presence_of :month_date
 
   filterrific(
     default_filter_params: { sorted_by: 'created_at_desc' },

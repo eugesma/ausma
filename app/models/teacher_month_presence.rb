@@ -7,5 +7,5 @@ class TeacherMonthPresence < ApplicationRecord
   delegate :fullname, to: :teacher, prefix: true
 
   # Validations
-  validates_presence_of :presence_time, :presence_percent
+  validates_presence_of :presence_time
 end

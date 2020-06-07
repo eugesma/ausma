@@ -2,16 +2,30 @@
   <div class="card-header">
     <h4><%= fa_icon "eye" %> Viendo asistencia de <%= l(@month_presence.month_date, format: '%B %Y') %></h4>
   </div>
-  <div class="card-body">
+  <div class="card-body fixed-panel">
     <div class="row">
-      <div class="col-md-6">
-      <p>
-        <strong>Docentes:</strong>
-          <% @month_presence.teachers.each do |teacher| %>
-            <%= teacher.fullname %><%= teacher == @month_presence.teachers.last ? ".": "," %>
-          <% end %>
-      </p>
-      </div>      
+      <div class="col-6 mx-auto">
+        <div class="card">
+          <table class="table table-sm">
+            <thead>
+              <tr class="">
+                <th>Profesor</th>
+                <th>Horas hábiles</th>
+                <th>% de asistencia</th>
+              </tr>
+            </thead>
+            <tbody class="teacher_meetings">
+              <% @month_presence.teacher_month_presences.each do |teacher_presence| %>
+                <tr>
+                  <td><%= teacher_presence.teacher_fullname %></td>
+                  <td><%= format_number(teacher_presence.presence_time) %></td>
+                  <td><%= format_number(teacher_presence.presence_percent) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
   <div class="card-footer text-right">

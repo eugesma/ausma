@@ -26,7 +26,7 @@ class MonthPresencesController < ApplicationController
   def new
     @month_presence = MonthPresence.new
     Teacher.find_each do |teacher|
-      @month_presence.teacher_month_presences.build(teacher: teacher, presence_time: teacher.total_dedication_hours).save!
+      @month_presence.teacher_month_presences.build(teacher: teacher, presence_time: teacher.total_dedication_hours)
     end
   end
 
@@ -60,10 +60,10 @@ class MonthPresencesController < ApplicationController
 
   # PATCH/PUT /month_presences/1
   # PATCH/PUT /month_presences/1.json
-  def update_assignment
+  def update
     respond_to do |format|
       if @month_presence.update(month_presence_params)
-        format.html { redirect_to @month_presence, notice: 'El formulario de asistencia se ha modificado correctamente.' }
+        format.html { redirect_to @month_presence, notice: 'La planilla de asistencia se ha modificado correctamente.' }
         format.json { render :show, status: :ok, location: @month_presence }
       else
         format.html { render :edit }
@@ -90,6 +90,7 @@ class MonthPresencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def month_presence_params
-      params.require(:month_presence).permit(:month_date, teacher_ids: [], teacher_month_presences_attributes: [:id, :teacher_id])
+      params.require(:month_presence).permit(:month_date, teacher_ids: [], 
+        teacher_month_presences_attributes: [:id, :teacher_id, :presence_time, :presence_percent])
     end
 end
