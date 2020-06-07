@@ -1,5 +1,5 @@
 class MonthPresencesController < ApplicationController
-  before_action :set_month_presence, only: [:show, :edit, :update, :destroy]
+  before_action :set_month_presence, only: [:show, :edit, :update, :destroy, :delete]
 
   # GET /month_presences
   # GET /month_presences.json
@@ -48,7 +48,7 @@ class MonthPresencesController < ApplicationController
 
     respond_to do |format|
       if @month_presence.save
-        format.html { redirect_to @month_presence, notice: 'El formulario de asistencia se ha creado correctamente.' }
+        format.html { redirect_to @month_presence, notice: 'La planilla de asistencia se ha creado correctamente.' }
         format.json { render :show, status: :created, location: @month_presence }
       else
         @teachers = Teacher.all
@@ -77,7 +77,7 @@ class MonthPresencesController < ApplicationController
   def destroy
     @month_presence.destroy
     respond_to do |format|
-      format.html { redirect_to month_presences_url, notice: 'El formulario de asistencia se ha eliminado correctamente.' }
+      format.html { redirect_to month_presences_url, notice: 'La planilla de asistencia se ha eliminado correctamente.' }
       format.json { head :no_content }
     end
   end
