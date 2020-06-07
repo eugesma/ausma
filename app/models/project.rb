@@ -4,17 +4,17 @@ class Project < ApplicationRecord
   # Relations
   has_many :teacher_projects, dependent: :destroy
   has_many :teachers, through: :teacher_projects
-
-  # Delegations
-  delegate :name, to: :formation_type, prefix: true
-  delegate :plus_percentage, to: :formation_type
+  belongs_to :project_type
 
   accepts_nested_attributes_for  :teachers, :teacher_projects,
     :reject_if => :all_blank,
     :allow_destroy => true
 
   # Validations
-  validates_presence_of :name, :formation_type, :hours
+  validates_presence_of :name, :code, :credit
+
+  # Delegations
+  delegate :name, to: :project_type, prefix: true
 
   filterrific(
     default_filter_params: { sorted_by: 'created_at_desc' },

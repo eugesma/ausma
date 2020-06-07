@@ -8,27 +8,16 @@
     %>
   </td>
   <td>
-    <%= f.input :quantity, label: false,
-      :input_html => { 
-        class: 'quantity',
-        min: 0,
-        max: format_number(@dedication.duration),
-        value: "#{ f.object.new_record? ? format_number(@dedication.duration) : format_number(f.object.quantity) }"
-      }
-    %> 
-  </td>
-  <td>
-    <%= f.collection_select :assistance_status_id, @assistance_statuses, :id, :name, {label: false },
-      { class: "selectpicker", size: 6, :data => {width: "200px"},
-        "data-none-results-text" => "No se encontró docente", "data-live-search"=>false,
-        "title"=>"Seleccionar",
+    <%= f.collection_select :project_role_id, @project_roles, :id, :name, {label: false }, 
+      { class: "selectpicker", size: 6, :data => {width: "250px"},
+        "title"=>"Seleccionar", value: "#{ f.object.project_role.present? ? f.object.project_role.id : "" }"
       }
     %>
   </td>
   <td>
     <h4>
     <span class="badge badge-info total-credit">
-      <%= f.object.new_record? ? format_number(@dedication.credit * @dedication.duration) : format_number(f.object.total_credit) %>
+    0
     </span>
     </h4>
   </td>

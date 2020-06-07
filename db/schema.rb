@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_07_150045) do
+ActiveRecord::Schema.define(version: 2020_06_07_223206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -300,6 +300,19 @@ ActiveRecord::Schema.define(version: 2020_06_07_150045) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "project_roles", force: :cascade do |t|
+    t.string "name"
+    t.integer "percent", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "project_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.decimal "credit", precision: 9, scale: 2, default: "0.0"
@@ -308,6 +321,9 @@ ActiveRecord::Schema.define(version: 2020_06_07_150045) do
     t.decimal "min_credit", precision: 9, scale: 2, default: "0.0"
     t.string "code"
     t.integer "project_type", default: 0
+    t.bigint "project_type_id", default: 1
+    t.text "observation"
+    t.index ["project_type_id"], name: "index_projects_on_project_type_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -428,8 +444,10 @@ ActiveRecord::Schema.define(version: 2020_06_07_150045) do
     t.bigint "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "role", default: 0
+    t.decimal "total_credit", precision: 9, scale: 2, default: "0.0"
+    t.bigint "project_role_id", default: 1
     t.index ["project_id"], name: "index_teacher_projects_on_project_id"
+    t.index ["project_role_id"], name: "index_teacher_projects_on_project_role_id"
     t.index ["teacher_id"], name: "index_teacher_projects_on_teacher_id"
   end
 

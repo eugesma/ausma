@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-   before_action :set_project, only: [:show, :edit, :update, :destroy]
+   before_action :set_project, only: [:show, :edit, :update, :destroy, :delete, :assign_dedication]
 
   # GET /projects
   # GET /projects.json
@@ -26,27 +26,29 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @teachers = Teacher.all
-    @project_types = PostType.all
   end
 
   # GET /projects/1/edit
   def edit
     @teachers = Teacher.all
-    @project_types = PostType.all
+  end
+
+  def assign_dedication
+    @teachers = Teacher.all
+    @project_roles = ProjectRole.all
   end
 
   # POST /projects
   # POST /projects.json
   def create
-    @project = Post.new(project_params)
+    @project = Project.new(project_params)
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Post was successfully created.' }
+        format.html { redirect_to @project, notice: 'El proyecto se ha creado correctamente.' }
         format.json { render :show, status: :created, location: @project }
       else
         @teachers = Teacher.all
-        @project_types = PostType.all
         format.html { render :new }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
@@ -58,7 +60,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Post was successfully updated.' }
+        format.html { redirect_to @project, notice: 'El proyecto se ha modificado correctamente.' }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit }
@@ -72,7 +74,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to projects_url, notice: 'El proyecto se ha enviado a la papelera.' }
       format.json { head :no_content }
     end
   end
@@ -80,11 +82,12 @@ class ProjectsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_project
-    @project = Post.find(params[:id])
+    @project = Project.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
-    params.require(:project).permit(:name, :project_type_id, teacher_ids: [], teacher_projects_attributes: [:id, :teacher_id])
+    params.require(:project).permit(:code, :name, :credit, :project_type_id, teacher_ids: [],
+      teacher_projects_attributes: [:id, :teacher_id, :project_role_id, :_destroy])
   end
 end

@@ -3,15 +3,15 @@
   <td><%= post.post_type_name %></td>
   <td><span class="badge badge-secondary"><%= post.teachers.count %></span></td>
   <td><span class="badge badge-info"><%= format_number(post.credit) %></span></td>
-  <td class="float-right">
+  <td class="text-right">
     <% if policy(post).show? %>
-      <%= link_to post_path(post), class: 'btn btn-secondary btn-sm', 
+      <%= link_to post_path(post), class: 'btn btn-secondary', 
         title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
         <%= fa_icon "eye" %>
       <% end %>
     <% end %>
     <% if policy(post).edit? %>
-      <%= link_to edit_post_path(post), class: 'btn btn-warning btn-sm', 
+      <%= link_to edit_post_path(post), class: 'btn btn-warning', 
         title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>
         <%= fa_icon "edit" %>
       <% end %>

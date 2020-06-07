@@ -1,7 +1,7 @@
 <tr id="user_<%= user.id %>">
   <td>
     <% if user.profile.present? %>
-      <span><%= image_tag user_avatar(user, 25), class:"img-circle" %></span>
+      <span><%= image_tag user_avatar(user, 34), class:"img-circle" %></span>
     <% end %>
   </td>
   <td>
@@ -11,21 +11,21 @@
   <td></td>
   <td><%= user.profile.email.present? ? user.profile.email : '----' %></td>
   <td><%= user.updated_at.strftime("%d/%m/%Y")%> </td>
-  <td class="float-right">
+  <td class="text-right">
     <% if policy(user).show? %>
-      <%= link_to users_admin_path(user), class: 'btn btn-secondary btn-sm', 
+      <%= link_to users_admin_path(user), class: 'btn btn-secondary', 
         title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
         <%= fa_icon "eye" %>
       <% end %>
     <% end %>
     <% if policy(user).edit? %>
-      <%= link_to edit_users_admin_path(user), class: 'btn btn-warning btn-sm', 
+      <%= link_to edit_users_admin_path(user), class: 'btn btn-warning', 
         title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>
         <%= fa_icon "edit" %>
       <% end %>
     <% end %>
     <% if policy(user).edit_permissions? %>
-      <%= link_to edit_permissions_users_admin_path(user), class: 'btn btn-warning btn-sm', 
+      <%= link_to edit_permissions_users_admin_path(user), class: 'btn btn-warning', 
         title: 'Editar permisos', data: { toggle: 'tooltip', placement: 'top' } do %>
         <%= fa_icon "lock" %>
       <% end %>
