@@ -8,7 +8,7 @@
           required: true,
           placeholder: "Elegir una fecha",
           class: "input-sm",
-          value: "#{f.object.new_record? ? MonthPresence.last.month_date.next_month.strftime("%m/%y") : f.object.month_date.strftime("%m/%y")}"
+          value: "#{f.object.new_record? ? DateTime.now.strftime("%m/%y") : f.object.month_date.strftime("%m/%y")}"
         },
         html5: false 
       %>
