@@ -5,9 +5,10 @@
       <%= f.input :month_date, as: :tempus_dominus,
         label: "Mes",
         input_html: {
+          required: true,
           placeholder: "Elegir una fecha",
           class: "input-sm",
-          value: "#{f.object.month_date.strftime("%m/%y")}"
+          value: "#{f.object.new_record? ? MonthPresence.last.month_date.next_month.strftime("%m/%y") : f.object.month_date.strftime("%m/%y")}"
         },
         html5: false 
       %>
