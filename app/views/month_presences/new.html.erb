@@ -1,18 +1,16 @@
-<div class="col-lg-8 col-md-12 mx-auto">
-  <div class="card">
-    <div class="card-header bg-primary text-white">
-    <h4><%= fa_icon "plus" %> Nuevo formulario de asistencia</h4>
-    </div>
-    <div class="card-body">
-      <%= render 'form', month_presence: @month_presence %>
-    </div>
-    <div class="card-footer">
-      <button type='submit' name='commit' class='btn btn-success float-right' form='new_month_presence'>
-        <%= fa_icon "check" %> Crear formulario
-      </button>
-      <%= link_to month_presences_path, class: "btn btn-light float-right mr-2" do %>
-        Volver
-      <% end %>
-    </div>
+<div class="card">
+  <div class="card-header bg-primary text-white">
+  <h4><%= fa_icon "plus" %> Nuevo formulario de asistencia</h4>
+  </div>
+  <div class="card-body">
+    <%= render 'form', month_presence: @month_presence %>
+  </div>
+  <div class="card-footer">
+    <button type='submit' name='commit' class='btn btn-success float-right' form='new_month_presence'>
+      <%= fa_icon "check" %> Crear formulario
+    </button>
+    <%= link_to month_presences_path, class: "btn btn-light float-right mr-2" do %>
+      Volver
+    <% end %>
   </div>
 </div>

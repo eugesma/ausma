@@ -18,6 +18,9 @@ class Teacher < ApplicationRecord
   has_many :teacher_dedications
   has_many :dedications, through: :teacher_dedications
 
+  has_many :teacher_month_presences
+  has_many :month_presences, through: :teacher_month_presences
+
   delegate :fullname, to: :profile
 
   def total_credit_assignatures

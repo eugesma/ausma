@@ -25,11 +25,17 @@ class MonthPresencesController < ApplicationController
   # GET /month_presences/new
   def new
     @month_presence = MonthPresence.new
+    Teacher.find_each do |teacher|
+      @month_presence.teacher_month_presences.build(teacher: teacher, presence_time: teacher.total_dedication_hours).save!
+    end
+  end
+
+  def assign_assistance
     @teachers = Teacher.all
   end
 
   # GET /month_presences/1/edit
-  def edit
+  def edit_assignment
     @teachers = Teacher.all
     @month_presence_types = month_presenceType.all
   end
@@ -38,6 +44,7 @@ class MonthPresencesController < ApplicationController
   # month_presence /month_presences.json
   def create
     @month_presence = MonthPresence.new(month_presence_params)
+    @month_presence.created_by = current_user
 
     respond_to do |format|
       if @month_presence.save
@@ -53,7 +60,7 @@ class MonthPresencesController < ApplicationController
 
   # PATCH/PUT /month_presences/1
   # PATCH/PUT /month_presences/1.json
-  def update
+  def update_assignment
     respond_to do |format|
       if @month_presence.update(month_presence_params)
         format.html { redirect_to @month_presence, notice: 'El formulario de asistencia se ha modificado correctamente.' }
@@ -78,7 +85,7 @@ class MonthPresencesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_month_presence
-      @month_presence = month_presence.find(params[:id])
+      @month_presence = MonthPresence.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

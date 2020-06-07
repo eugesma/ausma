@@ -1,4 +1,5 @@
 class TeacherProject < ApplicationRecord
+  # Relations
   belongs_to :teacher
   belongs_to :project
 

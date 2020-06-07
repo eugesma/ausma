@@ -1,5 +1,5 @@
 <tr id="month_presence_<%= month_presence.id %>">
-  <td><%= month_presence.month_date %></td>
+  <td><%= l(month_presence.month_date, format: '%B %Y').humanize %></td>
   <td class="float-right">
     <% if policy(month_presence).show? %>
       <%= link_to month_presence_path(month_presence), class: 'btn btn-secondary btn-sm', 

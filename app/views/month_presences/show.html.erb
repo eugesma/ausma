@@ -1,20 +1,10 @@
 <div class="card">
   <div class="card-header">
-    <h4><%= fa_icon "eye" %> Viendo formulario de asistencia: <%= @month_presence.name %></h4>
+    <h4><%= fa_icon "eye" %> Viendo asistencia de <%= l(@month_presence.month_date, format: '%B %Y') %></h4>
   </div>
   <div class="card-body">
     <div class="row">
       <div class="col-md-6">
-      <p>
-        <strong>Nombre:</strong>
-        <%= @month_presence.name %>
-      </p>
-
-      <p>
-        <strong>Tipo:</strong>
-        <%= @month_presence.month_presence_type.name %> 
-      </p>
-
       <p>
         <strong>Docentes:</strong>
           <% @month_presence.teachers.each do |teacher| %>

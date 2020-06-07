@@ -1,6 +1,9 @@
 class MonthPresence < ApplicationRecord
   belongs_to :created_by, class_name: "User"
 
+  has_many :teacher_month_presences
+  has_many :teachers, through: :teacher_month_presences
+
   filterrific(
     default_filter_params: { sorted_by: 'created_at_desc' },
     available_filters: [

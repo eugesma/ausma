@@ -1,4 +1,5 @@
 class TeacherMeeting < ApplicationRecord
+  # Relations
   belongs_to :teacher
   belongs_to :meeting
   belongs_to :assistance_status, optional: true

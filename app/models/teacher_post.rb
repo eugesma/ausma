@@ -1,4 +1,5 @@
 class TeacherPost < ApplicationRecord
-    belongs_to :post
-    belongs_to :teacher
+  # Relations
+  belongs_to :post
+  belongs_to :teacher
 end
