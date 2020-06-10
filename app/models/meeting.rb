@@ -1,6 +1,4 @@
 class Meeting < ApplicationRecord
-  has_many :evaluation_meetings
-  has_many :evaluations, through: :evaluation_meetings
   has_many :teacher_meetings, dependent: :destroy
   has_many :teachers, through: :teacher_meetings
 
