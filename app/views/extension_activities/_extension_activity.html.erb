@@ -2,7 +2,7 @@
   <td><%= extension_activity.name %></td>
   <td><%= extension_activity.career.present? ? extension_activity.career_name : "" %></td>
   <td><span class="badge badge-secondary"><%= extension_activity.teachers.count %></span></td>
-  <td class="float-right">
+  <td class="text-right">
     <%= link_to extension_activity_path(extension_activity), class: 'btn btn-secondary btn-md', 
       title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
       <%= fa_icon "eye" %>

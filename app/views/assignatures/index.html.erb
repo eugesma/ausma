@@ -10,7 +10,7 @@
   </div>
   <div class="card-body fixed-panel-index">
     <div class="card fixed-panel-list">
-      <table class="table table-hover table-sm">
+      <table class="table table-hover table-striped table-sm">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -26,7 +26,7 @@
               <td><%= assignature.name %></td>
               <td><%= assignature.career.present? ? assignature.career_name : "" %></td>
               <td><span class="badge badge-secondary"><%= assignature.teachers.count %></span></td>
-              <td class="float-right">
+              <td class="text-right">
                 <%= link_to assignature_path(assignature), class: 'btn btn-secondary btn-md', 
                   title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
                   <%= fa_icon "eye" %>

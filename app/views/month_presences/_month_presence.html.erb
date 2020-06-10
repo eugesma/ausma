@@ -1,17 +1,21 @@
 <tr id="month_presence_<%= month_presence.id %>">
   <td><%= l(month_presence.month_date, format: '%B %Y').humanize %></td>
-  <td class="float-right">
+  <td class="text-right">
     <% if policy(month_presence).show? %>
-      <%= link_to month_presence_path(month_presence), class: 'btn btn-secondary btn-sm', 
+      <%= link_to month_presence_path(month_presence), class: 'btn btn-secondary', 
         title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
         <%= fa_icon "eye" %>
       <% end %>
     <% end %>
     <% if policy(month_presence).edit? %>
-      <%= link_to edit_month_presence_path(month_presence), class: 'btn btn-warning btn-sm', 
+      <%= link_to edit_month_presence_path(month_presence), class: 'btn btn-warning', 
         title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>
         <%= fa_icon "edit" %>
       <% end %>
+    <% end %>
+    <%= link_to delete_month_presence_path(month_presence), remote: true,
+      class: 'btn btn-danger', title: 'Borrar', data: { toggle: 'tooltip', placement: 'top' } do %>
+      <%= fa_icon "trash" %>
     <% end %>
   </td>
 </tr>

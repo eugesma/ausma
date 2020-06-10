@@ -4,8 +4,7 @@ class ProfilesController < ApplicationController
   def edit
   end
 
-  def update    
-
+  def update
     if @profile.update_attributes(profile_params)
       flash[:success] = "Tu perfil se ha modificado correctamente."
       redirect_to request.referrer

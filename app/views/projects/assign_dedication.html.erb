@@ -1,19 +1,19 @@
 <div class="col-md-9 mx-auto">
   <div class="card">
     <div class="card-header bg-success text-white">
-      <h4><%= fa_icon "business-time" %> Asignar credito de <%= @project.name %></h4>
+      <h4><%= fa_icon "business-time" %> Asignar dedicación de proyecto <%= @project.name %></h4>
     </div>
     <div class="card-body">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-3">
           <p>
-            <strong>Crédito por <%= @project.unity.downcase %>: </strong><%= format_number(@project.credit) %>
-            <%= hidden_field :project, :credit %>
+            <strong>Tipo de proyecto</strong>
+            <%= @project.project_type_name %>
           </p>
         </div>
-        <div class="col-md-3">
-          <strong>Duración:</strong>
-          <%= format_number(@project.duration) %> <%= @project.unity.downcase.pluralize(@project.duration) %>
+        <div class="col-3">
+          <strong>Créditos:</strong>
+          <%= format_number(@project.credit) %>
         </div>
       </div>
       <%=  simple_form_for(@project) do |f| %>
@@ -21,8 +21,7 @@
           <thead>
             <tr class="">
               <th>Profesor</th>
-              <th><%= @project.unity.humanize.pluralize %></th>
-              <th>Asistencia</th>
+              <th>Rol</th>
               <th>Crédito</th>
               <th></th>
             </tr>

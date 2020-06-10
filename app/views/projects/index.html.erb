@@ -10,31 +10,29 @@
   </div>
   <div class="card-body fixed-panel-index">
     <div class="card fixed-panel-list">
-      <table class="table table-hover table-sm">
+      <table class="table table-hover table-striped table-sm">
         <thead>
           <tr>
+            <th>Código</th>
             <th>Nombre</th>
-            <th>Docentes invitados</th>
-            <th>Presentes</th>
-            <th>Ausentes</th>
-            <th>Ausentes s/a</th>
+            <th>Participantes</th>
+            <th>Crédito</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           <% @projects.each do |project| %>
             <tr>
+              <td><%= project.code %></td>
               <td><%= project.name %></td>
               <td><span class="badge badge-secondary"><%= project.teachers.count %></span></td>
-              <td><span class="badge badge-success"><%= project.count_assist %></span></td>
-              <td><span class="badge badge-secondary"><%= project.count_not_assist %></span></td>
-              <td><span class="badge badge-danger"><%= project.count_not_assist_without %></span></td>
-              <td class="float-right">
+              <td><%= format_number(project.credit) %></td>
+              <td class="text-right">
                 <%= link_to project_path(project), class: 'btn btn-secondary btn-md', 
                   title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
                   <%= fa_icon "eye" %>
                 <% end %>
-                <%= link_to assign_project_project_path(project), class: 'btn btn-success btn-md', 
+                <%= link_to assign_dedication_project_path(project), class: 'btn btn-success btn-md', 
                   title: 'Asignar crédito', data: { toggle: 'tooltip', placement: 'top' } do %>
                   <%= fa_icon "business-time" %>
                 <% end %>

@@ -1,5 +1,5 @@
 class MonthPresencesController < ApplicationController
-  before_action :set_month_presence, only: [:show, :edit, :update, :destroy]
+  before_action :set_month_presence, only: [:show, :edit, :update, :destroy, :delete]
 
   # GET /month_presences
   # GET /month_presences.json
@@ -26,7 +26,7 @@ class MonthPresencesController < ApplicationController
   def new
     @month_presence = MonthPresence.new
     Teacher.find_each do |teacher|
-      @month_presence.teacher_month_presences.build(teacher: teacher, presence_time: teacher.total_dedication_hours).save!
+      @month_presence.teacher_month_presences.build(teacher: teacher, presence_time: teacher.total_dedication_hours)
     end
   end
 
@@ -48,7 +48,7 @@ class MonthPresencesController < ApplicationController
 
     respond_to do |format|
       if @month_presence.save
-        format.html { redirect_to @month_presence, notice: 'El formulario de asistencia se ha creado correctamente.' }
+        format.html { redirect_to @month_presence, notice: 'La planilla de asistencia se ha creado correctamente.' }
         format.json { render :show, status: :created, location: @month_presence }
       else
         @teachers = Teacher.all
@@ -60,10 +60,10 @@ class MonthPresencesController < ApplicationController
 
   # PATCH/PUT /month_presences/1
   # PATCH/PUT /month_presences/1.json
-  def update_assignment
+  def update
     respond_to do |format|
       if @month_presence.update(month_presence_params)
-        format.html { redirect_to @month_presence, notice: 'El formulario de asistencia se ha modificado correctamente.' }
+        format.html { redirect_to @month_presence, notice: 'La planilla de asistencia se ha modificado correctamente.' }
         format.json { render :show, status: :ok, location: @month_presence }
       else
         format.html { render :edit }
@@ -77,7 +77,7 @@ class MonthPresencesController < ApplicationController
   def destroy
     @month_presence.destroy
     respond_to do |format|
-      format.html { redirect_to month_presences_url, notice: 'El formulario de asistencia se ha eliminado correctamente.' }
+      format.html { redirect_to month_presences_url, notice: 'La planilla de asistencia se ha eliminado correctamente.' }
       format.json { head :no_content }
     end
   end
@@ -90,6 +90,7 @@ class MonthPresencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def month_presence_params
-      params.require(:month_presence).permit(:month_date, teacher_ids: [], teacher_month_presences_attributes: [:id, :teacher_id])
+      params.require(:month_presence).permit(:month_date, teacher_ids: [], 
+        teacher_month_presences_attributes: [:id, :teacher_id, :presence_time, :presence_percent])
     end
 end

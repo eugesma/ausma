@@ -65,6 +65,10 @@ Rails.application.routes.draw do
   
   resources :posts
 
-  resources :month_presences
+  resources :month_presences do
+    member do
+      get :delete
+    end
+  end
 
 end

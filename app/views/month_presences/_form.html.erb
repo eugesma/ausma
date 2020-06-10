@@ -5,37 +5,53 @@
       <%= f.input :month_date, as: :tempus_dominus,
         label: "Mes",
         input_html: {
+          required: true,
           placeholder: "Elegir una fecha",
           class: "input-sm",
+          value: "#{f.object.new_record? ? DateTime.now.strftime("%m/%y") : f.object.month_date.strftime("%m/%y")}"
         },
         html5: false 
       %>
     </div>
-    
-    <table class="table table-sm">
-      <thead>
-        <tr class="">
-          <th>Profesor</th>
-          <th>Horas hábiles</th>
-          <th>% de asistencia</th>
-        </tr>
-      </thead>
-      <tbody class="teacher_meetings">
-        <%= f.simple_fields_for :teacher_month_presence do |teacher_presence| %>
-          <td><%= teacher_presence.object.teacher_fullname %></td>
-          <td><%= teacher_presence.object.presence_time %></td>
-          <td>
-            <%= teacher_presence.input :presence_percent,
-              label: false,
-              required: true,
-              :input_html => {
-                class: "form-control",
-                size: 20
-              }
-            %>
-          </td>
-        <% end %>
-      </tbody>
-    </table>
+  </div>
+  <div class="row">
+    <div class="col-6 mx-auto">
+      <div class="card">
+        <table class="table table-sm">
+          <thead>
+            <tr class="">
+              <th>Profesor</th>
+              <th>Horas hábiles</th>
+              <th>% de asistencia</th>
+            </tr>
+          </thead>
+          <tbody class="teacher_meetings">
+            <%= f.simple_fields_for :teacher_month_presences do |teacher_presence| %>
+              <tr>
+                <td>
+                  <%= teacher_presence.object.teacher_fullname %>
+                  <%= teacher_presence.hidden_field :teacher_id, value: "#{teacher_presence.object.teacher_id}" %>
+                </td>
+                <td>
+                  <%= format_number(teacher_presence.object.presence_time) %>
+                  <%= teacher_presence.hidden_field :presence_time, value: "#{teacher_presence.object.presence_time}" %>
+                </td>
+                <td>
+                  <%= teacher_presence.input :presence_percent,
+                    label: false,
+                    required: true,
+                    :input_html => {
+                      :maxlength =>100,
+                      :style=> 'width: 100px',
+                      class: "form-control",
+                    }
+                  %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 <% end %>
