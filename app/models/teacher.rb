@@ -27,7 +27,6 @@ class Teacher < ApplicationRecord
     self.teacher_assignatures.sum(:total_credit)
   end
 
-
   def total_dedication_hours
     self.teacher_dedications.sum(:total_credit)
   end
