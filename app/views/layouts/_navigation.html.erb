@@ -1,11 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <% if current_user.has_role?(:docente) %>
-      <a class="navbar-brand" id="lig-brand" href="/">
-        <%= image_tag("uncoma-1.png", size: "45x45", alt: "Logo Uncoma", class: 'logo') %>
-        AUSMA SED
-      </a>
-    <% end %>
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <% if current_user.has_role? :admin %>
         <li class="nav-item">

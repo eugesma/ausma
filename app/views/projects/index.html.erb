@@ -2,9 +2,11 @@
   <div class="card-header">
     <h3 class="title">
       <%= fa_icon "users" %> Proyectos
-      <%= link_to new_project_path, class: "btn btn-primary" do %>
-        <%= fa_icon "plus" %> 
-        Nuevo
+      <% if policy(Project).new? %>
+        <%= link_to new_project_path, class: "btn btn-primary" do %>
+          <%= fa_icon "plus" %> 
+          Nuevo
+        <% end %>
       <% end %>
     </h3>
   </div>
@@ -16,7 +18,6 @@
             <th>Código</th>
             <th>Nombre</th>
             <th>Participantes</th>
-            <th>Crédito</th>
             <th></th>
           </tr>
         </thead>
@@ -26,7 +27,6 @@
               <td><%= project.code %></td>
               <td><%= project.name %></td>
               <td><span class="badge badge-secondary"><%= project.teachers.count %></span></td>
-              <td><%= format_number(project.credit) %></td>
               <td class="text-right">
                 <%= link_to project_path(project), class: 'btn btn-secondary btn-md', 
                   title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>

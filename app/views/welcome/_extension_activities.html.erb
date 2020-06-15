@@ -1,0 +1,38 @@
+<h4 class="row mb-0 pb-0">
+  <div class="col-8 mb-0 pb-0"><%= fa_icon "hiking" %> Actividades de extensión</div>
+  <div class="col-4 text-right mb-0 pb-0">
+  </div>
+</h4>
+<hr class="mt-0">
+<div class="col-10 mx-auto">
+  <% if extension_activities.present? %>
+    <div class="row border-bottom">
+      <div class="col">
+        Nombre
+      </div>
+      <div class="col">
+        Carrera
+      </div>
+    </div>
+    <% extension_activities.each do |extension_activity| %>
+      <div class="row">
+        <div class="col">
+          <%= extension_activity.name %>
+        </div>
+        <div class="col">
+          <%= extension_activity.career_name %>
+        </div>
+      </div>
+    <% end %>
+    <div class="row table-info">
+      <div class="col">
+        Total
+      </div>
+      <div class="col">
+        <%= number_to_currency(@teacher.total_extension_activity_credits, unit: "créditos", format: "%n %u") %>
+      </div>
+    </div>
+  <% else %>
+    No tienes actividades de extensión
+  <% end %>
+</div>

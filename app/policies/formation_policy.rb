@@ -1,6 +1,6 @@
 class FormationPolicy < ApplicationPolicy
   def index?
-    user.has_any_role?(:admin, :secretaria)
+    user.has_any_role?(:admin, :secretaria, :docente)
   end
 
   def show?

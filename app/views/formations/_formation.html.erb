@@ -2,7 +2,7 @@
   <td><%= formation.name %></td>
   <td><%= formation.formation_type_name %></td>
   <td><span class="badge badge-secondary"><%= formation.teachers.count %></span></td>
-  <td><%= pluralize(format_number(formation.hours), "hora")%></td>
+  <td><%= pluralize(format_number(formation.hours), "hora") %></td>
   <td class="text-right">
     <%= link_to formation_path(formation), class: 'btn btn-secondary btn-md', 
       title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>

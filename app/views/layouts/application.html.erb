@@ -19,9 +19,7 @@
     <div class="corner-ribbon bottom-right sticky orange shadow">ALFA</div>
       <!-- Sidebar -->
       <% if user_signed_in? %>
-        <% unless current_user.has_role?(:docente)%>
           <%= render 'layouts/side_navigation' %>
-        <% end %>
       <% end %>
 
       <!-- Page Content -->

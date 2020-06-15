@@ -27,9 +27,9 @@ class Formation < ApplicationRecord
 
   # Scopes
   pg_search_scope :search_by_name,
-  against: :name,
-  :using => { :tsearch => {:prefix => true} }, # Buscar coincidencia desde las primeras letras.
-  :ignoring => :accents # Ignorar tildes.
+    against: :name,
+    :using => { :tsearch => {:prefix => true} }, # Buscar coincidencia desde las primeras letras.
+    :ignoring => :accents # Ignorar tildes.
 
   scope :sorted_by, lambda { |sort_option|
       # extract the sort direction from the param value.

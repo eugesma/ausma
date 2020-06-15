@@ -7,6 +7,9 @@
     </a>
   </div>
   <div class="list-group list-group-flush">
+    <%= link_to root_path, class: "list-group-item list-group-item-action list-custom bg-dark #{active_class('welcome')}" do %>
+      <%= fa_icon "home" %> Inicio
+    <% end %>
     <% if policy(Assignature).index? %>
         <%= link_to assignatures_path, class: "list-group-item list-group-item-action list-custom bg-dark #{active_class('assignatures')}" do %>
           <%= fa_icon "chalkboard-teacher" %> Académicas

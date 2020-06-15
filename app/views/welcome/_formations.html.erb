@@ -1,0 +1,47 @@
+<h4 class="row mb-0 pb-0">
+  <div class="col-8 mb-0 pb-0"><%= fa_icon "user-graduate" %> Formaciones</div>
+  <div class="col-4 text-right mb-0 pb-0">
+    <%= link_to 'Registrar formación', new_formation_path(), class: "btn btn-ight text-primary" %>
+  </div>
+</h4>
+<hr class="mt-0">
+<div class="col-10 mx-auto">
+  <% if formations.present? %>
+    <div class="row border-bottom">
+      <div class="col">
+        Nombre
+      </div>
+      <div class="col">
+        Tipo
+      </div>
+      <div class="col">
+        Duración
+      </div>
+    </div>
+    <% formations.each do |formation| %>
+      <div class="row">
+        <div class="col">
+          <%= formation.name %>
+        </div>
+        <div class="col">
+          <%= formation.formation_type_name %>
+        </div>
+        <div class="col">
+          <%= pluralize(format_number(formation.hours), "hora") %>
+        </div>
+      </div>
+    <% end %>
+    <div class="row table-info">
+      <div class="col">
+        Total
+      </div>
+      <div class="col">
+      </div>
+      <div class="col">
+        <%= number_to_currency(@teacher.total_formation_credits, unit: "créditos", format: "%n %u") %>
+      </div>
+    </div>
+  <% else %>
+    No tienes formaciones
+  <% end %>
+</div>

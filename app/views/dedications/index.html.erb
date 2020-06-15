@@ -2,9 +2,11 @@
   <div class="card-header">
     <h3 class="title">
       <%= fa_icon "users" %> Dedicaciones
-      <%= link_to new_dedication_path, class: "btn btn-primary" do %>
-        <%= fa_icon "plus" %> 
-        Nueva
+      <% if policy(Dedication).new? %>
+        <%= link_to new_dedication_path, class: "btn btn-primary" do %>
+          <%= fa_icon "plus" %>
+          Nueva
+        <% end %>
       <% end %>
     </h3>
   </div>

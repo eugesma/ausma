@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_15_164819) do
+ActiveRecord::Schema.define(version: 2020_06_15_221820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -426,11 +426,13 @@ ActiveRecord::Schema.define(version: 2020_06_15_164819) do
     t.index ["teacher_id"], name: "index_teacher_month_presences_on_teacher_id"
   end
 
-  create_table "teacher_posts", id: false, force: :cascade do |t|
-    t.bigint "post_id", null: false
-    t.bigint "teacher_id", null: false
-    t.index ["post_id", "teacher_id"], name: "index_teacher_posts_on_post_id_and_teacher_id"
-    t.index ["teacher_id", "post_id"], name: "index_teacher_posts_on_teacher_id_and_post_id"
+  create_table "teacher_posts", force: :cascade do |t|
+    t.bigint "teacher_id"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_teacher_posts_on_post_id"
+    t.index ["teacher_id"], name: "index_teacher_posts_on_teacher_id"
   end
 
   create_table "teacher_projects", force: :cascade do |t|

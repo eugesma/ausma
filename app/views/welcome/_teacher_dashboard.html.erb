@@ -4,8 +4,8 @@
       <h3><%= fa_icon "file-alt"%> Mi currículum anual</h3>
     </div>
     <div class="card-body">
-      <div class="row">
-        <div class="col-3 rounded full-height bg-info text-center pt-3">
+      <div class="row pl-3">
+        <div class="col-3 rounded full-height-cv bg-info text-center pt-3">
           <%= image_tag asset_path('profile-placeholder.png'), class:"img-thumbnail rounded-circle card-img-top" %>
           <p>
             <h4 class="text-white"><%= current_user.fullname %></h4>
@@ -25,71 +25,11 @@
             <% end %>
           </p>
         </div>
-        <div class="col-9">
+        <div class="col-9 fixed-panel-list">
           <!-- Asignatures -->
-          <h4 class="row mb-0 pb-0">
-            <div class="col-8 mb-0 pb-0"><%= fa_icon "chalkboard-teacher" %> Académicas</div>
-          </h4>
-          <hr class="mt-0">
-          <div class="col-10 mx-auto">
-            <% if @assignatures.present? %>
-              <div class="row border-bottom">
-                <div class="col">
-                  Asignatura
-                </div>
-                <div class="col">
-                  Preparación
-                </div>
-                <div class="col">
-                  Implementación
-                </div>
-                <div class="col">
-                  Consultas
-                </div>
-                <div class="col">
-                  Crédito
-                </div>
-              </div>
-              <% @assignatures.each do |assignature| %>
-                <div class="row">
-                  <div class="col">
-                    <%= assignature.name %>
-                  </div>
-                  <div class="col">
-                    <%= number_to_currency(assignature.preparation, unit: "hrs", format: "%n %u") %>
-                  </div>
-                  <div class="col">
-                    <%= number_to_currency(assignature.implementation, unit: "hrs", format: "%n %u") %>
-                  </div>
-                  <div class="col">
-                    <%= number_to_currency(assignature.consultation, unit: "hrs", format: "%n %u") %>
-                  </div>
-                  <div class="col">
-                    <%= assignature.total_credit %>
-                  </div>
-                </div>
-              <% end %>
-              <div class="row table-info">
-                <div class="col">
-                  Total
-                </div>
-                <div class="col">
-                  <%= number_to_currency(@assignatures.sum(:preparation), unit: "hrs", format: "%n %u") %>
-                </div>
-                <div class="col">
-                  <%= number_to_currency(@assignatures.sum(:implementation), unit: "hrs", format: "%n %u") %>
-                </div>
-                <div class="col">
-                  <%= number_to_currency(@assignatures.sum(:consultation), unit: "hrs", format: "%n %u") %>
-                </div>
-                <div class="col">
-                  <%= number_to_currency(@assignatures.sum(:total_credit), unit: "créditos", format: "%n %u") %>
-                </div>
-              </div>
-            <% end %>
-          </div>
+          <%= render "assignatures", assignatures: @assignatures%>
 
-
+          <!-- Meetings -->
           <h4 class="row mt-3 mb-0 pb-0">
             <div class="col-8 mb-0 pb-0"><%= fa_icon "users" %> Reuniones</div>
           </h4>
@@ -104,46 +44,39 @@
                   Crédito
                 </div>
               </div>
-            <% end %>
-            <% @meetings.each do |meeting| %>
-              <div class="row">
+              <% @meetings.each do |meeting| %>
+                <div class="row">
+                  <div class="col">
+                    <%= meeting.name %>
+                  </div>
+                  <div class="col">
+                    <%= meeting.total_credit %>
+                  </div>
+                </div>
+              <% end %>
+              <div class="row table-info">
                 <div class="col">
-                  <%= meeting.name %>
+                  Total
                 </div>
                 <div class="col">
-                  <%= meeting.total_credit %>
+                  <%= number_to_currency(@meetings.sum(:total_credit), unit: "créditos", format: "%n %u") %>
                 </div>
               </div>
+            <% else %>
+              No tienes reuniones
             <% end %>
-            <div class="row table-info">
-              <div class="col">
-                Total
-              </div>
-              <div class="col">
-                <%= number_to_currency(@meetings.sum(:total_credit), unit: "créditos", format: "%n %u") %>
-              </div>
-            </div>
           </div>
+          <!-- End meetings -->
 
-          <h4 class="row mt-3 mb-0 pb-0">
-            <div class="col-8 mb-0 pb-0"><%= fa_icon "hiking" %> Actividades de extensión</div>
-            <div class="col-4 text-right mb-0 pb-0">
-              <%= link_to 'Registrar actividad', new_meeting_path(), class: "btn btn-ight text-primary" %>
-            </div>
-          </h4>
-          <hr class="mt-0">
+          <!-- Extension activities -->
+          <%= render "extension_activities", extension_activities: @extension_activities %>
 
-          <h4 class="row mt-3 mb-0 pb-0">
-            <div class="col-8 mb-0 pb-0"><%= fa_icon "user-graduate" %> Formaciones</div>
-            <div class="col-4 text-right mb-0 pb-0">
-              <%= link_to 'Registrar formación', new_meeting_path(), class: "btn btn-ight text-primary" %>
-            </div>
-          </h4>
-          <hr class="mt-0">
-            
-          <p>
-            <h3>Total:</h3>
-          </p>
+          <!-- Formations -->
+          <%= render "formations", formations: @formations %>
+
+          <!-- Posts -->
+          <%= render "posts", posts: @posts %>
+
         </div>
       </div>
     </div>

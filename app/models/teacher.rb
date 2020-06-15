@@ -21,6 +21,9 @@ class Teacher < ApplicationRecord
   has_many :teacher_month_presences
   has_many :month_presences, through: :teacher_month_presences
 
+  has_many :teacher_posts
+  has_many :posts, through: :teacher_posts
+
   delegate :fullname, to: :profile
 
   def total_credit_assignatures
@@ -29,5 +32,13 @@ class Teacher < ApplicationRecord
 
   def total_dedication_hours
     self.teacher_dedications.sum(:total_credit)
+  end
+
+  def total_post_credits
+    self.posts.validado.map { |post| post.post_type.credit }.sum
+  end
+
+  def total_formation_credits
+    self.teacher_formations.sum(:total_credit)
   end
 end
