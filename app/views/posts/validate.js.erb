@@ -1,0 +1,12 @@
+<%# Change the post status label %>
+$('#post_<%= @post.id %>').replaceWith('<%= j render (@post) %>');
+
+<%# Render flash message %>
+$("#flash_messages").html('<%= j render partial: "layouts/flash_notices" %>');
+
+<%# Animation effect %>
+$('#post_<%= @post.id %>').addClass('table-success');
+
+setTimeout(function() {
+ $("#post_<%= @post.id %>").removeClass("table-success");
+}, 3000);

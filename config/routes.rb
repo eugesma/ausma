@@ -63,7 +63,11 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :posts
+  resources :posts do
+    member do
+      patch :validate
+    end
+  end
 
   resources :month_presences do
     member do

@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :validate]
 
   # GET /posts
   # GET /posts.json
@@ -39,9 +39,10 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.created_by = current_user
 
     respond_to do |format|
-      if @post.save
+      if @post.save!
         format.html { redirect_to @post, notice: 'La publicación se ha creado correctamente.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -67,6 +68,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def validate
+    @post.validado!
+    flash.now[:notice] = "La publicación se ha validado correctamente"
+    respond_to do |format|
+      format.html { redirect_to @post, notice: 'La publicación se ha validado correctamente' }
+      format.js
+    end
+  end
+
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
@@ -85,6 +95,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:name, :post_type_id, teacher_ids: [], teacher_posts_attributes: [:id, :teacher_id])
+      params.require(:post).permit(:name, :post_type_id, :link, :published_at, teacher_ids: [], teacher_posts_attributes: [:id, :teacher_id])
     end
 end

@@ -1,14 +1,14 @@
 <div class="col-lg-8 col-md-12 mx-auto">
   <div class="card">
     <div class="card-header bg-primary text-white">
-    <h4><%= fa_icon "plus" %> Nuevo publicación</h4>
+    <h4><%= fa_icon "plus" %> Nueva publicación</h4>
     </div>
     <div class="card-body">
       <%= render 'form', post: @post %>
     </div>
     <div class="card-footer">
       <button type='submit' name='commit' class='btn btn-success float-right' form='new_post'>
-        <%= fa_icon "check" %> Crear publicación
+        <%= fa_icon "check" %> Crear
       </button>
       <%= link_to posts_path, class: "btn btn-light float-right mr-2" do %>
         Volver

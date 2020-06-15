@@ -1,9 +1,16 @@
-<tr id="post_<%= post.id %>">
+<tr id="post_<%= post.id %>" class="transition-tr">
   <td><%= post.name %></td>
   <td><%= post.post_type_name %></td>
   <td><span class="badge badge-secondary"><%= post.teachers.count %></span></td>
+  <td><span class="badge badge-<%= post_status_label(post) %>"><%= post.status.humanize %></td>
   <td><span class="badge badge-info"><%= format_number(post.credit) %></span></td>
   <td class="text-right">
+    <% if policy(post).validate? %>
+      <%= link_to validate_post_path(post), remote: true, method: :patch, class: 'btn btn-success', 
+        title: 'Validar', data: { toggle: 'tooltip', placement: 'top' } do %>
+        <%= fa_icon "check" %>
+      <% end %>
+    <% end %>
     <% if policy(post).show? %>
       <%= link_to post_path(post), class: 'btn btn-secondary', 
         title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>

@@ -1,7 +1,10 @@
 class Post < ApplicationRecord
     include PgSearch::Model
+
+    enum status: { auditoria: 0, validado: 1, rechazado: 2 }
     
     # Relations
+    belongs_to :created_by, class_name: "User"
     belongs_to :post_type
     has_many :teacher_posts
     has_many :teachers, :through => :teacher_posts
@@ -15,7 +18,7 @@ class Post < ApplicationRecord
     delegate :credit, to: :post_type
     
     # Validations
-    validates_presence_of :name, :post_type
+    validates_presence_of :name, :post_type, :link, :published_at, :created_by
 
     filterrific(
         default_filter_params: { sorted_by: 'created_at_desc' },

@@ -1,6 +1,6 @@
 class PostPolicy < ApplicationPolicy
   def index?
-    user.has_any_role?(:admin, :secretaria)
+    user.has_any_role?(:admin, :secretaria, :docente)
   end
 
   def show?
@@ -8,15 +8,23 @@ class PostPolicy < ApplicationPolicy
   end
 
   def create?
-    user.has_any_role?(:admin, :secretaria)
+    user.has_any_role?(:admin, :secretaria, :docente)
   end
 
   def new?
     create?
   end
 
+  def validate?
+    unless record.validado?
+      user.has_any_role?(:admin, :secretaria)
+    end
+  end
+
   def update?
-    user.has_any_role?(:admin, :secretaria)
+    if record.created_by == user
+      user.has_any_role?(:admin, :secretaria, :docente)
+    end
   end
 
   def edit?
