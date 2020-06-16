@@ -5,8 +5,15 @@
     <%= f.input :name, label: 'Nombre' %>
   </div>
   <div class="col-6">
-    <%= f.input :credit, label: "Crédito", :input_html => { min: 0, value: "#{format_number(project.credit)}" } %>
-    <%= f.input :observation, label: "Observaciones" %>
+    <%= f.input :observation, label: "Observaciones", input_html: { cols: 1, rows: 1 } %>
+    <div class="form-group">
+      <label class="form-control-label">Tipo de proyecto</label>
+      <%= f.collection_select :project_type_id, ProjectType.all, :id, :name, {}, 
+        { class: "selectpicker", size: 6, :data => {width: "100%"},
+        "title"=>"Seleccionar",
+        }
+      %>
+    </div>
   </div>
 </div>
 <div class="row">

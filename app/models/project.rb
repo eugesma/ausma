@@ -11,7 +11,7 @@ class Project < ApplicationRecord
     :allow_destroy => true
 
   # Validations
-  validates_presence_of :name, :code, :credit
+  validates_presence_of :name, :code
 
   # Delegations
   delegate :name, to: :project_type, prefix: true
