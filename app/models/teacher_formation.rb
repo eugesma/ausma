@@ -12,7 +12,7 @@ class TeacherFormation < ApplicationRecord
     :allow_destroy => true
 
   # Delegates
-  delegate :hours, :name, :formation_type_name, to: :formation
+  delegate :hours, :formation_type_name, to: :formation, allow_nil: true
   delegate :plus_percentage, to: :teacher_formation_role
   delegate :name, to: :teacher_formation_role, prefix: true
   delegate :fullname, to: :teacher, prefix: true

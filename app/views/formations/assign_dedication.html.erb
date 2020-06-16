@@ -9,11 +9,28 @@
           <strong>Formación: </strong><%= @formation.name %>
         </p>
         <p class="col-4">
+          <strong>Fecha de inicio: </strong>
+          <%= @formation.init_date.strftime("%d/%m/%y") %>
+        </p>
+        <p class="col-4">
+          <strong>Observaciones:</strong>
+          <%= @formation.observation %>
+        </p>
+      </div>
+      <div class="row">
+        <p class="col-4">
           <strong>Tipo: </strong><%= @formation.formation_type_name %>
         </p>
         <p class="col-4">
           <strong>Duración: </strong><%= pluralize(format_number(@formation.hours), "hora") %>
         </p>
+        <% if @formation.link.present? %>
+          <p class="col-4">
+            <a href="<%= @formation.link %>" class="btn btn-sm btn-primary" target="_blank">
+              <%= fa_icon "external-link-alt" %> Más información
+            </a>
+          </p>
+        <% end %>
       </div>
       <%=  simple_form_for(@formation) do |f| %>
         <div class="card">
@@ -39,10 +56,6 @@
           <% end %>
         </div>
       <% end %>
-      <p>
-        <strong>Observación:</strong>
-        <%= @formation.observation %>
-      </p>
     </div>
     <div class="card-footer">
       <button type='submit' name='commit' class='btn btn-success float-right' form='edit_formation_<%= @formation.id %>'>

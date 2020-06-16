@@ -89,7 +89,7 @@ class FormationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def formation_params
-      params.require(:formation).permit(:name, :formation_type_id, :observation, :hours, teacher_ids: [], 
+      params.require(:formation).permit(:name, :formation_type_id, :observation, :hours, :init_date, :certificate, :link, teacher_ids: [],
         teacher_formations_attributes: [:id, :teacher_id, :teacher_formation_role_id]
       )
     end

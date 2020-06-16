@@ -2,45 +2,68 @@
   <div class="card-header">
     <h4><%= fa_icon "eye" %> Viendo <%= @formation.formation_type_name.downcase %> <%= @formation.name %></h4>
   </div>
-  <div class="card-body">
+  <div class="card-body fixed-panel">
     <div class="row">
       <p class="col-4">
-        <strong>Nombre:</strong>
+        <strong>Formación:</strong>
         <%= @formation.name %>
       </p>
-
+      <p class="col-4">
+        <strong>Fecha de inicio: </strong>
+        <%= @formation.init_date.present? ? @formation.init_date.strftime("%d/%m/%Y") : "" %>
+      </p>
+      <p>
+        <strong>Observaciones: </strong>
+        <%= @formation.observation %>
+      </p>
+    </div>
+    <div class="row">
       <p class="col-4">
         <strong>Tipo:</strong>
         <%= @formation.formation_type_name %>
       </p>
-      
       <p class="col-4">
         <strong>Duración:</strong>
         <%= pluralize(format_number(@formation.hours), "hora") %>
       </p>
+      <p class="col-2">
+        <strong>Certificado: </strong>
+        <%= @formation.certificate.humanize %>
+      </p>
+      <% if @formation.link.present? %>
+        <p class="col-2">
+          <a href="<%= @formation.link %>" class="btn btn-sm btn-primary" target="_blank">
+            <%= fa_icon "external-link-alt" %> Más información
+          </a>
+        </p>
+      <% end %>
+    </div>
+    <div class="row">
     </div>
     <div class="row">
       <div class="col-md-6 mx-auto">
         <p>
-          <table class="table table-hover table-sm">
-            <thead>
-              <tr>
-                <th>Docente</th>
-                <th>Rol</th>
-                <th>Crédito</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <% @formation.teacher_formations.each do |t_f| %>
+          <div class="card">
+            <table class="table table-hover table-sm">
+              <thead>
                 <tr>
-                  <td><%= t_f.teacher_fullname %></td>
-                  <td><%= t_f.teacher_formation_role_name %></td>
-                  <td><%= format_number(t_f.total_credit)%></td>
+                  <th>Docente</th>
+                  <th>Rol</th>
+                  <th>Crédito</th>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody>
+                <% @formation.teacher_formations.each do |t_f| %>
+                  <tr>
+                    <td><%= t_f.teacher_fullname %></td>
+                    <td><%= t_f.teacher_formation_role_name %></td>
+                    <td><%= format_number(t_f.total_credit)%></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </p>
       </div>
     </div>

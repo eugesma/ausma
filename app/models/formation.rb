@@ -1,13 +1,15 @@
 class Formation < ApplicationRecord
   include PgSearch::Model
     
+  enum certificate: { no: 0, digital: 1, papel: 2 }
+
   # Relations
   belongs_to :formation_type
   has_many :teacher_formations, dependent: :destroy
   has_many :teachers, through: :teacher_formations
 
   # Delegations
-  delegate :name, to: :formation_type, prefix: true
+  delegate :name, to: :formation_type, prefix: :formation_type
   delegate :plus_percentage, to: :formation_type
 
   accepts_nested_attributes_for  :teachers, :teacher_formations,
@@ -15,7 +17,7 @@ class Formation < ApplicationRecord
     :allow_destroy => true
 
   # Validations
-  validates_presence_of :name, :formation_type, :hours
+  validates_presence_of :name, :formation_type, :hours, :init_date
 
   filterrific(
     default_filter_params: { sorted_by: 'created_at_desc' },

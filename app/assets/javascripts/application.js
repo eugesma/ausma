@@ -67,6 +67,14 @@ $(document).on('turbolinks:load', function() {
       }
     });
 
+    $("#formation_init_date").datetimepicker({
+      format: 'DD/MM/YYYY',
+      locale: 'es',
+      icons: {
+        time: "fa fa-clock",
+      }
+    });
+
     $("#month_presence_month_date").datetimepicker({
       viewMode: 'months',
       format: 'MM/YYYY',

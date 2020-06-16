@@ -21,10 +21,10 @@
     <% formations.each do |formation| %>
       <div class="row">
         <div class="col">
-          <%= formation.name %>
+          <%= formation.formation.name %>
         </div>
         <div class="col">
-          <%= formation.formation_type_name %>
+          <%= formation.formation.formation_type_name %>
         </div>
         <div class="col">
           <%= pluralize(format_number(formation.hours), "hora") %>

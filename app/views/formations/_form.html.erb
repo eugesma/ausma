@@ -3,17 +3,28 @@
     <div class='col-md-12'>
       <div class="row">
         <div class='col-md-6'>
-          <%= f.input :name, label: 'Nombre' %>
-          <%= f.input :observation, label: 'Observación' %>
-        </div><br>
-        <div class="col-md-6">
           <%= f.label :formation, "Tipo de formación" %>
             <%= f.collection_select :formation_type_id, @formation_types, :id, :name, {label: "Tipo de formación" }, 
               { class: "selectpicker", size: 6, :data => {width: "100%"},
                 "title"=>"Seleccionar tipo",
               }
             %>
-          <%= f.input :hours, label: "Horas" %>
+          <%= f.input :name, label: 'Nombre' %>
+          <%= f.input :observation, label: 'Observación' %>
+          <%= f.input :certificate, label: 'Certificado', input_html: { class: "selectpicker" },:collection => Formation.certificates.keys.to_a %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :init_date,  as: :tempus_dominus, label: 'Fecha de inicio',
+            input_html: {
+              :placeholder => "Seleccionar fecha",
+              autocomplete: 'off', 
+              required: true,
+              value: "#{f.object.new_record? ? DateTime.now.strftime("%d/%m/%y") : f.object.init_date.strftime("%d/%m/%y")}"
+            },
+            html5: false
+          %>
+          <%= f.input :hours, label: "Duración (horas)" %>
+          <%= f.input :link, as: :string, label: "Link información", :placeholder => "Pegue la URL" %>
         </div>
       </div>
     </div>
