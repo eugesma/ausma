@@ -12,8 +12,8 @@
           </p>
         </div>
         <div class="col-3">
-          <strong>Créditos:</strong>
-          <%= format_number(@project.credit) %>
+          <strong>Duración:</strong>
+          <%= format_number(@project.duration) %> horas
         </div>
       </div>
       <%=  simple_form_for(@project) do |f| %>

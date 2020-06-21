@@ -17,8 +17,8 @@
           <tr>
             <th>Código</th>
             <th>Nombre</th>
+            <th>Duración</th>
             <th>Participantes</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -26,6 +26,7 @@
             <tr>
               <td><%= project.code %></td>
               <td><%= project.name %></td>
+              <td><%= format_number(project.duration) %></td>
               <td><span class="badge badge-secondary"><%= project.teachers.count %></span></td>
               <td class="text-right">
                 <%= link_to project_path(project), class: 'btn btn-secondary btn-md', 

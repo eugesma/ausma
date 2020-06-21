@@ -5,7 +5,7 @@
     <%= f.input :name, label: 'Nombre' %>
   </div>
   <div class="col-6">
-    <%= f.input :credit, label: "Crédito", :input_html => { min: 0, value: "#{format_number(project.credit)}" } %>
+    <%= f.input :duration, label: "Duración (horas)", :input_html => { min: 0 } %>
     <%= f.input :observation, label: "Observaciones" %>
   </div>
 </div>
