@@ -8,7 +8,13 @@ class TeacherProject < ApplicationRecord
   # Delegations
   delegate :fullname, to: :teacher, prefix: true
 
+  before_save :calc_total_credit
+
   accepts_nested_attributes_for :teacher, :project,
     :reject_if => :all_blank,
     :allow_destroy => true
+
+  def calc_total_credit
+    self.total_credit = self.project.duration * self.project_role.multiple
+  end
 end
