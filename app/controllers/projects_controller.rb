@@ -63,6 +63,8 @@ class ProjectsController < ApplicationController
         format.html { redirect_to @project, notice: 'El proyecto se ha modificado correctamente.' }
         format.json { render :show, status: :ok, location: @project }
       else
+        @project_roles = ProjectRole.all
+        @teachers = Teacher.all
         format.html { render :edit }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
