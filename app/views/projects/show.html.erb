@@ -5,12 +5,24 @@
   <div class="card-body fixed-panel">
     <div class="row">
       <p class="col-3">
+        <strong>Código:</strong>
+        <%= @project.code %>
+      </p>
+      <p class="col-3">
         <strong>Nombre:</strong>
         <%= @project.name %>
       </p>
       <p class="col-3">
         <strong>Tipo:</strong>
         <%= @project.project_type_name %>
+      </p>
+      <p class="col-3">
+        <strong>Duración:</strong>
+        <%= @project.duration %>
+      </p>
+      <p class="col-12">
+        <strong>Observaciones:</strong>
+        <%= @project.observation %>
       </p>
     </div>
     <div class="row">

@@ -11,7 +11,11 @@ class Project < ApplicationRecord
     :allow_destroy => true
 
   # Validations
+<<<<<<< HEAD
   validates_presence_of :name, :code, :duration
+=======
+  validates_presence_of :name, :code
+>>>>>>> dd69bcb0b32cf8658558fdc9a6973c29c9c2c45c
 
   # Delegations
   delegate :name, to: :project_type, prefix: true

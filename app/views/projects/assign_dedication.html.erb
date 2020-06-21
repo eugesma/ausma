@@ -3,40 +3,52 @@
     <div class="card-header bg-success text-white">
       <h4><%= fa_icon "business-time" %> Asignar dedicación de proyecto <%= @project.name %></h4>
     </div>
-    <div class="card-body">
+    <div class="card-body fixed-panel">
       <div class="row">
-        <div class="col-3">
-          <p>
-            <strong>Tipo de proyecto</strong>
-            <%= @project.project_type_name %>
-          </p>
-        </div>
-        <div class="col-3">
+        <p class="col-3">
+          <strong>Código:</strong>
+          <%= @project.code %>
+        </p>
+        <p class="col-3">
+          <strong>Nombre:</strong>
+          <%= @project.name %>
+        </p>
+        <p class="col-3">
+          <strong>Tipo:</strong>
+          <%= @project.project_type_name %>
+        </p>
+        <p class="col-3">
           <strong>Duración:</strong>
-          <%= format_number(@project.duration) %> horas
-        </div>
+          <%= @project.duration %>
+        </p>
+        <p class="col-12">
+          <strong>Observaciones:</strong>
+          <%= @project.observation %>
+        </p>
       </div>
       <%=  simple_form_for(@project) do |f| %>
-        <table class="table table-sm">
-          <thead>
-            <tr class="">
-              <th>Profesor</th>
-              <th>Rol</th>
-              <th>Crédito</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody class="teacher_projects">    
-            <%= f.simple_fields_for :teacher_projects, @project.teacher_projects.joins(teacher: :profile).order("profiles.last_name") do |form_quantity| %>
-              <%= render "teacher_project_fields", f: form_quantity %>
-            <% end %>
-          </tbody>
-        </table>
-        <%= link_to_add_association f, :teacher_projects, class: 'btn btn-primary btn-sm', id: 'add-nested',
-          data: {"association-insertion-node" => "tbody.teacher_projects", "association-insertion-method" => "append"} do %>
-          <%= fa_icon "plus" %>
-          Agregar docente
-        <% end %>
+        <div class="card">
+          <table class="table table-sm">
+            <thead>
+              <tr class="">
+                <th>Profesor</th>
+                <th>Rol</th>
+                <th>Crédito</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody class="teacher_projects">    
+              <%= f.simple_fields_for :teacher_projects, @project.teacher_projects.joins(teacher: :profile).order("profiles.last_name") do |form_quantity| %>
+                <%= render "teacher_project_fields", f: form_quantity %>
+              <% end %>
+            </tbody>
+          </table>
+          <%= link_to_add_association f, :teacher_projects, class: 'btn btn-primary btn-sm', id: 'add-nested',
+            data: {"association-insertion-node" => "tbody.teacher_projects", "association-insertion-method" => "append"} do %>
+            <%= fa_icon "plus" %>
+            Agregar docente
+          <% end %>
+        </div>
       <% end %>
     </div>
     <div class="card-footer">
