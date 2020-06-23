@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_21_230539) do
+ActiveRecord::Schema.define(version: 2020_06_23_172040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -327,7 +327,6 @@ ActiveRecord::Schema.define(version: 2020_06_21_230539) do
     t.integer "project_type", default: 0
     t.bigint "project_type_id", default: 1
     t.text "observation"
-    t.decimal "duration"
     t.index ["project_type_id"], name: "index_projects_on_project_type_id"
   end
 
@@ -444,6 +443,7 @@ ActiveRecord::Schema.define(version: 2020_06_21_230539) do
     t.datetime "updated_at", null: false
     t.decimal "total_credit", precision: 9, scale: 2, default: "0.0"
     t.bigint "project_role_id", default: 1
+    t.decimal "week_hours"
     t.index ["project_id"], name: "index_teacher_projects_on_project_id"
     t.index ["project_role_id"], name: "index_teacher_projects_on_project_role_id"
     t.index ["teacher_id"], name: "index_teacher_projects_on_teacher_id"

@@ -18,10 +18,6 @@
           <%= @project.project_type_name %>
         </p>
         <p class="col-3">
-          <strong>Duración:</strong>
-          <%= format_number(@project.duration) %> horas
-        </p>
-        <p class="col-12">
           <strong>Observaciones:</strong>
           <%= @project.observation %>
         </p>
@@ -33,6 +29,7 @@
               <tr class="">
                 <th>Profesor</th>
                 <th>Rol</th>
+                <th>Horas semanales</th>
                 <th>Crédito</th>
                 <th></th>
               </tr>

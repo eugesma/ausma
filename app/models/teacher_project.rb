@@ -8,6 +8,8 @@ class TeacherProject < ApplicationRecord
   # Delegations
   delegate :fullname, to: :teacher, prefix: true
 
+  validates :week_hours, presence: true, numericality: { greater_than: 0, message: "Las horas semanales deben ser mayores a cero." } 
+
   before_save :calc_total_credit
 
   accepts_nested_attributes_for :teacher, :project,
@@ -15,6 +17,6 @@ class TeacherProject < ApplicationRecord
     :allow_destroy => true
 
   def calc_total_credit
-    self.total_credit = self.project.duration * self.project_role.multiple
+    self.total_credit = self.week_hours * self.project_role.multiple
   end
 end

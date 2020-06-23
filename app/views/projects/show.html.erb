@@ -17,10 +17,6 @@
         <%= @project.project_type_name %>
       </p>
       <p class="col-3">
-        <strong>Duración:</strong>
-        <%= format_number(@project.duration) %> horas
-      </p>
-      <p class="col-12">
         <strong>Observaciones:</strong>
         <%= @project.observation %>
       </p>
@@ -34,6 +30,7 @@
                 <tr>
                   <th>Docente</th>
                   <th>Rol</th>
+                  <th>Horas semanales</th>
                   <th>Crédito</th>
                 </tr>
               </thead>
@@ -42,6 +39,7 @@
                   <tr>
                     <td><%= teacher_project.teacher_fullname %></td>
                     <td><%= teacher_project.project_role.name %></td>
+                    <td><%= format_number(teacher_project.week_hours) %></td>
                     <td><%= format_number(teacher_project.total_credit) %></td>
                   </tr>
                 <% end %>
