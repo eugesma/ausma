@@ -25,7 +25,7 @@
           <% @projects.each do |project| %>
             <tr>
               <td><%= project.code %></td>
-              <td><%= project.name %></td>
+              <td class="text-truncate" style="max-width: 20em;"><%= project.name %></td>
               <td><%= project.project_type_name %></td>
               <td><span class="badge badge-secondary"><%= project.teachers.count %></span></td>
               <td class="text-right">

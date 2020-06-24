@@ -1,5 +1,5 @@
 <tr id="post_<%= post.id %>" class="transition-tr">
-  <td><%= post.name %></td>
+  <td class="text-truncate" style="max-width: 20em;"><%= post.name %></td>
   <td><%= post.post_type_name %></td>
   <td><span class="badge badge-secondary"><%= post.teachers.count %></span></td>
   <td><span class="badge badge-<%= post_status_label(post) %>"><%= post.status.humanize %></td>
