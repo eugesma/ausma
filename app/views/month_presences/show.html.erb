@@ -32,9 +32,11 @@
     <%= link_to month_presences_path, class: "btn btn-light mr-1" do %>
       Volver
     <% end %>
-    <%= link_to edit_month_presence_path(@month_presence), class: "btn btn-warning mr-1" do %>
-      <%= fa_icon "edit" %>
-      Editar
+    <% if policy(@month_presence).edit? %>
+      <%= link_to edit_month_presence_path(@month_presence), class: "btn btn-warning mr-1" do %>
+        <%= fa_icon "edit" %>
+        Editar
+      <% end %>
     <% end %>
   </div>
 </div>

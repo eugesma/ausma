@@ -54,13 +54,17 @@
     <%= link_to projects_path, class: "btn btn-light mr-1" do %>
       Volver
     <% end %>
-    <%= link_to edit_project_path(@project), class: "btn btn-warning mr-1" do %>
-      <%= fa_icon "edit" %>
-      Editar
+    <% if policy(@project).edit? %>
+      <%= link_to edit_project_path(@project), class: "btn btn-warning mr-1" do %>
+        <%= fa_icon "edit" %>
+        Editar
+      <% end %>
     <% end %>
-    <%= link_to assign_dedication_project_path(@project), class: 'btn btn-success' do %>
-      <%= fa_icon "business-time" %>
-      Asignar dedicaciones
+    <% if policy(@project).assign_dedication? %>
+      <%= link_to assign_dedication_project_path(@project), class: 'btn btn-success' do %>
+        <%= fa_icon "business-time" %>
+        Asignar dedicaciones
+      <% end %>
     <% end %>
   </div>
 </div>

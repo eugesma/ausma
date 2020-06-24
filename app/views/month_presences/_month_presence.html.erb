@@ -13,9 +13,11 @@
         <%= fa_icon "edit" %>
       <% end %>
     <% end %>
-    <%= link_to delete_month_presence_path(month_presence), remote: true,
-      class: 'btn btn-danger', title: 'Borrar', data: { toggle: 'tooltip', placement: 'top' } do %>
-      <%= fa_icon "trash" %>
+    <% if policy(month_presence).destroy? %>
+      <%= link_to delete_month_presence_path(month_presence), remote: true,
+        class: 'btn btn-danger', title: 'Borrar', data: { toggle: 'tooltip', placement: 'top' } do %>
+        <%= fa_icon "trash" %>
+      <% end %>
     <% end %>
   </td>
 </tr>

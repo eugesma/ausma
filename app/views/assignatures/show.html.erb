@@ -61,13 +61,17 @@
     <%= link_to assignatures_path, class: "btn btn-light mr-1" do %>
       Volver
     <% end %>
-    <%= link_to edit_assignature_path(@assignature), class: "btn btn-warning mr-1" do %>
-      <%= fa_icon "edit" %>
-      Editar
+    <% if policy(@assignature).edit? %>
+      <%= link_to edit_assignature_path(@assignature), class: "btn btn-warning mr-1" do %>
+        <%= fa_icon "edit" %>
+        Editar
+      <% end %>
     <% end %>
-    <%= link_to assign_dedication_assignature_path(@assignature), class: 'btn btn-success' do %>
-      <%= fa_icon "business-time" %>
-      Asignar dedicaciones
+    <% if policy(@assignature).assign_dedication? %>
+      <%= link_to assign_dedication_assignature_path(@assignature), class: 'btn btn-success' do %>
+        <%= fa_icon "business-time" %>
+        Asignar dedicaciones
+      <% end %>
     <% end %>
   </div>
 </div>

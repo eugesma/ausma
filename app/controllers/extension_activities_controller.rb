@@ -1,6 +1,7 @@
 class ExtensionActivitiesController < ApplicationController
   before_action :set_extension_activity, only: [:show, :edit, :update, :destroy, :delete, :assign_dedication]
   def index
+    authorize ExtensionActivity
     @filterrific = initialize_filterrific(
       ExtensionActivity,
       params[:filterrific],
@@ -15,19 +16,23 @@ class ExtensionActivitiesController < ApplicationController
   end
 
   def show
+    authorize @extension_activity
   end
 
   def assign_dedication
+    authorize @extension_activity
     @teachers = Teacher.all
   end
 
   def new
+    authorize ExtensionActivity
     @extension_activity = ExtensionActivity.new
     @teachers = Teacher.select(:id, :profile_id)
     @careers = Career.all
   end
   
   def edit
+    authorize @extension_activity
     @teachers = Teacher.all
     @careers = Career.all
   end
@@ -36,6 +41,7 @@ class ExtensionActivitiesController < ApplicationController
   # POST /extension_activities.json
   def create
     @extension_activity = ExtensionActivity.new(extension_activity_params)
+    authorize @extension_activity
 
     respond_to do |format|
       if @extension_activity.save
@@ -53,6 +59,7 @@ class ExtensionActivitiesController < ApplicationController
   # PATCH/PUT /extension_activities/1
   # PATCH/PUT /extension_activities/1.json
   def update
+    authorize @extension_activity
     respond_to do |format|
       if @extension_activity.update!(extension_activity_params)
         format.html { redirect_to @extension_activity, notice: 'La dedicación se ha modificado correctamente.' }
@@ -68,6 +75,7 @@ class ExtensionActivitiesController < ApplicationController
   # DELETE /extension_activities/1
   # DELETE /extension_activities/1.json
   def destroy
+    authorize @extension_activity
     @extension_activity.destroy
     respond_to do |format|
       format.html { redirect_to extension_activities_url, notice: 'La dedicación de ha eliminado correctamente.' }
@@ -83,6 +91,7 @@ class ExtensionActivitiesController < ApplicationController
   end
 
   def assign_extension_activity
+    authorize ExtensionActivity
     @assistance_statuses = AssistanceStatus.all
     @teachers = Teacher.all
   end

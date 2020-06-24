@@ -60,9 +60,11 @@
       <%= link_to posts_path, class: "btn btn-light mr-1" do %>
         Volver
       <% end %>
-      <%= link_to edit_post_path(@post), class: "btn btn-warning mr-1" do %>
-        <%= fa_icon "edit" %>
-        Editar
+      <% if policy(@post).edit? %>
+        <%= link_to edit_post_path(@post), class: "btn btn-warning mr-1" do %>
+          <%= fa_icon "edit" %>
+          Editar
+        <% end %>
       <% end %>
       <% if policy(@post).validate? %>
         <%= link_to validate_post_path(@post), method: :patch, class: "btn btn-success mr-1" do %>

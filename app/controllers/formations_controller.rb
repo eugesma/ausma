@@ -4,6 +4,7 @@ class FormationsController < ApplicationController
   # GET /formations
   # GET /formations.json
   def index
+    authorize Formation
     @filterrific = initialize_filterrific(
       Formation,
       params[:filterrific],
@@ -20,21 +21,25 @@ class FormationsController < ApplicationController
   # GET /formations/1
   # GET /formations/1.json
   def show
+    authorize @formation
   end
 
   # GET /formations/new
   def new
+    authorize Formation
     @formation = Formation.new
     @formation_types = FormationType.all
   end
 
   def assign_dedication
+    authorize Formation
     @teachers = Teacher.all
     @teacher_formation_roles = TeacherFormationRole.all
   end
 
   # GET /formations/1/edit
   def edit
+    authorize @formation 
     @formation_types = FormationType.all
   end
 
@@ -42,6 +47,7 @@ class FormationsController < ApplicationController
   # POST /formations.json
   def create
     @formation = Formation.new(formation_params)
+    authorize @formation
 
     respond_to do |format|
       if @formation.save
@@ -59,6 +65,7 @@ class FormationsController < ApplicationController
   # PATCH/PUT /formations/1
   # PATCH/PUT /formations/1.json
   def update
+    authorize @formation
     respond_to do |format|
       if @formation.update(formation_params)
         format.html { redirect_to @formation, notice: 'La formación se ha editado correctamente.' }
@@ -74,6 +81,7 @@ class FormationsController < ApplicationController
   # DELETE /formations/1
   # DELETE /formations/1.json
   def destroy
+    authorize @formation
     @formation.destroy
     respond_to do |format|
       format.html { redirect_to formations_url, notice: 'La formación se ha enviado a la papelera correctamente.' }

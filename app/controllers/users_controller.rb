@@ -36,6 +36,7 @@ class UsersController < ApplicationController
   # POST /users_admin.json
   def create
     @user = User.new(user_params)
+    authorize @user
 
     respond_to do |format|
       if @user.save
@@ -53,6 +54,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    authorize @user
     if params[:user][:password].blank?
         params[:user].delete(:password)
     end
@@ -101,6 +103,7 @@ class UsersController < ApplicationController
   end
 
   private
+  
   def set_user
     @user = User.find(params[:id])
   end

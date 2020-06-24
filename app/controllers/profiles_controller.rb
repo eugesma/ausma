@@ -2,9 +2,11 @@ class ProfilesController < ApplicationController
   before_action :set_profile, only: [ :edit, :update ] 
 
   def edit
+    authoriza @profile
   end
 
   def update
+    authoriza @profile
     if @profile.update_attributes(profile_params)
       flash[:success] = "Tu perfil se ha modificado correctamente."
       redirect_to request.referrer

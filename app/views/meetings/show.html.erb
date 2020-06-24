@@ -2,7 +2,7 @@
   <div class="card-header">
     <h4><%= fa_icon "eye" %> Viendo <%= @meeting.name %></h4>
   </div>
-  <div class="card-body">
+  <div class="card-body fixed-panel">
     <div class="row">
       <p class="col-md-3">
         <strong>Nombre:</strong>
@@ -14,30 +14,32 @@
       </p>
       <p class="col-md-3">
         <strong>Fecha:</strong>
-        <%= @meeting.since_date.strftime("%d/%m/%Y %M:%H") %>
+        <%= @meeting.since_date.strftime("%d/%m/%Y %H:%M") %>
       </p>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-8 mx-auto">
         <% if @meeting.teachers.present? %>
-          <table class="table table-hover table-sm">
-            <thead>
-              <tr>
-                <th>Docente</th>
-                <th>Asistencia</th>
-                <th>Crédito</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @meeting.teacher_meetings.each do |teacher_meeting| %>
+          <div class="card">
+            <table class="table table-hover table-sm">
+              <thead>
                 <tr>
-                  <td><%= teacher_meeting.teacher_fullname %></td>
-                  <td><%= teacher_meeting.assistance_status.present? ? teacher_meeting.assistance_status.name : "---" %></td>
-                  <td><%= format_number(teacher_meeting.total_credit) %></td>
+                  <th>Docente</th>
+                  <th>Asistencia</th>
+                  <th>Crédito</th>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <% @meeting.teacher_meetings.each do |teacher_meeting| %>
+                  <tr>
+                    <td><%= teacher_meeting.teacher_fullname %></td>
+                    <td><%= teacher_meeting.assistance_status.present? ? teacher_meeting.assistance_status.name : "---" %></td>
+                    <td><%= format_number(teacher_meeting.total_credit) %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         <% end %>
       </div>
     </div>
@@ -50,13 +52,17 @@
     <%= link_to meetings_path, class: "btn btn-light mr-1" do %>
       Volver
     <% end %>
-    <%= link_to edit_meeting_path(@meeting), class: "btn btn-warning mr-1" do %>
-      <%= fa_icon "edit" %>
-      Editar
+    <% if policy(@meeting).edit? %>
+      <%= link_to edit_meeting_path(@meeting), class: "btn btn-warning mr-1" do %>
+        <%= fa_icon "edit" %>
+        Editar
+      <% end %>
     <% end %>
-    <%= link_to assign_dedication_meeting_path(@meeting), class: 'btn btn-success' do %>
-      <%= fa_icon "business-time" %>
-      Asignar dedicaciones
+    <% if policy(@meeting).assign_dedication? %>
+      <%= link_to assign_dedication_meeting_path(@meeting), class: 'btn btn-success' do %>
+        <%= fa_icon "business-time" %>
+        Asignar dedicaciones
+      <% end %>
     <% end %>
   </div>
 </div>

@@ -3,36 +3,45 @@
     <div class="card-header bg-success text-white">
       <h4><%= fa_icon "business-time" %> Asignar credito de <%= @meeting.name %></h4>
     </div>
-    <div class="card-body">
+    <div class="card-body fixed-panel">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-3">
           <p>
-            <strong>Crédito / duración: </strong><%= format_number(@meeting.credit) %>
+            <strong>Reunión: </strong>
+            <%= @meeting.name %>
+          </p>
+        </div>
+        <div class="col-3">
+          <p>
+            <strong>Crédito / duración: </strong>
+            <%= format_number(@meeting.credit) %>
             <%= hidden_field :meeting, :credit %>
           </p>
         </div>
       </div>
       <%=  simple_form_for(@meeting) do |f| %>
-        <table class="table table-sm">
-          <thead>
-            <tr class="">
-              <th>Profesor</th>
-              <th>Asistencia</th>
-              <th>Crédito</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody class="teacher_meetings">    
-            <%= f.simple_fields_for :teacher_meetings, @meeting.teacher_meetings.joins(teacher: :profile).order("profiles.last_name") do |form_quantity| %>
-              <%= render "teacher_meeting_fields", f: form_quantity %>
-            <% end %>
-          </tbody>
-        </table>
-        <%= link_to_add_association f, :teacher_meetings, class: 'btn btn-primary btn-sm', id: 'add-nested',
-          data: {"association-insertion-node" => "tbody.teacher_meetings", "association-insertion-method" => "append"} do %>
-          <%= fa_icon "plus" %>
-          Agregar docente
-        <% end %>
+        <div class="card">
+          <table class="table table-sm">
+            <thead>
+              <tr class="">
+                <th>Profesor</th>
+                <th>Asistencia</th>
+                <th>Crédito</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody class="teacher_meetings">    
+              <%= f.simple_fields_for :teacher_meetings, @meeting.teacher_meetings.joins(teacher: :profile).order("profiles.last_name") do |form_quantity| %>
+                <%= render "teacher_meeting_fields", f: form_quantity %>
+              <% end %>
+            </tbody>
+          </table>
+          <%= link_to_add_association f, :teacher_meetings, class: 'btn btn-primary btn-sm', id: 'add-nested',
+            data: {"association-insertion-node" => "tbody.teacher_meetings", "association-insertion-method" => "append"} do %>
+            <%= fa_icon "plus" %>
+            Agregar docente
+          <% end %>
+        </div>
       <% end %>
     </div>
     <div class="card-footer">

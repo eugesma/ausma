@@ -1,23 +1,28 @@
 class AssignaturesController < ApplicationController
   before_action :set_assignature, only: [:show, :edit, :update, :destroy, :delete, :assign_dedication]
   def index
+    authorize Assignature
     @assignatures = Assignature.all
   end
 
   def show
+    authorize @assignature
   end
 
   def assign_dedication
+    authorize @assignature
     @teachers = Teacher.all
   end
 
   def new
+    authorize Assignature
     @assignature = Assignature.new
     @teachers = Teacher.all
     @careers = Career.all
   end
   
   def edit
+    authorize @assignature
     @teachers = Teacher.all
     @careers = Career.all
   end
@@ -26,6 +31,7 @@ class AssignaturesController < ApplicationController
   # POST /assignatures.json
   def create
     @assignature = Assignature.new(assignature_params)
+    authorize @assignature
 
     respond_to do |format|
       if @assignature.save
@@ -43,6 +49,7 @@ class AssignaturesController < ApplicationController
   # PATCH/PUT /assignatures/1
   # PATCH/PUT /assignatures/1.json
   def update
+    authorize @assignature
     respond_to do |format|
       if @assignature.update(assignature_params)
         format.html { redirect_to @assignature, notice: 'La asignatura se ha modificado correctamente.' }
@@ -57,6 +64,7 @@ class AssignaturesController < ApplicationController
   # DELETE /assignatures/1
   # DELETE /assignatures/1.json
   def destroy
+    authorize @assignature
     @assignature.destroy
     respond_to do |format|
       format.html { redirect_to assignatures_url, notice: 'La asignatura de ha eliminado correctamente.' }

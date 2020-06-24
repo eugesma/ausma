@@ -20,7 +20,8 @@
                 :placeholder => "Seleccionar fecha",
                 input_html: {
                   autocomplete: 'off', 
-                  required: true
+                  required: true,
+                  value: "#{f.object.new_record? ? DateTime.now.strftime("%d/%m/%y %H:%M") : f.object.since_date.strftime("%d/%m/%y %H:%M")}"
                 },
                 html5: false
               %>

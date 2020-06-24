@@ -4,6 +4,7 @@ class MonthPresencesController < ApplicationController
   # GET /month_presences
   # GET /month_presences.json
   def index
+    authorize MonthPresence
     @filterrific = initialize_filterrific(
       MonthPresence,
       params[:filterrific],
@@ -20,10 +21,12 @@ class MonthPresencesController < ApplicationController
   # GET /month_presences/1
   # GET /month_presences/1.json
   def show
+    authorize @month_presence
   end
 
   # GET /month_presences/new
   def new
+    authorize MonthPresence
     @month_presence = MonthPresence.new
     Teacher.find_each do |teacher|
       @month_presence.teacher_month_presences.build(teacher: teacher, presence_time: teacher.total_dedication_hours)
@@ -31,11 +34,13 @@ class MonthPresencesController < ApplicationController
   end
 
   def assign_assistance
+    authorize MonthPresence
     @teachers = Teacher.all
   end
 
   # GET /month_presences/1/edit
   def edit_assignment
+    authorize MonthPresence
     @teachers = Teacher.all
     @month_presence_types = month_presenceType.all
   end
@@ -45,6 +50,7 @@ class MonthPresencesController < ApplicationController
   def create
     @month_presence = MonthPresence.new(month_presence_params)
     @month_presence.created_by = current_user
+    authorize @month_presence
 
     respond_to do |format|
       if @month_presence.save
@@ -61,6 +67,7 @@ class MonthPresencesController < ApplicationController
   # PATCH/PUT /month_presences/1
   # PATCH/PUT /month_presences/1.json
   def update
+    authorize @month_presence
     respond_to do |format|
       if @month_presence.update(month_presence_params)
         format.html { redirect_to @month_presence, notice: 'La planilla de asistencia se ha modificado correctamente.' }
@@ -75,6 +82,7 @@ class MonthPresencesController < ApplicationController
   # DELETE /month_presences/1
   # DELETE /month_presences/1.json
   def destroy
+    authorize @month_presence
     @month_presence.destroy
     respond_to do |format|
       format.html { redirect_to month_presences_url, notice: 'La planilla de asistencia se ha eliminado correctamente.' }

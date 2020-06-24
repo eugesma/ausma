@@ -22,9 +22,11 @@
     </div>
   </div>
   <div class="card-footer text-right">
-    <%= link_to edit_config_path(@config), class: "btn btn-warning" do %>
-      <%= fa_icon "edit" %>
-      Editar
+    <% if policy(@config).edit? %>
+      <%= link_to edit_config_path(@config), class: "btn btn-warning" do %>
+        <%= fa_icon "edit" %>
+        Editar
+      <% end %>
     <% end %>
   </div>
 </div>

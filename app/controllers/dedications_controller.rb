@@ -1,27 +1,32 @@
 class DedicationsController < ApplicationController
-  before_action :set_dedication, only: [:show, :edit, :update, :destroy, :assign_dedication]
-
+  before_action :set_dedication, only: [:show, :edit, :update, :destroy, :delete, :assign_dedication]
+  
   # GET /dedications
   # GET /dedications.json
   def index
+    authorize Dedication
     @dedications = Dedication.all
   end
 
   # GET /dedications/1
   # GET /dedications/1.json
   def show
+    authorize @dedication
   end
 
   # GET /dedications/new
   def new
+    authorize Dedication
     @dedication = Dedication.new
   end
 
   # GET /dedications/1/edit
   def edit
+    authorize @dedication
   end
 
   def assign_dedication
+    authorize @dedication
     @teachers = Teacher.all
   end
 
@@ -29,6 +34,7 @@ class DedicationsController < ApplicationController
   # POST /dedications.json
   def create
     @dedication = Dedication.new(dedication_params)
+    authorize @dedication
 
     respond_to do |format|
       if @dedication.save
@@ -44,6 +50,7 @@ class DedicationsController < ApplicationController
   # PATCH/PUT /dedications/1
   # PATCH/PUT /dedications/1.json
   def update
+    authorize @dedication
     respond_to do |format|
       if @dedication.update(dedication_params)
         format.html { redirect_to @dedication, notice: 'La dedicación se ha modificado correctamente.' }
@@ -58,6 +65,7 @@ class DedicationsController < ApplicationController
   # DELETE /dedications/1
   # DELETE /dedications/1.json
   def destroy
+    authorize @dedication
     @dedication.destroy
     respond_to do |format|
       format.html { redirect_to dedications_url, notice: 'La dedicación se ha eliminado correctamente.' }

@@ -4,7 +4,7 @@ class ExtensionActivity < ApplicationRecord
   # Relations
   has_many :evaluation_extension_activities
   has_many :evaluations, through: :evaluation_extension_activities
-  has_many :teacher_extension_activities
+  has_many :teacher_extension_activities, dependent: :destroy
   has_many :teachers, through: :teacher_extension_activities
   belongs_to :career, counter_cache: true
 

@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    authorize Post
     @filterrific = initialize_filterrific(
       Post,
       params[:filterrific],
@@ -20,10 +21,12 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    authorize @post
   end
 
   # GET /posts/new
   def new
+    authorize Post
     @post = Post.new
     @teachers = Teacher.all
     @post_types = PostType.all
@@ -31,6 +34,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    authorize @post
     @teachers = Teacher.all
     @post_types = PostType.all
   end
@@ -40,6 +44,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.created_by = current_user
+    authorize @post
 
     respond_to do |format|
       if @post.save!
@@ -57,6 +62,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    authorize @post
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'La publicación se ha modificado correctamente.' }
@@ -69,6 +75,7 @@ class PostsController < ApplicationController
   end
 
   def validate
+    authorize @post
     @post.validado!
     flash.now[:notice] = "La publicación se ha validado correctamente"
     respond_to do |format|
@@ -80,6 +87,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
+    authorize @post
     @post.destroy
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'La publicación se ha eliminado correctamente.' }

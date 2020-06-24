@@ -5,12 +5,12 @@ $('.modal-header').addClass('bg-danger text-white');
 $('#dialog h5').html("<i class='fa fa-trash'></i>  Enviar a papelera");
 
 // Render the edit form
-$('.modal-body').html('Esta seguro que desea enviar a la papelera la planilla de asistencia de <%= l(@month_presence.month_date, format: '%B %Y').humanize %>?');
+$('.modal-body').html('Esta seguro que desea enviar a la papelera la dedicación <%= @dedication.name %>?');
 
 // Add form button
 $('.modal-footer').html(
   "<button type='button' class='btn btn-default pull-left' data-dismiss='modal'>Volver</button>"+
-  "<a data-remote='true' data-method='delete' href='/month_presences/<%= @month_presence.id %>>' data-dismiss='modal' class='btn commit btn-danger pull-right' rel='nofollow'>Confirmar</a>"
+  "<a data-remote='true' data-method='delete' href='/dedications/<%= @dedication.id %>>' data-dismiss='modal' class='btn commit btn-danger pull-right' rel='nofollow'>Confirmar</a>"
 );
 
 // Show the dynamic dialog

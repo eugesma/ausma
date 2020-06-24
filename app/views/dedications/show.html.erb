@@ -49,9 +49,11 @@
     <%= link_to dedications_path, class: "btn btn-light mr-1" do %>
       Volver
     <% end %>
-    <%= link_to edit_dedication_path(@dedication), class: "btn btn-warning mr-1" do %>
-      <%= fa_icon "edit" %>
-      Editar
+    <% if policy(@dedication).edit? %>
+      <%= link_to edit_dedication_path(@dedication), class: "btn btn-warning mr-1" do %>
+        <%= fa_icon "edit" %>
+        Editar
+      <% end %>
     <% end %>
   </div>
 </div>

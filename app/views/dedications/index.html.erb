@@ -28,21 +28,29 @@
               <td><%= format_number(dedication.hours) %></td>
               <td><span class="badge badge-secondary"><%= dedication.teachers.count %></span></td>
               <td class="text-right">
-                <%= link_to dedication_path(dedication), class: 'btn btn-secondary', 
-                  title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
-                  <%= fa_icon "eye" %>
+                <% if policy(dedication).show? %>
+                  <%= link_to dedication_path(dedication), class: 'btn btn-secondary', 
+                    title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
+                    <%= fa_icon "eye" %>
+                  <% end %>
                 <% end %>
-                <%= link_to assign_dedication_dedication_path(dedication), class: 'btn btn-success', 
-                  title: 'Asignar crédito', data: { toggle: 'tooltip', placement: 'top' } do %>
-                  <%= fa_icon "business-time" %>
+                <% if policy(dedication).assign_dedication? %>
+                  <%= link_to assign_dedication_dedication_path(dedication), class: 'btn btn-success', 
+                    title: 'Asignar crédito', data: { toggle: 'tooltip', placement: 'top' } do %>
+                    <%= fa_icon "business-time" %>
+                  <% end %>
                 <% end %>
-                <%= link_to edit_dedication_path(dedication), class: 'btn btn-warning', 
-                  title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>
-                  <%= fa_icon "edit" %>
+                <% if policy(dedication).edit? %>
+                  <%= link_to edit_dedication_path(dedication), class: 'btn btn-warning', 
+                    title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>
+                    <%= fa_icon "edit" %>
+                  <% end %>
                 <% end %>
-                <%= link_to delete_dedication_path(dedication),
-                  class: 'btn btn-danger', title: 'Borrar', data: { toggle: 'tooltip', placement: 'top' } do %>
-                  <%= fa_icon "trash" %>
+                <% if policy(dedication).destroy? %>
+                  <%= link_to delete_dedication_path(dedication), remote: true,
+                    class: 'btn btn-danger', title: 'Borrar', data: { toggle: 'tooltip', placement: 'top' } do %>
+                    <%= fa_icon "trash" %>
+                  <% end %>
                 <% end %>
               </td>
             </tr>

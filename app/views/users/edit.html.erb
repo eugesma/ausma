@@ -36,13 +36,13 @@
         </div>
       <% end %>
     </div>
-    <div class="card-footer">
-      <button type='submit' name='commit' class='btn btn-success pull-right' form='edit_user_<%=@user.id%>'>
-        <%= fa_icon "save" %> Guardar cambios
-      </button>
-      <%= link_to users_admin_index_path, class: "btn btn-light pull-right" do %>
+    <div class="card-footer text-right">
+      <%= link_to users_admin_index_path, class: "btn btn-light mr-2" do %>
         Volver
       <% end %>
+      <button type='submit' name='commit' class='btn btn-success' form='edit_user_<%=@user.id%>'>
+        <%= fa_icon "save" %> Guardar cambios
+      </button>
     </div>
   </div>
 </div>

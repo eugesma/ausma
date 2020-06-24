@@ -1,23 +1,28 @@
 class MeetingsController < ApplicationController
   before_action :set_meeting, only: [:show, :edit, :update, :destroy, :delete, :assign_dedication]
   def index
+    authorize Meeting
     @meetings = Meeting.all
   end
 
   def show
+    authorize @meeting
   end
 
   def assign_dedication
+    authorize @meeting
     @teachers = Teacher.select(:id, :profile_id)
     @assistance_statuses = AssistanceStatus.all
   end
 
   def new
+    authorize Meeting
     @meeting = Meeting.new
     @teachers = Teacher.select(:id, :profile_id)
   end
   
   def edit
+    authorize @meeting
     @teachers = Teacher.all
   end
 
@@ -25,6 +30,7 @@ class MeetingsController < ApplicationController
   # POST /meetings.json
   def create
     @meeting = Meeting.new(meeting_params)
+    authorize @meeting
 
     respond_to do |format|
       if @meeting.save
@@ -41,6 +47,7 @@ class MeetingsController < ApplicationController
   # PATCH/PUT /meetings/1
   # PATCH/PUT /meetings/1.json
   def update
+    authorize @meeting
     respond_to do |format|
       if @meeting.update!(meeting_params)
         format.html { redirect_to @meeting, notice: 'La reunión se ha modificado correctamente.' }
@@ -55,6 +62,7 @@ class MeetingsController < ApplicationController
   # DELETE /meetings/1
   # DELETE /meetings/1.json
   def destroy
+    authorize @meeting
     @meeting.destroy
     respond_to do |format|
       format.html { redirect_to meetings_url, notice: 'La reunión de ha eliminado correctamente.' }
@@ -67,6 +75,7 @@ class MeetingsController < ApplicationController
   end
 
   def assign_meeting
+    authorize Meeting
     @assistance_statuses = AssistanceStatus.all
     @teachers = Teacher.all
   end

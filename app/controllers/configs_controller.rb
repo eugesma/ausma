@@ -2,12 +2,15 @@ class ConfigsController < ApplicationController
   before_action :set_config, only: [:show, :edit, :update]
 
   def show
+    authorize @config
   end
 
   def edit
+    authorize @config
   end
 
   def update
+    authorize @config
     respond_to do |format|
       if @config.update(config_params)
         format.html { redirect_to @config, notice: 'La dedicación se ha modificado correctamente.' }

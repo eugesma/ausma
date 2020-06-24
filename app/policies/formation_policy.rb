@@ -23,6 +23,10 @@ class FormationPolicy < ApplicationPolicy
     update?
   end
 
+  def assign_dedication?
+    user.has_any_role?(:admin, :secretaria)
+  end
+
   def destroy?
     user.has_any_role?(:admin, :secretaria)
   end

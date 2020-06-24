@@ -1,5 +1,5 @@
 // Style modal
-$('.modal-content').addClass('panel-danger');
+$('.modal-header').addClass('bg-danger text-white');
 
 // Add the dialog title
 $('#dialog h5').html("<i class='fa fa-trash'></i>  Enviar a papelera");
@@ -18,5 +18,5 @@ $('#dialog').modal("show");
 
 // Remove style
 $('#dialog').on('hidden.bs.modal', function () {
-  $('.modal-content').removeClass('panel-danger');
+  $('.modal-header').removeClass('bg-danger text-white');
 });
