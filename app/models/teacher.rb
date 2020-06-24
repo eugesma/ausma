@@ -24,6 +24,9 @@ class Teacher < ApplicationRecord
   has_many :teacher_posts
   has_many :posts, through: :teacher_posts
 
+  has_many :teacher_projects
+  has_many :projects, through: :teacher_projects
+
   delegate :fullname, to: :profile
 
   def total_credit_assignatures
@@ -40,5 +43,9 @@ class Teacher < ApplicationRecord
 
   def total_formation_credits
     self.teacher_formations.sum(:total_credit)
+  end
+
+  def total_project_credits
+    self.teacher_projects.sum(:total_credit)
   end
 end

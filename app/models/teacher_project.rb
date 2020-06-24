@@ -7,6 +7,7 @@ class TeacherProject < ApplicationRecord
 
   # Delegations
   delegate :fullname, to: :teacher, prefix: true
+  delegate :name, to: :project_role, prefix: true
 
   validates :week_hours, presence: true, numericality: { greater_than: 0, message: "Las horas semanales deben ser mayores a cero." } 
 

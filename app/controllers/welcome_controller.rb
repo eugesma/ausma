@@ -7,6 +7,7 @@ class WelcomeController < ApplicationController
     @formations = @teacher.teacher_formations
     @extension_activities = @teacher.teacher_extension_activities
     @posts = @teacher.teacher_posts
+    @projects = @teacher.teacher_projects
 
     @total_credit_assignatures = @teacher.total_credit_assignatures
     end
