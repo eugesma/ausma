@@ -1,36 +1,41 @@
 <%=  simple_form_for(meeting) do |f| %>
-  <div class='row'>
-    <div class='col-md-12'>
+  <%= f.error_notification %>
+  <div class="row">
+    <div class='col-6'>
+      <%= f.input :name, label: 'Nombre' %>
+      <%= f.input :observation, label: 'Observación' %>
+    </div>
+    <div class="col-6">
       <div class="row">
-        <div class='col-md-6'>
-          <%= f.input :name, label: 'Nombre' %>
-          <%= f.input :observation, label: 'Observación' %>
-          <%= f.label :teachers, "Docentes citados" %>
-          <%= f.collection_select :teacher_ids, @teachers, :id, :fullname, {label: "Docentes" }, 
-            { class: "selectpicker", multiple: true, size: 6, :data => {width: "320px"},
-              "data-none-results-text" => "No se encontró docente", "data-live-search"=>true,
-              "title"=>"Seleccionar docentes",
-            }
+        <div class="col-12">
+          <%= f.input :since_date,  as: :tempus_dominus, label: 'Fecha',
+            :placeholder => "Seleccionar fecha",
+            input_html: {
+              autocomplete: 'off', 
+              required: true,
+              value: "#{f.object.new_record? ? DateTime.now.strftime("%d/%m/%y %H:%M") : f.object.since_date.strftime("%d/%m/%y %H:%M")}"
+            },
+            html5: false
           %>
-        </div><br>
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-6">
-              <%= f.input :since_date,  as: :tempus_dominus, label: 'Fecha',
-                :placeholder => "Seleccionar fecha",
-                input_html: {
-                  autocomplete: 'off', 
-                  required: true,
-                  value: "#{f.object.new_record? ? DateTime.now.strftime("%d/%m/%y %H:%M") : f.object.since_date.strftime("%d/%m/%y %H:%M")}"
-                },
-                html5: false
-              %>
-            </div>
-          </div>
+        </div>
+        <div class="col-6">
           <%= f.input :credit, label: "Crédito / duración", :input_html => { min: 0, value: "#{format_number(meeting.credit)}" } %>
+        </div>
+        <div class="col-6">
           <%= f.input :unity, label: "Unidad (singular)", placeholder: "Ej: Hora" %>
         </div>
       </div>
+    </div>    
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <%= f.label :teachers, "Docentes citados" %>
+      <%= f.collection_select :teacher_ids, @teachers, :id, :fullname, {label: "Docentes" }, 
+        { class: "selectpicker", multiple: true, size: 6, :data => {width: "100%"},
+          "data-none-results-text" => "No se encontró docente", "data-live-search"=>true,
+          "title"=>"Seleccionar docentes",
+        }
+      %>
     </div>
   </div>
 <% end %>

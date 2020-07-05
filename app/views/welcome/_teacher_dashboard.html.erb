@@ -3,29 +3,17 @@
     <div class="card-header">
       <h3><%= fa_icon "file-alt"%> Mi currículum anual</h3>
     </div>
-    <div class="card-body">
-      <div class="row pl-3">
-        <div class="col-3 rounded full-height-cv bg-info text-center pt-3">
-          <%= image_tag asset_path('profile-placeholder.png'), class:"img-thumbnail rounded-circle card-img-top" %>
-          <p>
-            <h4 class="text-white"><%= current_user.fullname %></h4>
-          </p>
-          <p>
-            <% if current_user.email.present? %>
-              <h5 class="text-white">
-                <%=fa_icon "envelope" %> <%= current_user.email %>
-              </h5>
-            <% end %>
-          </p>
-          <p>
-            <% if current_user.employee_num.present? %>
-              <h5 class="text-white">
-                N° Empleado <%= current_user.employee_num %>
-              </h5>
-            <% end %>
-          </p>
-        </div>
-        <div class="col-9 fixed-panel-list">
+    <div class="card-body fixed-panel-cv">
+      <div class="row">
+        <div class="col-12">
+          <div class="media mb-3">
+            <%= image_tag('profile-placeholder.png', size: "100x100", class: "align-self-center img-thumbnail mr-3") %>
+            <div class="media-body">
+              <h5 class="mt-0"><%= current_user.fullname %></h5>
+              <p><% if current_user.email.present? %><%=fa_icon "envelope" %> <%= current_user.email %><% end %></p>
+              <p class="mb-0">N° Empleado <%= current_user.employee_num %></p>
+            </div>
+          </div>
           <!-- Asignatures -->
           <%= render "assignatures", assignatures: @assignatures %>
 

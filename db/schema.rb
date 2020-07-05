@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_23_172040) do
+ActiveRecord::Schema.define(version: 2020_07_04_202355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -201,14 +201,17 @@ ActiveRecord::Schema.define(version: 2020_06_23_172040) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "min_preparation", precision: 9, scale: 2, default: "0.0"
-    t.decimal "min_implementation", precision: 9, scale: 2, default: "0.0"
-    t.decimal "min_evaluation", precision: 9, scale: 2, default: "0.0"
-    t.decimal "min_credit", precision: 9, scale: 2, default: "0.0"
-    t.bigint "career_id"
-    t.string "code"
-    t.index ["career_id"], name: "index_extension_activities_on_career_id"
-    t.index ["code"], name: "index_extension_activities_on_code", unique: true
+    t.bigint "extension_activity_type_id"
+    t.index ["extension_activity_type_id"], name: "index_extension_activities_on_extension_activity_type_id"
+  end
+
+  create_table "extension_activity_types", force: :cascade do |t|
+    t.string "name"
+    t.decimal "preparation", precision: 9, scale: 2
+    t.integer "preparation_calc", default: 0
+    t.decimal "evaluation", precision: 9, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "formation_types", force: :cascade do |t|
@@ -502,7 +505,6 @@ ActiveRecord::Schema.define(version: 2020_06_23_172040) do
   add_foreign_key "evaluation_teacher_formations", "teacher_formations"
   add_foreign_key "evaluations", "teachers"
   add_foreign_key "evaluations", "users"
-  add_foreign_key "extension_activities", "careers"
   add_foreign_key "formations", "formation_types"
   add_foreign_key "posts", "post_types"
   add_foreign_key "profiles", "users"

@@ -1,10 +1,10 @@
 <%=  simple_form_for(dedication) do |f| %>
   <%= f.error_notification %>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
       <%= f.input :name, label: "Nombre" %>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
       <%= f.input :hours, as: :integer, label: "Horas" %>
     </div>
   </div>

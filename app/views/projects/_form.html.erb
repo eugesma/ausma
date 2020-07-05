@@ -1,12 +1,15 @@
 <%=  simple_form_for(project) do |f| %>
-<div class="row">
-  <div class='col-6'>
-    <%= f.input :code, label: 'Código' %>
-    <%= f.input :name, label: 'Nombre' %>
+  <%= f.error_notification %>
+  <div class="row">
+    <div class='col-6'>
+      <%= f.input :code, label: 'Código' %>
+    </div>
   </div>
-  <div class="col-6">
-    <%= f.input :observation, label: "Observaciones", input_html: { cols: 1, rows: 1 } %>
-    <div class="form-group">
+  <div class="row">
+    <div class="col-12">
+      <%= f.input :name, label: 'Nombre' %>
+    </div>
+    <div class="col-12">
       <label class="form-control-label">Tipo de proyecto</label>
       <%= f.collection_select :project_type_id, ProjectType.all, :id, :name, {}, 
         { class: "selectpicker", size: 6, :data => {width: "100%"},
@@ -14,6 +17,8 @@
         }
       %>
     </div>
+    <div class="col-12 mt-3">
+      <%= f.input :observation, label: "Observaciones", input_html: { cols: 1, rows: 2 } %>
+    </div>
   </div>
-</div>
 <% end %>

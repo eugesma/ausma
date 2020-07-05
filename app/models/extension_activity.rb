@@ -6,14 +6,13 @@ class ExtensionActivity < ApplicationRecord
   has_many :evaluations, through: :evaluation_extension_activities
   has_many :teacher_extension_activities, dependent: :destroy
   has_many :teachers, through: :teacher_extension_activities
-  belongs_to :career, counter_cache: true
+  belongs_to :extension_activity_type
 
   # Validations
-  validates_presence_of :name, :min_credit, :credit, :min_implementation, :implementation, :evaluation, :min_evaluation,
-  :preparation, :min_preparation, :career
+  validates_presence_of :name, :credit, :implementation, :evaluation, :preparation, :extension_activity_type
 
   # Delegations
-  delegate :name, to: :career, prefix: :career
+  delegate :name, to: :extension_activity_type, prefix: true
 
   accepts_nested_attributes_for  :teachers, :teacher_extension_activities,
     :reject_if => :all_blank,
@@ -22,16 +21,16 @@ class ExtensionActivity < ApplicationRecord
   filterrific(
     default_filter_params: { sorted_by: 'created_at_desc' },
     available_filters: [
-        :search_by_name,
-        :sorted_by
+      :search_by_name,
+      :sorted_by
     ]
   )
 
   # Scopes
   pg_search_scope :search_by_name,
-  against: :name,
-  :using => { :tsearch => {:prefix => true} }, # Buscar coincidencia desde las primeras letras.
-  :ignoring => :accents # Ignorar tildes.
+    against: :name,
+    :using => { :tsearch => {:prefix => true} }, # Buscar coincidencia desde las primeras letras.
+    :ignoring => :accents # Ignorar tildes.
 
   scope :sorted_by, lambda { |sort_option|
       # extract the sort direction from the param value.

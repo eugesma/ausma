@@ -4,47 +4,46 @@
   </div>
   <div class="card-body fixed-panel">
     <div class="row">
-      <div class="col-md-6">
-      <p>
-        <strong>Código de referencia</strong>
-        <%= @extension_activity.code %>
-      </p>
-
-      <p>
-        <strong>Nombre:</strong>
-        <%= @extension_activity.name %>
-      </p>
-
-      <p>
-        <strong>Preparación mínima / máxima:</strong>
-        <%= @extension_activity.min_preparation %> - <%= @extension_activity.preparation %> 
-      </p>
-
-      <p>
-        <strong>Implementación mínima / máxima:</strong>
-        <%= @extension_activity.min_implementation %> - <%= @extension_activity.implementation %>
-      </p>
-
-      <p>
-        <strong>Evaluación mínima / máxima:</strong>
-        <%= @extension_activity.min_evaluation %> - <%= @extension_activity.evaluation %>
-      </p>
-
-      <p>
-        <strong>Crédito mínimo / máximo:</strong>
-        <%= @extension_activity.min_credit %> - <%= @extension_activity.credit %>
-      </p>
-      </div>
-      <div class="col-md-6">
+      <div class="col-12">
         <p>
-          <strong>Carrera:</strong>
-          <%= @extension_activity.career.name %>
+          <strong>Nombre:</strong>
+          <%= @extension_activity.name %>
         </p>
         <p>
+          <strong>Observaciones: </strong>
+          <%= @extension_activity.observation.present? ? @extension_activity.observation : "----" %>
+        </p>
+        <p>
+          <strong>Tipo de actividad: </strong>
+          <%= @extension_activity.extension_activity_type_name %>
+        </p>
+      </div>
+      <div class="col-3">
+        <strong>Implementación:</strong>
+        <%= @extension_activity.implementation %>
+      </div>
+      <div class="col-3">
+        <strong>Preparación:</strong>
+        <%= @extension_activity.preparation %>
+      </div>
+      <div class="col-3">
+        <strong>Evaluación/consultas:</strong>
+        <%= @extension_activity.evaluation %>
+      </div>
+      <div class="col-3">
+        <strong>Crédito:</strong>
+        <%= @extension_activity.credit %>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12">
+        <p>
           <strong>Docentes:</strong>
-          <% @extension_activity.teachers.each do |teacher| %>
-            <%= teacher.fullname %><%= teacher == @extension_activity.teachers.last ? ".": "," %>
-          <% end %>
+          <ul class="list-group">
+            <% @extension_activity.teachers.each do |teacher| %>
+              <li class="list-group-item"><%= teacher.fullname %></li>
+            <% end %>
+          </ul>
         </p>
       </div>
     </div>
@@ -59,11 +58,11 @@
         Editar
       <% end %>
     <% end %>
-    <% if policy(@extension_activity).assign_dedication? %>
+    <!-- <% if policy(@extension_activity).assign_dedication? %>
       <%= link_to assign_dedication_extension_activity_path(@extension_activity), class: 'btn btn-success' do %>
         <%= fa_icon "business-time" %>
         Asignar dedicaciones
       <% end %>
-    <% end %>
+    <% end %> -->
   </div>
 </div>

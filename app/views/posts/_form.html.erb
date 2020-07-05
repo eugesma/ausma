@@ -1,17 +1,20 @@
 <%=  simple_form_for(post) do |f| %>
   <%= f.error_notification %>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-12">
+      <%= f.input :name, as: :string, label: "Nombre"%>
+    </div>
+    <div class="col-6">
       <div class="form-group">
-          <label class="form-control-label">Tipo</label>
+          <label class="form-control-label">Tipo de publicación</label>
           <%= f.collection_select :post_type_id, @post_types, :id, :name, {},
           { class: "selectpicker form-control", size: 6, :data => {width: "100%"},
-          "title"=>"Seleccionar tipo", required: true
+          "title"=>"Seleccionar tipo de publicación", required: true
           }%>
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-6">
       <div class="form-group">
         <%= f.input :published_at,  as: :tempus_dominus, label: 'Fecha de publicación',
           input_html: {
@@ -25,15 +28,11 @@
       </div>
     </div>
 
-    <div class="col-md-6">
-      <%= f.input :name, as: :string, label: "Nombre"%>
-    </div>
-
-    <div class="col-md-6">
+    <div class="col-12">
       <%= f.input :link, as: :string, required: true, label: "Link del adjunto", :placeholder => "Pegue la URL" %>
     </div>
   
-    <div class="col-md-6">
+    <div class="col-12">
       <div class="form-group">
         <label class="form-control-label">Docentes</label>
         <%= f.collection_select :teacher_ids, @teachers, :id, :fullname, {}, 

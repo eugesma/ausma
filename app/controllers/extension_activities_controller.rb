@@ -28,13 +28,13 @@ class ExtensionActivitiesController < ApplicationController
     authorize ExtensionActivity
     @extension_activity = ExtensionActivity.new
     @teachers = Teacher.select(:id, :profile_id)
-    @careers = Career.all
+    @extension_activity_types = ExtensionActivityType.all
   end
   
   def edit
     authorize @extension_activity
     @teachers = Teacher.all
-    @careers = Career.all
+    @extension_activity_types = ExtensionActivityType.all
   end
 
   # POST /extension_activities
@@ -49,7 +49,7 @@ class ExtensionActivitiesController < ApplicationController
         format.json { render :show, status: :created, location: @extension_activity }
       else
         @teachers = Teacher.all
-        @careers = Career.all
+        @extension_activity_types = ExtensionActivityType.all
         format.html { render :new }
         format.json { render json: @extension_activity.errors, status: :unprocessable_entity }
       end
@@ -65,7 +65,7 @@ class ExtensionActivitiesController < ApplicationController
         format.html { redirect_to @extension_activity, notice: 'La dedicación se ha modificado correctamente.' }
         format.json { render :show, status: :ok, location: @extension_activity }
       else
-        @careers = Career.all
+        @extension_activity_types = ExtensionActivityType.all
         format.html { render :edit }
         format.json { render json: @extension_activity.errors, status: :unprocessable_entity }
       end
@@ -104,8 +104,8 @@ class ExtensionActivitiesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def extension_activity_params
-    params.require(:extension_activity).permit(:name, :observation, :credit, :duration, :unity, :code, :career_id, :min_credit,
-      :min_preparation, :preparation, :min_implementation, :implementation, :evaluation, :min_evaluation, teacher_ids: [],
+    params.require(:extension_activity).permit(:name, :observation, :credit, :extension_activity_type_id,
+      :implementation, :preparation, :evaluation, :min_evaluation, teacher_ids: [],
       teacher_extension_activities_attributes: [ :id, :teacher_id, :quantity, :assistance_status_id ] 
     )
   end
