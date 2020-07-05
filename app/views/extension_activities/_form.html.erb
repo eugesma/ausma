@@ -8,24 +8,26 @@
       <%= f.input :observation, label: 'Observaciones' %>
     </div>
     <div class="col-12">
-      <%= f.input :extension_activity_type_id, label: 'Tipo de actividad', 
-        :collection => @extension_activity_types,
+      <%= f.input :extension_activity_type_id, label: 'Tipo de actividad', id: "activity-type",
+        :collection => @extension_activity_types.map {
+          |act| [act.name, act.id, {'data-prep' => act.preparation, 'data-prep-calc' => act.preparation_calc, 'data-evaluation' => act.evaluation }]
+        },
         required: true,
-        input_html: { class: "selectpicker", "title"=>"Seleccionar un tipo de actividad" } %>
+        input_html: { class: "selectpicker", "title"=>"Seleccionar un tipo de actividad", "size"=>"5", id: "activity-type" } %>
     </div>
   </div>
   <div class="row">
     <div class="col-3">
-      <%= f.input :implementation, label: "Implementación" %>
+      <%= f.input :implementation, label: "Implementación",  input_html: { id: "implementation" }, readonly: true %>
     </div>
     <div class="col-3"> 
-      <%= f.input :preparation, label: "Preparación" %>
+      <%= f.input :preparation, label: "Preparación",  input_html: { id: "preparation"} , readonly: true %>
     </div>
     <div class="col-3">
-      <%= f.input :evaluation, label: "Evaluación/consultas" %>
+      <%= f.input :evaluation, label: "Evaluación/consultas",  input_html: { id: "evaluation" }, readonly: true %>
     </div>
     <div class="col-3">
-      <%= f.input :credit, label: "Crédito" %>
+      <%= f.input :credit, label: "Crédito",  input_html: { id: "credit" }, readonly: true %>
     </div>
   </div>
   <div class="row">
@@ -34,7 +36,7 @@
       <%= f.collection_select :teacher_ids, @teachers, :id, :fullname, {label: "Docentes" }, 
         { class: "selectpicker", multiple: true, size: 6, :data => {width: "100%"},
           "data-none-results-text" => "No se encontró docente", "data-live-search"=>true,
-          "title"=>"Seleccionar docentes",
+          "title"=>"Seleccionar docentes", "size"=>"5"
         }
       %>
     </div>

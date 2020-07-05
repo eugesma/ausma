@@ -9,12 +9,14 @@
         <%= fa_icon "eye" %>
       <% end %>
     <% end %>
+    <!--
     <% if policy(extension_activity).assign_dedication? %>
       <%= link_to assign_dedication_extension_activity_path(extension_activity), class: 'btn btn-success btn-md', 
         title: 'Asignar dedicaciones', data: { toggle: 'tooltip', placement: 'top' } do %>
         <%= fa_icon "business-time" %>
       <% end %>
     <% end %>
+    -->
     <% if policy(extension_activity).edit? %>
       <%= link_to edit_extension_activity_path(extension_activity), class: 'btn btn-warning btn-md', 
         title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>

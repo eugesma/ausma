@@ -46,7 +46,7 @@ class Teacher < ApplicationRecord
   end
 
   def total_extension_activity_credits
-    self.teacher_extension_activities.sum(:total_credit)
+    self.extension_activities.sum(:credit)
   end
 
   def total_project_credits
