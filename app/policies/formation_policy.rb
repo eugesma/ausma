@@ -8,7 +8,7 @@ class FormationPolicy < ApplicationPolicy
   end
 
   def create?
-    user.has_any_role?(:admin, :secretaria)
+    user.has_any_role?(:admin, :secretaria, :docente)
   end
 
   def new?
