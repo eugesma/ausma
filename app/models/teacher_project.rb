@@ -18,6 +18,6 @@ class TeacherProject < ApplicationRecord
     :allow_destroy => true
 
   def calc_total_credit
-    self.total_credit = self.week_hours * self.project_role.multiple
+    self.total_credit = (self.week_hours * self.project.week_duration) * self.project_role.multiple
   end
 end

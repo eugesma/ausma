@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_04_202355) do
+ActiveRecord::Schema.define(version: 2020_07_08_012237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -330,6 +330,7 @@ ActiveRecord::Schema.define(version: 2020_07_04_202355) do
     t.integer "project_type", default: 0
     t.bigint "project_type_id", default: 1
     t.text "observation"
+    t.integer "week_duration"
     t.index ["project_type_id"], name: "index_projects_on_project_type_id"
   end
 

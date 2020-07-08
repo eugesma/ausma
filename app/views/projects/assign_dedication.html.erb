@@ -22,6 +22,12 @@
           <%= @project.observation %>
         </p>
       </div>
+      <div class="row">
+        <p class="col-3">
+          <strong>Duración:</strong>
+          <%= pluralize(@project.week_duration, "semana") %>
+        </p>
+      </div>
       <%=  simple_form_for(@project) do |f| %>
         <div class="card">
           <table class="table table-sm">
