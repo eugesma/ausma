@@ -28,6 +28,12 @@ class UserPolicy < ApplicationPolicy
     self.update?
   end
 
+  def show_top_brand?
+    unless user.has_any_role?(:admin, :secretaria)
+      user.has_role?(:docente)
+    end
+  end
+
   def update_permissions?
     if ( record.has_role? :admin ) && ( record == user )
       return true

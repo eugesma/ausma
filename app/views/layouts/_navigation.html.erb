@@ -1,4 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+  <% if policy(User).show_top_brand? %>
+    <div class="brand-container d-flex">
+      <a class="navbar-brand m-0 p-0" id="lig-brand" href="/">
+        <%= image_tag("uncoma-1.png", size: "40x40", alt: "Logo Uncoma", class: 'logo') %>
+        AUSMA SED
+      </a>
+    </div>
+  <% end %>
+
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <% if current_user.has_role? :admin %>
