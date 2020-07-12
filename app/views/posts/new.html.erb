@@ -6,13 +6,19 @@
     <div class="card-body">
       <%= render 'form', post: @post %>
     </div>
-    <div class="card-footer">
-      <button type='submit' name='commit' class='btn btn-success float-right' form='new_post'>
+    <div class="card-footer text-right">
+      <% if policy(Post).index? %>
+        <%= link_to posts_path, class: "btn btn-light mr-1" do %>
+          Volver
+        <% end %>
+      <% else %>
+        <%= link_to root_path, class: "btn btn-light mr-1" do %>
+          Volver
+        <% end %>
+      <% end %>
+      <button type='submit' name='commit' class='btn btn-success' form='new_post'>
         <%= fa_icon "check" %> Crear
       </button>
-      <%= link_to posts_path, class: "btn btn-light float-right mr-2" do %>
-        Volver
-      <% end %>
     </div>
   </div>
 </div>

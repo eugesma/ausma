@@ -57,5 +57,7 @@
         <%= number_to_currency(assignatures.sum(:total_credit), unit: "créditos", format: "%n %u") %>
       </div>
     </div>
+  <% else %>
+    No tienes académicas asignadas
   <% end %>
 </div>

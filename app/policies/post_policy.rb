@@ -1,10 +1,14 @@
 class PostPolicy < ApplicationPolicy
   def index?
-    user.has_any_role?(:admin, :secretaria, :docente)
+    user.has_any_role?(:admin, :secretaria)
   end
 
   def show?
-    index?
+    if user.has_any_role?(:admin, :secretaria)
+      return true
+    else
+      record.teachers.include?(user.teacher)
+    end
   end
 
   def create?

@@ -5,6 +5,7 @@ class Formation < ApplicationRecord
 
   # Relations
   belongs_to :formation_type
+  belongs_to :created_by, class_name: "User", optional: true
   has_many :teacher_formations, dependent: :destroy
   has_many :teachers, through: :teacher_formations
 

@@ -18,9 +18,9 @@
 
           <p>
             <strong>Docentes:</strong>
-              <% @post.teachers.each do |teacher| %>
-                <%= teacher.fullname %><%= teacher == @post.teachers.last ? ".": "," %>
-              <% end %>
+            <% @post.teachers.each do |teacher| %>
+              <%= teacher.fullname %><%= teacher == @post.teachers.last ? ".": "," %>
+            <% end %>
           </p>
 
           <% if @post.link.present? %>
@@ -53,12 +53,17 @@
             <span class="badge badge-info %>"><%= format_number(@post.credit) %>
           </p>
         </div>
-
       </div>
     </div>
     <div class="card-footer text-right">
-      <%= link_to posts_path, class: "btn btn-light mr-1" do %>
-        Volver
+      <% if policy(Post).index? %>
+        <%= link_to posts_path, class: "btn btn-light mr-1" do %>
+          Volver
+        <% end %>
+      <% else %>
+        <%= link_to root_path, class: "btn btn-light mr-1" do %>
+          Volver
+        <% end %>
       <% end %>
       <% if policy(@post).edit? %>
         <%= link_to edit_post_path(@post), class: "btn btn-warning mr-1" do %>

@@ -1,10 +1,14 @@
 class FormationPolicy < ApplicationPolicy
   def index?
-    user.has_any_role?(:admin, :secretaria, :docente)
+    user.has_any_role?(:admin, :secretaria)
   end
 
   def show?
-    index?
+    if user.has_any_role?(:admin, :secretaria)
+      return true
+    else
+      record.teachers.include?(user.teacher) || record.created_by == user
+    end
   end
 
   def create?

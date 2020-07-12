@@ -69,8 +69,14 @@
     </div>
   </div>
   <div class="card-footer text-right">
-    <%= link_to formations_path, class: "btn btn-light mr-1" do %>
-      Volver
+    <% if policy(Formation).index? %>
+      <%= link_to formations_path, class: "btn btn-light mr-1" do %>
+        Volver
+      <% end %>
+    <% else %>
+      <%= link_to root_path, class: "btn btn-light mr-1" do %>
+        Volver
+      <% end %>
     <% end %>
     <% if policy(@formation).edit? %>
       <%= link_to edit_formation_path(@formation), class: "btn btn-warning mr-1" do %>

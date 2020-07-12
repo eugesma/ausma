@@ -47,6 +47,7 @@ class FormationsController < ApplicationController
   # POST /formations.json
   def create
     @formation = Formation.new(formation_params)
+    @formation.created_by = current_user
     authorize @formation
 
     respond_to do |format|
@@ -98,7 +99,7 @@ class FormationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def formation_params
       params.require(:formation).permit(:name, :formation_type_id, :observation, :hours, :init_date, :certificate, :link, teacher_ids: [],
-        teacher_formations_attributes: [:id, :teacher_id, :teacher_formation_role_id]
+        teacher_formations_attributes: [:id, :teacher_id, :teacher_formation_role_id, :_destroy]
       )
     end
 end
