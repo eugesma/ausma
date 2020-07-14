@@ -29,6 +29,11 @@ class FormationsController < ApplicationController
     authorize Formation
     @formation = Formation.new
     @formation_types = FormationType.all
+
+    if policy(Formation).autoassign_formation?
+      @formation.teacher_formations.build(teacher: current_user.teacher)
+      @teacher_formation_roles = TeacherFormationRole.all
+    end
   end
 
   def assign_dedication

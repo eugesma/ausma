@@ -21,7 +21,24 @@
       <%= f.input :certificate, label: 'Certificado', input_html: { class: "selectpicker" },:collection => Formation.certificates.keys.to_a %>
     </div>
   </div>
-  <div class="row">
+  <% if policy(Formation).autoassign_formation? %>
+    <div class="row">
+      <%= f.simple_fields_for :teacher_formations, formation.teacher_formations do |tf| %>
+        <%= tf.input :teacher_id, :as => :hidden, :input_html => { class: 'supply-id', value: tf.object.teacher_id } %>
+        <div class="col-12">
+          <%= tf.collection_select :teacher_formation_role_id, @teacher_formation_roles, :id, :name, {},
+            { 
+              class: "selectpicker", size: 6, :data => {width: "100%"},
+              required: true,
+              "title"=>"Seleccionar rol",
+              label: "Rol en la formación"
+            }
+          %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="row mt-2">
     <div class="col-6">
       <%= f.input :init_date,  as: :tempus_dominus, label: 'Fecha de inicio',
         input_html: {

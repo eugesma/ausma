@@ -13,7 +13,9 @@
 ActiveRecord::Schema.define(version: 2020_07_12_150239) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -207,8 +209,8 @@ ActiveRecord::Schema.define(version: 2020_07_12_150239) do
 
   create_table "extension_activity_types", force: :cascade do |t|
     t.string "name"
-    t.decimal "preparation", precision: 9, scale: 2
     t.integer "preparation_calc", default: 0
+    t.decimal "preparation", precision: 9, scale: 2
     t.decimal "evaluation", precision: 9, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -225,9 +227,9 @@ ActiveRecord::Schema.define(version: 2020_07_12_150239) do
     t.string "name"
     t.bigint "formation_type_id"
     t.decimal "hours", precision: 9, scale: 2, default: "0.0"
-    t.text "observation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "observation"
     t.datetime "init_date"
     t.string "link"
     t.integer "certificate", default: 0
@@ -292,7 +294,7 @@ ActiveRecord::Schema.define(version: 2020_07_12_150239) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "post_type_id"
+    t.bigint "post_type_id", null: false
     t.datetime "published_at"
     t.string "link"
     t.bigint "created_by_id"
@@ -377,11 +379,11 @@ ActiveRecord::Schema.define(version: 2020_07_12_150239) do
     t.bigint "extension_activity_id"
     t.integer "duration", default: 0
     t.decimal "total_credit", precision: 9, default: "0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.decimal "preparation", precision: 9, scale: 2, default: "0.0"
     t.decimal "implementation", precision: 9, scale: 2, default: "0.0"
     t.decimal "evaluation", precision: 9, scale: 2, default: "0.0"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["extension_activity_id"], name: "index_teacher_extension_activities_on_extension_activity_id"
     t.index ["teacher_id"], name: "index_teacher_extension_activities_on_teacher_id"
   end
@@ -393,16 +395,25 @@ ActiveRecord::Schema.define(version: 2020_07_12_150239) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "teacher_formation_types", force: :cascade do |t|
+    t.string "name"
+    t.decimal "credit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "teacher_formations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "min_credit", precision: 9, scale: 2, default: "0.0"
+    t.bigint "teacher_formation_type_id"
     t.bigint "teacher_id"
     t.bigint "formation_id"
     t.bigint "teacher_formation_role_id"
     t.decimal "total_credit", precision: 9, scale: 2, default: "0.0"
     t.index ["formation_id"], name: "index_teacher_formations_on_formation_id"
     t.index ["teacher_formation_role_id"], name: "index_teacher_formations_on_teacher_formation_role_id"
+    t.index ["teacher_formation_type_id"], name: "index_teacher_formations_on_teacher_formation_type_id"
     t.index ["teacher_id"], name: "index_teacher_formations_on_teacher_id"
   end
 
@@ -519,6 +530,7 @@ ActiveRecord::Schema.define(version: 2020_07_12_150239) do
   add_foreign_key "teacher_extension_activities", "teachers"
   add_foreign_key "teacher_formations", "formations"
   add_foreign_key "teacher_formations", "teacher_formation_roles"
+  add_foreign_key "teacher_formations", "teacher_formation_types"
   add_foreign_key "teacher_formations", "teachers"
   add_foreign_key "teacher_meetings", "assistance_statuses"
   add_foreign_key "teacher_meetings", "meetings"

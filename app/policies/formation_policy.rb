@@ -15,6 +15,12 @@ class FormationPolicy < ApplicationPolicy
     user.has_any_role?(:admin, :secretaria, :docente)
   end
 
+  def autoassign_formation?
+    unless user.has_any_role?(:admin, :secretaria)
+      return user.has_role? :docente
+    end
+  end
+
   def new?
     create?
   end

@@ -19,6 +19,7 @@ class Formation < ApplicationRecord
 
   # Validations
   validates_presence_of :name, :formation_type, :hours, :init_date
+  validates_associated :teacher_formations
 
   filterrific(
     default_filter_params: { sorted_by: 'created_at_desc' },

@@ -3,39 +3,39 @@
     <h4><%= fa_icon "eye" %> Viendo <%= @formation.formation_type_name.downcase %> <%= @formation.name %></h4>
   </div>
   <div class="card-body fixed-panel">
-    <div class="row">
-      <p class="col-4">
-        <strong>Formación:</strong>
+    <div class="row p-2">
+      <div class="col-4">
+        <h5>Formación</h5>
         <%= @formation.name %>
-      </p>
-      <p class="col-4">
-        <strong>Fecha de inicio: </strong>
+      </div>
+      <div class="col-4">
+        <h5>Fecha de inicio</h5>
         <%= @formation.init_date.present? ? @formation.init_date.strftime("%d/%m/%Y") : "" %>
-      </p>
-      <p>
-        <strong>Observaciones: </strong>
+      </div>
+      <div class="col-4">
+        <h5>Observaciones</h5>
         <%= @formation.observation %>
-      </p>
+      </div>
     </div>
-    <div class="row">
-      <p class="col-4">
-        <strong>Tipo:</strong>
+    <div class="row p-2">
+      <div class="col-4">
+        <h5>Tipo</h5>
         <%= @formation.formation_type_name %>
-      </p>
-      <p class="col-4">
-        <strong>Duración:</strong>
+      </div>
+      <div class="col-4">
+        <h5>Duración</h5>
         <%= pluralize(format_number(@formation.hours), "hora") %>
-      </p>
-      <p class="col-2">
-        <strong>Certificado: </strong>
+      </div>
+      <div class="col-2">
+        <h5>Certificado</h5>
         <%= @formation.certificate.humanize %>
-      </p>
+      </div>
       <% if @formation.link.present? %>
-        <p class="col-2">
+        <div class="col-2">
           <a href="<%= @formation.link %>" class="btn btn-sm btn-primary" target="_blank">
             <%= fa_icon "external-link-alt" %> Más información
           </a>
-        </p>
+        </div>
       <% end %>
     </div>
     <div class="row">
