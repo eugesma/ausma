@@ -206,8 +206,10 @@ GEM
       activesupport (>= 5.2)
     popper_js (1.14.7)
     public_suffix (4.0.6)
-    puma (3.12.6)
-    puma (3.12.6-java)
+    puma (4.3.8)
+      nio4r (~> 2.0)
+    puma (4.3.8-java)
+      nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
     racc (1.5.2)
@@ -368,7 +370,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   pg_search
   popper_js (~> 1.14.5)
-  puma (~> 3.12)
+  puma (~> 4.3)
   pundit
   rails (~> 5.2.2)
   rails_admin (~> 2.0)
