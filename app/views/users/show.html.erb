@@ -1,38 +1,39 @@
-<div class="col-md-8 mx-auto">
-  <div class="card">
-    <div class="card-header">
-      <h5>
-        <%= fa_icon "eye" %> Viendo usuario <%= @user.fullname %>
-        <%= link_to users_admin_index_path, class: 'btn pull-right close-btn',
-          :title => 'Cerrar', :'data-placement'=>'top', :'data-toggle'=>'tooltip' do %>
-          <%= content_tag(:span, '', class: 'glyphicon glyphicon-remove') %>
-        <% end %>
-      </h5>
-    </div>
-    <div class="card-body" id="panel-body-new">
-      <div class='row'>
-        <div class="col-md-3">
-          <%= image_tag user_avatar(@user, 200), class:"img-thumbnail" %>
-        </div>
-        <div class="col-md-9">
-          <strong>DNI:</strong> <%= @user.username %><br>
-          <strong>Apellido y nombre:</strong> <%= @user.fullname %><br>
-          <strong><%= fa_icon "envelope" %></strong><%= @user.email %><br>
-          <strong>N° Empleado:</strong><%= @user.employee_num %><br>
-          <strong><%= fa_icon "lock" %></strong> <%= @user.roles.map(&:name).join(", ").humanize %>
-        </div> <!-- End col-md-12 -->
-      </div> <!-- End row -->
-    </div><!-- End panel body -->
-
-    <div class="card-footer text-right">
-      <%= link_to 'Volver', users_admin_index_path, class: "btn" %>
-      <% if policy(@user).edit_permissions? %>
-        <%= link_to edit_permissions_users_admin_path(@user), :"data-turbolinks" => false,
-          class: "btn btn-warning" do %>
-          <%= fa_icon "lock" %>
-          Editar permisos
-        <% end %>
+<div class="card">
+  <div class="card-header">
+    <div class="d-flex justify-content-between">
+      <div class="card-title h5">
+        <%= fa_icon "eye" %> 
+        Viendo usuario <%= @user.fullname %>
+      </div>
+      <%= link_to users_admin_index_path, class: 'btn close-btn',
+        :title => 'Cerrar', :'data-placement'=>'top', :'data-toggle'=>'tooltip' do %>
+        <%= fa_icon "times" %>
       <% end %>
     </div>
+  </div>
+  <div class="card-body fixed-panel" id="panel-body-new">
+    <div class='row'>
+      <div class="col-md-3">
+        <%= image_tag("profile-placeholder.png", size: "200x200", class:"img-thumbnail") %>
+      </div>
+      <div class="col-md-9">
+        <strong>DNI:</strong> <%= @user.username %><br>
+        <strong>Apellido y nombre:</strong> <%= @user.fullname %><br>
+        <strong><%= fa_icon "envelope" %></strong><%= @user.email %><br>
+        <strong>N° Empleado:</strong><%= @user.employee_num %><br>
+        <strong><%= fa_icon "lock" %></strong> <%= @user.roles.map(&:name).join(", ").humanize %>
+      </div> <!-- End col-md-12 -->
+    </div> <!-- End row -->
+  </div><!-- End panel body -->
+
+  <div class="card-footer text-right">
+    <%= link_to 'Volver', users_admin_index_path, class: "btn btn-light" %>
+    <% if policy(@user).edit_permissions? %>
+      <%= link_to edit_permissions_users_admin_path(@user), :"data-turbolinks" => false,
+        class: "btn btn-warning" do %>
+        <%= fa_icon "lock" %>
+        Editar permisos
+      <% end %>
+    <% end %>
   </div>
 </div>
