@@ -2,8 +2,15 @@
   <td class="text-truncate" style="max-width: 20em;"><%= formation.name %></td>
   <td><%= formation.formation_type_name %></td>
   <td><span class="badge badge-secondary"><%= formation.teachers.count %></span></td>
+  <td><span class="badge badge-<%= post_status_label(formation) %>"><%= formation.status.humanize %></span></td>
   <td><%= pluralize(format_number(formation.hours), "hora") %></td>
   <td class="text-right">
+    <% if policy(formation).validate? %>
+      <%= link_to confirm_validation_formation_path(formation), remote: true, class: 'btn btn-success',
+        title: 'Validar', data: { toggle: 'tooltip', placement: 'top' } do %>
+        <%= fa_icon "check" %>
+      <% end %>
+    <% end %>
     <% if policy(formation).show? %>
       <%= link_to formation_path(formation), class: 'btn btn-secondary btn-md', 
         title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>

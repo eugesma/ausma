@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     member do
       get :delete
       get :assign_dedication
+      get :confirm_validation
+      patch :validate
     end
   end
   

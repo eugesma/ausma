@@ -2,10 +2,12 @@ class Formation < ApplicationRecord
   include PgSearch::Model
     
   enum certificate: { no: 0, digital: 1, papel: 2 }
+  enum status: { auditoria: 0, validado: 1, rechazado: 2 }
 
   # Relations
   belongs_to :formation_type
   belongs_to :created_by, class_name: "User", optional: true
+  belongs_to :validated_by, class_name: "User", optional: true
   has_many :teacher_formations, dependent: :destroy
   has_many :teachers, through: :teacher_formations
 

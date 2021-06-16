@@ -37,6 +37,12 @@ class FormationPolicy < ApplicationPolicy
     user.has_any_role?(:admin, :secretaria)
   end
 
+  def validate?
+    unless record.validado?
+      user.has_any_role?(:admin, :secretaria)
+    end
+  end
+
   def destroy?
     user.has_any_role?(:admin, :secretaria)
   end

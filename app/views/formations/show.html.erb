@@ -1,6 +1,9 @@
 <div class="card">
   <div class="card-header">
-    <h5><%= fa_icon "eye" %> Viendo <%= @formation.formation_type_name.downcase %> <%= @formation.name %></h5>
+    <h5>
+      <%= fa_icon "eye" %> Viendo <%= @formation.formation_type_name.downcase %> <%= @formation.name %>
+      <span class="badge badge-<%= post_status_label(@formation) %>"><%= @formation.status.humanize %></span>
+    </h5>
   </div>
   <div class="card-body fixed-panel">
     <div class="row p-2">
@@ -88,6 +91,12 @@
       <%= link_to assign_dedication_formation_path(@formation), class: 'btn btn-success' do %>
         <%= fa_icon "business-time" %>
         Asignar dedicaciones
+      <% end %>
+    <% end %>
+    <% if policy(@formation).validate? %>
+      <%= link_to confirm_validation_formation_path(@formation), remote: true, class: 'btn btn-success ml-1' do %>
+        <%= fa_icon "check" %>
+        Validar
       <% end %>
     <% end %>
   </div>

@@ -1,5 +1,6 @@
 class FormationsController < ApplicationController
-  before_action :set_formation, only: [:show, :edit, :update, :destroy, :delete, :assign_dedication]
+  before_action :set_formation, only: [:show, :edit, :update, :destroy, :delete, :assign_dedication, 
+    :confirm_validation, :validate]
 
   # GET /formations
   # GET /formations.json
@@ -92,6 +93,22 @@ class FormationsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to formations_url, notice: 'La formación se ha enviado a la papelera correctamente.' }
       format.json { head :no_content }
+    end
+  end
+
+  def confirm_validation
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def validate
+    authorize @formation
+    @formation.validated_by = current_user
+    @formation.validado!
+    flash[:notice] = "La formación se ha validado correctamente"
+    respond_to do |format|
+      format.html { redirect_to @formation, notice: 'La formación se ha validado correctamente' }
     end
   end
 

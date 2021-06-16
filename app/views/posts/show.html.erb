@@ -1,82 +1,80 @@
-<div class="col-8 mx-auto">
-  <div class="card">
-    <div class="card-header">
-      <h5><%= fa_icon "eye" %> Viendo publicación <%= @post.name %></h5>
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-6">
-          <p>
-            <strong>Tipo:</strong>
-            <%= @post.post_type.name %>
-          </p>
-          
-          <p>
-            <strong>Nombre:</strong>
-            <%= @post.name %>
-          </p>
+<div class="card">
+  <div class="card-header">
+    <h5><%= fa_icon "eye" %> Viendo publicación <%= @post.name %></h5>
+  </div>
+  <div class="card-body fixed-panel">
+    <div class="row">
+      <div class="col-6">
+        <p>
+          <strong>Tipo:</strong>
+          <%= @post.post_type.name %>
+        </p>
+        
+        <p>
+          <strong>Nombre:</strong>
+          <%= @post.name %>
+        </p>
 
-          <p>
-            <strong>Docentes:</strong>
-            <% @post.teachers.each do |teacher| %>
-              <%= teacher.fullname %><%= teacher == @post.teachers.last ? ".": "," %>
-            <% end %>
-          </p>
-
-          <% if @post.link.present? %>
-            <p>
-              <strong>Adjunto: </strong>
-              <a href="<%= @post.link %>" class="btn btn-primary" target="_blank">
-                <%= fa_icon "external-link-alt" %> Link
-              </a>
-            </p>
+        <p>
+          <strong>Docentes:</strong>
+          <% @post.teachers.each do |teacher| %>
+            <%= teacher.fullname %><%= teacher == @post.teachers.last ? ".": "," %>
           <% end %>
-        </div>
-        <div class="col-6">
-          <p>
-            <strong>Fecha de publicación:</strong>
-            <%= @post.published_at.strftime("%d/%m/%Y") %>
-          </p>
+        </p>
 
+        <% if @post.link.present? %>
           <p>
-            <strong>Cargado por:</strong>
-            <%= @post.created_by.fullname %>
+            <strong>Adjunto: </strong>
+            <a href="<%= @post.link %>" class="btn btn-primary" target="_blank">
+              <%= fa_icon "external-link-alt" %> Link
+            </a>
           </p>
+        <% end %>
+      </div>
+      <div class="col-6">
+        <p>
+          <strong>Fecha de publicación:</strong>
+          <%= @post.published_at.strftime("%d/%m/%Y") %>
+        </p>
 
-          <p>
-            <strong>Estado:</strong>
-            <span class="badge badge-<%= post_status_label(@post) %>"><%= @post.status.humanize %>
-          </p>
+        <p>
+          <strong>Cargado por:</strong>
+          <%= @post.created_by.fullname %>
+        </p>
 
-          <p>
-            <strong>Créditos:</strong>
-            <span class="badge badge-info %>"><%= format_number(@post.credit) %>
-          </p>
-        </div>
+        <p>
+          <strong>Estado:</strong>
+          <span class="badge badge-<%= post_status_label(@post) %>"><%= @post.status.humanize %>
+        </p>
+
+        <p>
+          <strong>Créditos:</strong>
+          <span class="badge badge-info %>"><%= format_number(@post.credit) %>
+        </p>
       </div>
     </div>
-    <div class="card-footer text-right">
-      <% if policy(Post).index? %>
-        <%= link_to posts_path, class: "btn btn-light mr-1" do %>
-          Volver
-        <% end %>
-      <% else %>
-        <%= link_to root_path, class: "btn btn-light mr-1" do %>
-          Volver
-        <% end %>
+  </div>
+  <div class="card-footer text-right">
+    <% if policy(Post).index? %>
+      <%= link_to posts_path, class: "btn btn-light mr-1" do %>
+        Volver
       <% end %>
-      <% if policy(@post).edit? %>
-        <%= link_to edit_post_path(@post), class: "btn btn-warning mr-1" do %>
-          <%= fa_icon "edit" %>
-          Editar
-        <% end %>
+    <% else %>
+      <%= link_to root_path, class: "btn btn-light mr-1" do %>
+        Volver
       <% end %>
-      <% if policy(@post).validate? %>
-        <%= link_to validate_post_path(@post), method: :patch, class: "btn btn-success mr-1" do %>
-          <%= fa_icon "check" %>
-          Validar
-        <% end %>
+    <% end %>
+    <% if policy(@post).edit? %>
+      <%= link_to edit_post_path(@post), class: "btn btn-warning mr-1" do %>
+        <%= fa_icon "edit" %>
+        Editar
       <% end %>
-    </div>
+    <% end %>
+    <% if policy(@post).validate? %>
+      <%= link_to validate_post_path(@post), method: :patch, class: "btn btn-success mr-1" do %>
+        <%= fa_icon "check" %>
+        Validar
+      <% end %>
+    <% end %>
   </div>
 </div>

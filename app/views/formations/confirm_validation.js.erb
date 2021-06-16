@@ -1,0 +1,22 @@
+// Style modal
+$('.modal-header').addClass('bg-success text-white');
+
+// Add the dialog title
+$('#dialog h5').html("<i class='fa fa-check'></i>  Validar formación");
+
+// Render the edit form
+$('.modal-body').html('Esta seguro de que desea validar la formación "<%= @formation.name %>"?');
+
+// Add form button
+$('.modal-footer').html(
+  "<button type='button' class='btn btn-default pull-left' data-dismiss='modal'>Volver</button>"+
+  "<a data-method='patch' href='<%= validate_formation_path(@formation) %>' data-dismiss='modal' class='btn commit btn-primary pull-right' rel='nofollow'>Confirmar</a>"
+);
+
+// Show the dynamic dialog
+$('#dialog').modal("show");
+
+// Remove style
+$('#dialog').on('hidden.bs.modal', function () {
+  $('.modal-header').removeClass('bg-danger text-white');
+});
