@@ -1,13 +1,13 @@
 <div class="col-md-8 mx-auto">
   <div class="card">
     <div class="card-header">
-      <h3>
+      <h5>
         <%= fa_icon "eye" %> Viendo usuario <%= @user.fullname %>
         <%= link_to users_admin_index_path, class: 'btn pull-right close-btn',
           :title => 'Cerrar', :'data-placement'=>'top', :'data-toggle'=>'tooltip' do %>
           <%= content_tag(:span, '', class: 'glyphicon glyphicon-remove') %>
         <% end %>
-      </h3>
+      </h5>
     </div>
     <div class="card-body" id="panel-body-new">
       <div class='row'>
