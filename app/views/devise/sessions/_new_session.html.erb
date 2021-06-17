@@ -34,3 +34,27 @@
     <% end %>
   </div>
 </div>
+<footer class="row footer bg-light d-flex justify-content-center text-center">
+  <!-- Copyright -->
+    <div class='p-4'>
+      <p class="mb-0"><strong>DOCENTES</strong></p>
+      <span class="h4 counter"><%= User.with_role(:docente).count %></span>
+    </div>
+    <div class='p-4'>
+      <p class="mb-0"><strong>ACADÉMICAS</strong></p>
+      <span class="h4 counter"><%= Assignature.count %></span>
+    </div>
+    <div class='p-4'>
+      <p class="mb-0"><strong>REUNIONES</strong></p>
+      <span class="h4 counter"><%= Meeting.count %></span>
+    </div>
+    <div class='p-4'>
+      <p class="mb-0"><strong>PUBLICACIONES</strong></p>
+      <span class="h4 counter"><%= Post.count %></span>
+    </div>
+    <div class='p-4'>
+      <p class="mb-0"><strong>FORMACIONES</strong></p>
+      <span class="h4 counter"><%= Formation.count %></span>
+    </div>
+  <!-- Copyright -->
+</footer>

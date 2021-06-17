@@ -105,3 +105,12 @@ body{
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  opacity: 0.5;
+  color: #2666ac;
+}
