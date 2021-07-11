@@ -1,0 +1,12 @@
+<div class="col-5">
+  <%= f.input :year, label: 'Año' %>
+</div>
+<div class="col-5">
+  <%= f.input :number_of_days, label: 'Días hábiles' %>
+</div>
+<div class="col-2">
+  <%= link_to_remove_association  f, class: 'remove-tag btn btn-warning btn-sm', tabindex: -1,
+    title: 'Quitar', data: { toggle: 'tooltip', placement: 'top' } do %>
+      <%= fa_icon "minus" %>
+  <% end %>
+</div>

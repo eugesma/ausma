@@ -21,28 +21,52 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12">
+      <div class="col-6">
         <h4 class="border-bottom pb-2">Roles de proyectos</h4>
-      </div>
-      <div class="d-flex justify-content-center">
-        <div class="card ml-3">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>Rol</th>
-                <th>Múltiplo</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <% ProjectRole.all.each do |project_role| %>
+        <div class="d-flex justify-content-center">
+          <div class="card ml-3">
+            <table class="table table-hover">
+              <thead>
                 <tr>
-                  <td><%= project_role.name %></td>
-                  <td><%= project_role.multiple %></td>
+                  <th>Rol</th>
+                  <th>Múltiplo</th>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody>
+                <% ProjectRole.all.each do |project_role| %>
+                  <tr>
+                    <td><%= project_role.name %></td>
+                    <td><%= project_role.multiple %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <h4 class="border-bottom pb-2">Días hábiles por año</h4>
+        <div class="d-flex justify-content-center">
+          <div class="card ml-3">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Año</th>
+                  <th>Días</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @config.working_day_per_years.each do |wdpy| %>
+                  <tr>
+                    <td><%= wdpy.year %></td>
+                    <td><%= wdpy.number_of_days %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

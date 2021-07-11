@@ -9,5 +9,23 @@
     <div class='col-md-6'>
       <%= f.input :assignature_consultation_percentage, label: "% Consulta" %></td>
     </div>
+    <div class="col-12">
+      <h5 class="border-bottom pb-2">Días hábiles por año</h5>
+      <%= f.simple_fields_for :working_day_per_years do |wdpy| %>
+        <div class="row working-days">
+          <div class="col-5">
+            <%= wdpy.input :year, label: 'Año' %>
+          </div>
+          <div class="col-5">
+            <%= wdpy.input :number_of_days, label: 'Días hábiles' %>
+          </div>
+        </div>
+      <% end %>
+      <%= link_to_add_association f, :working_day_per_years, class: 'btn btn-primary btn-sm', id: 'add-nested',
+        data: {"association-insertion-node" => "div.working-days", "association-insertion-method" => "append"} do %>
+        <%= fa_icon "plus" %>
+        Agregar año
+      <% end %>
+    </div>
   </div>
 <% end %>

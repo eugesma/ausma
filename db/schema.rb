@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_16_031316) do
+ActiveRecord::Schema.define(version: 2021_07_11_041012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -491,6 +491,15 @@ ActiveRecord::Schema.define(version: 2021_06_16_031316) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  create_table "working_day_per_years", force: :cascade do |t|
+    t.bigint "config_id"
+    t.integer "year"
+    t.integer "number_of_days"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["config_id"], name: "index_working_day_per_years_on_config_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "assignatures", "careers"
   add_foreign_key "evaluation_assignatures", "assignatures"
@@ -532,4 +541,5 @@ ActiveRecord::Schema.define(version: 2021_06_16_031316) do
   add_foreign_key "teacher_projects", "teachers"
   add_foreign_key "teachers", "profiles"
   add_foreign_key "teachers", "users"
+  add_foreign_key "working_day_per_years", "configs"
 end
