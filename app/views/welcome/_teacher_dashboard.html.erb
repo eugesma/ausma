@@ -1,7 +1,20 @@
 <div class="mx-auto col-10">
   <div class="card">
     <div class="card-header">
-      <h4><%= fa_icon "file-alt"%> Mi currículum anual</h4>
+      <div class="h4 d-flex justify-content-start align-items-center">
+        <%= fa_icon "file-alt", class: 'mr-2'%> 
+        Mi currículum anual 
+        <div class="dropdown ml-2">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= @year.year %>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <% (2019..Date.today.year).step(1) do |year| %>
+              <%= link_to year, root_path(year: year), class: "dropdown-item" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="card-body fixed-panel-cv">
       <div class="row">

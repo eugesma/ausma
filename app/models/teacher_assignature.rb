@@ -1,4 +1,6 @@
 class TeacherAssignature < ApplicationRecord
+  include DateScopes
+
   belongs_to :teacher
   belongs_to :assignature
 

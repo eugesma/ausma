@@ -1,4 +1,5 @@
 class TeacherProject < ApplicationRecord
+  include DateScopes
 
   # Relations
   belongs_to :teacher

@@ -27,7 +27,16 @@ class Teacher < ApplicationRecord
   has_many :teacher_projects
   has_many :projects, through: :teacher_projects
 
+  # Delegations
   delegate :fullname, to: :profile
+  delegate :to_year, to: :teacher_formations, prefix: true
+  delegate :to_year, to: :teacher_assignatures, prefix: true
+  delegate :to_year, to: :teacher_meetings, prefix: true
+  delegate :to_year, to: :teacher_extension_activities, prefix: true
+  delegate :to_year, to: :teacher_dedications, prefix: true
+  delegate :to_year, to: :teacher_month_presences, prefix: true
+  delegate :to_year, to: :teacher_posts, prefix: true
+  delegate :to_year, to: :teacher_projects, prefix: true
 
   def total_credit_assignatures
     self.teacher_assignatures.sum(:total_credit)

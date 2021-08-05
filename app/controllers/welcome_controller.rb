@@ -1,16 +1,17 @@
 class WelcomeController < ApplicationController
   def index
-    if user_signed_in?
+    return unless user_signed_in?
+
     @teacher = current_user.teacher
-    @assignatures = @teacher.teacher_assignatures
-    @meetings = @teacher.teacher_meetings
-    @formations = @teacher.teacher_formations
-    @extension_activities = @teacher.teacher_extension_activities
-    @posts = @teacher.teacher_posts
-    @projects = @teacher.teacher_projects
+    @year = params[:year].present? ? Date.new(params[:year].to_i) : Date.today
+
+    @assignatures = @teacher.teacher_assignatures_to_year(@year)
+    @meetings = @teacher.teacher_meetings_to_year(@year)
+    @formations = @teacher.teacher_formations_to_year(@year)
+    @extension_activities = @teacher.teacher_extension_activities_to_year(@year)
+    @posts = @teacher.teacher_posts_to_year(@year)
+    @projects = @teacher.teacher_projects_to_year(@year)
 
     @total_credit_assignatures = @teacher.total_credit_assignatures
-    end
   end
-
 end

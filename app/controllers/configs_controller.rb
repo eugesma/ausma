@@ -33,6 +33,6 @@ class ConfigsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def config_params
     params.require(:config).permit(:assignature_preparation_percentage, :assignature_consultation_percentage,
-                                    working_day_per_years_attributes: [:id, :year, :number_of_days, :_destroy])
+                                   working_day_per_years_attributes: [:id, :year, :number_of_days, :_destroy])
   end
 end

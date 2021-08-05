@@ -1,4 +1,6 @@
 class TeacherExtensionActivity < ApplicationRecord
+  include DateScopes
+
   belongs_to :teacher
   belongs_to :extension_activity
 

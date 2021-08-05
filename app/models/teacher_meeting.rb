@@ -1,4 +1,6 @@
 class TeacherMeeting < ApplicationRecord
+  include DateScopes
+
   # Relations
   belongs_to :teacher
   belongs_to :meeting

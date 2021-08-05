@@ -1,12 +1,12 @@
-  <!-- Header -->
-  <header class="masthead">
-    <% if user_signed_in? %>
-      <% if current_user.has_any_role?(:docente) %>
-        <%= render "teacher_dashboard"%>
-      <% elsif current_user.has_any_role?(:admin, :secretaria) %>
-        <%= render "secretary_dashboard" %>
-      <% end %>
-    <% else %>
-      <%= render "devise/sessions/new_session" %>
+<!-- Header -->
+<header class="masthead">
+  <% if user_signed_in? %>
+    <% if current_user.has_any_role?(:docente) %>
+      <%= render "teacher_dashboard"%>
+    <% elsif current_user.has_any_role?(:admin, :secretaria) %>
+      <%= render "secretary_dashboard" %>
     <% end %>
-  </header>
+  <% else %>
+    <%= render "devise/sessions/new_session" %>
+  <% end %>
+</header>
