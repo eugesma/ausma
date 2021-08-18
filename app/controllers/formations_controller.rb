@@ -9,12 +9,7 @@ class FormationsController < ApplicationController
     @filterrific = initialize_filterrific(
       Formation,
       params[:filterrific],
-      persistence_id: false,
-      default_filter_params: { sorted_by: 'name_at_asc' },
-      available_filters: [
-        :search_by_name,
-        :sorted_by
-      ],
+      persistence_id: false
     ) or return
     @formations = @filterrific.find.page(params[:page]).per_page(15)
   end

@@ -1,31 +1,44 @@
 <div class="card">
   <div class="card-header">
-    <div class="row">
-      <div class="col-8">
-        <h4 class="title">
-          <%= fa_icon "user-graduate" %> Formaciones
-          <% if policy(Formation).new? %>
-            <%= link_to new_formation_path, class: "btn btn-primary" do %>
-              <%= fa_icon "plus" %> 
-              Nueva
-            <% end %>
+    <div class="row d-flex align-items-center">
+      <div class="col-3 h5">
+        <%= fa_icon "user-graduate" %> Formaciones
+        <% if policy(Formation).new? %>
+          <%= link_to new_formation_path, class: "btn btn-primary" do %>
+            <%= fa_icon "plus" %> 
+            Nueva
           <% end %>
-        </h4>
+        <% end %>
       </div>
-      <div class="col-md-1"><%= render_filterrific_spinner %></div>
-      <div class="col-md-3">
+      <div class="col-9">
         <%= form_for_filterrific @filterrific do |f| %>
-          <div class="input-group">
-            <%= f.text_field(
-              :search_by_name,
-              class: 'filterrific-periodically-observed form-control py-2 border-right-0 border',
-              placeholder: 'Nombre',
-              autocomplete: 'off',
-              ) 
-            %> 
-            <span class="input-group-append">
-              <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
-            </span>
+          <div class="row d-flex justify-content-end">
+            <div class="col d-flex justify-content-end align-items-center">
+              <%= render_filterrific_spinner %>
+              <%= link_to formations_path(reset: true), class: 'btn btn-secondary ml-2',
+                title: 'Reiniciar', data: { toggle: 'tooltip', placement: 'top' },
+                'data-disable-with' => "<i class='fa fa-redo fa-spin'></i>".html_safe do %>
+                <%= fa_icon 'redo' %>
+              <% end %>
+            </div>
+            <div class="col">
+              <%= f.text_field(
+                :search_by_teacher,
+                class: 'filterrific-periodically-observed form-control py-2 border-right-0 border',
+                placeholder: 'Docente',
+                autocomplete: 'off',
+                ) 
+              %>
+            </div>
+            <div class="col">
+              <%= f.text_field(
+                :search_by_name,
+                class: 'filterrific-periodically-observed form-control py-2 border-right-0 border',
+                placeholder: 'Formación',
+                autocomplete: 'off',
+                ) 
+              %> 
+            </div>
           </div>
         <% end %>
       </div>
