@@ -1,4 +1,5 @@
 <tr id="formation_<%=formation.id%>">
+  <td><%= formation.init_date.strftime("%d/%m/%Y") %></td>
   <td class="text-truncate" style="max-width: 20em;"><%= formation.name %></td>
   <td><%= formation.formation_type_name %></td>
   <td><span class="badge badge-secondary"><%= formation.teachers.count %></span></td>

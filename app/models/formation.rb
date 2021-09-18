@@ -5,7 +5,7 @@ class Formation < ApplicationRecord
   enum certificate: { no: 0, digital: 1, papel: 2 }
   enum status: { auditoria: 0, validado: 1, rechazado: 2 }
 
-  # Relations
+  # Relationships
   belongs_to :formation_type
   belongs_to :created_by, class_name: 'User', optional: true
   belongs_to :validated_by, class_name: 'User', optional: true
@@ -17,6 +17,7 @@ class Formation < ApplicationRecord
   delegate :name, to: :formation_type, prefix: :formation_type
   delegate :plus_percentage, to: :formation_type
 
+  # Nested attributes
   accepts_nested_attributes_for :teachers, :teacher_formations,
                                 reject_if: :all_blank,
                                 allow_destroy: true
@@ -26,21 +27,31 @@ class Formation < ApplicationRecord
   validates_associated :teacher_formations
 
   filterrific(
-    default_filter_params: { sorted_by: 'name_at_desc' },
+    default_filter_params: { sorted_by: 'fecha_inicio_desc' },
     available_filters: %i[search_by_teacher search_by_name sorted_by]
   )
 
   # Scopes
   scope :sorted_by, lambda { |sort_option|
-    # extract the sort direction from the param value.
     direction = sort_option =~ /desc$/ ? 'desc' : 'asc'
     case sort_option.to_s
-    when /^name_/s
-      # Ordenamiento por nombre
-      order("formations.name #{direction}")
+    when /^fecha_inicio_/s
+      # Sort by init_date
+      reorder("formations.init_date #{direction}")
+    when /^nombre_/s
+      # Sort by name
+      reorder("formations.name #{direction}")
     else
-      # Si no existe la opcion de ordenamiento se levanta la excepcion
       raise(ArgumentError, "Invalid sort option: #{sort_option.inspect}")
     end
   }
+
+  def self.options_for_sorted_by
+    [
+      ['Fecha (nueva primero)', 'fecha_inicio_desc'],
+      ['Fecha (antigua primero)', 'fecha_inicio_asc'],
+      ['Nombre (a-z)', 'nombre_asc'],
+      ['Nombre (z-a)', 'nombre_desc']
+    ]
+  end
 end

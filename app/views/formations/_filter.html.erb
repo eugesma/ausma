@@ -24,7 +24,16 @@
         placeholder: 'Formación',
         autocomplete: 'off',
         ) 
-      %> 
+      %>
+    </div>
+    <div class="col">
+      <div class="input-group">
+        <%= f.select(:sorted_by,
+          @filterrific.select_options[:sorted_by].map {
+            |status| [status.first, status.second]
+          },{},
+          { class: "selectpicker show-tick custom-select-pick", "data-width"=>"100%"}) %>
+      </div>
     </div>
   </div>
 <% end %>
