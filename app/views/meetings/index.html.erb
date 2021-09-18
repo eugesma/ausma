@@ -1,66 +1,24 @@
 <div class="card">
   <div class="card-header">
-    <h4 class="title">
+    <div class="row d-flex align-items-center">
+      <div class="col-3 h5">
       <%= fa_icon "users" %> Reuniones
-      <% if policy(Meeting).new? %>
-        <%= link_to new_meeting_path, class: "btn btn-primary" do %>
-          <%= fa_icon "plus" %> 
-          Nueva
+        <% if policy(Meeting).new? %>
+          <%= link_to new_meeting_path, class: "btn btn-primary" do %>
+            <%= fa_icon "plus" %> 
+            Nueva
+          <% end %>
         <% end %>
-      <% end %>
-    </h4>
+      </div>
+      <div class="col-9">
+        <%= render 'filter' %>
+      </div>
+    </div>
   </div>
   <div class="card-body fixed-panel-index">
-    <div class="card fixed-panel-list">
-      <table class="table table-hover table-striped table-sm">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Docentes invitados</th>
-            <th>Presentes</th>
-            <th>Ausentes</th>
-            <th>Ausentes s/a</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @meetings.each do |meeting| %>
-            <tr>
-              <td><%= meeting.name %></td>
-              <td><span class="badge badge-secondary"><%= meeting.teachers.count %></span></td>
-              <td><span class="badge badge-success"><%= meeting.count_assist %></span></td>
-              <td><span class="badge badge-secondary"><%= meeting.count_not_assist %></span></td>
-              <td><span class="badge badge-danger"><%= meeting.count_not_assist_without %></span></td>
-              <td class="text-right">
-                <% if policy(meeting).show? %>
-                  <%= link_to meeting_path(meeting), class: 'btn btn-secondary btn-md', 
-                    title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
-                    <%= fa_icon "eye" %>
-                  <% end %>
-                <% end %>
-                <% if policy(meeting).assign_dedication? %>
-                  <%= link_to assign_dedication_meeting_path(meeting), class: 'btn btn-success btn-md', 
-                    title: 'Asignar crédito', data: { toggle: 'tooltip', placement: 'top' } do %>
-                    <%= fa_icon "business-time" %>
-                  <% end %>
-                <% end %>
-                <% if policy(meeting).edit? %>
-                  <%= link_to edit_meeting_path(meeting), class: 'btn btn-warning btn-md', 
-                    title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>
-                    <%= fa_icon "edit" %>
-                  <% end %>
-                <% end %>
-                <% if policy(meeting).destroy? %>
-                  <%= link_to delete_meeting_path(meeting),
-                    class: 'btn btn-danger btn-md', title: 'Borrar', data: { toggle: 'tooltip', placement: 'top' } do %>
-                    <%= fa_icon "trash" %>
-                  <% end %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+    <%= render(
+      partial: 'meetings/list',
+      locals: { meetings: @meetings }
+    ) %>
   </div>
 </div>

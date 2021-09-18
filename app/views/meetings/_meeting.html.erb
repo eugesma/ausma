@@ -1,0 +1,34 @@
+<tr id="meeting_<%= meeting.id %>">
+  <td><%= meeting.since_date.strftime('%d/%m/%Y') %></td>
+  <td><%= meeting.name %></td>
+  <td><span class="badge badge-secondary"><%= meeting.teachers.count %></span></td>
+  <td><span class="badge badge-success"><%= meeting.count_assist %></span></td>
+  <td><span class="badge badge-secondary"><%= meeting.count_not_assist %></span></td>
+  <td><span class="badge badge-danger"><%= meeting.count_not_assist_without %></span></td>
+  <td class="text-right">
+    <% if policy(meeting).show? %>
+      <%= link_to meeting_path(meeting), class: 'btn btn-secondary btn-md', 
+        title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
+        <%= fa_icon "eye" %>
+      <% end %>
+    <% end %>
+    <% if policy(meeting).assign_dedication? %>
+      <%= link_to assign_dedication_meeting_path(meeting), class: 'btn btn-success btn-md', 
+        title: 'Asignar crédito', data: { toggle: 'tooltip', placement: 'top' } do %>
+        <%= fa_icon "business-time" %>
+      <% end %>
+    <% end %>
+    <% if policy(meeting).edit? %>
+      <%= link_to edit_meeting_path(meeting), class: 'btn btn-warning btn-md', 
+        title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>
+        <%= fa_icon "edit" %>
+      <% end %>
+    <% end %>
+    <% if policy(meeting).destroy? %>
+      <%= link_to delete_meeting_path(meeting),
+        class: 'btn btn-danger btn-md', title: 'Borrar', data: { toggle: 'tooltip', placement: 'top' } do %>
+        <%= fa_icon "trash" %>
+      <% end %>
+    <% end %>
+  </td>
+</tr>

@@ -1,8 +1,16 @@
 class MeetingsController < ApplicationController
-  before_action :set_meeting, only: [:show, :edit, :update, :destroy, :delete, :assign_dedication]
+  before_action :set_meeting, only: %i[show edit update destroy delete assign_dedication]
   def index
     authorize Meeting
-    @meetings = Meeting.all
+    @filterrific = initialize_filterrific(
+      Meeting,
+      params[:filterrific],
+      persistence_id: :meeting_filter,
+      select_options: {
+        sorted_by: Meeting.options_for_sorted_by
+      }
+    ) or return
+    @meetings = @filterrific.find.page(params[:page]).per_page(15)
   end
 
   def show
@@ -20,7 +28,7 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new
     @teachers = Teacher.select(:id, :profile_id)
   end
-  
+
   def edit
     authorize @meeting
     @teachers = Teacher.all
