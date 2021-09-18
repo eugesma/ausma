@@ -1,5 +1,4 @@
 class TeacherFormation < ApplicationRecord
-  include DateScopes
 
   # Relations
   belongs_to :teacher
@@ -10,8 +9,8 @@ class TeacherFormation < ApplicationRecord
   before_validation :calc_total_credit
 
   accepts_nested_attributes_for :teacher, :formation,
-    :reject_if => :all_blank,
-    :allow_destroy => true
+                                reject_if: :all_blank,
+                                allow_destroy: true
 
   # Delegates
   delegate :hours, :formation_type_name, to: :formation, allow_nil: true
@@ -21,6 +20,11 @@ class TeacherFormation < ApplicationRecord
 
   # Validations
   validates_presence_of :teacher, :formation, :teacher_formation_role
+
+  # Scopes
+  scope :to_year, lambda { |a_date|
+    joins(:formation).where(formations: { init_date: a_date.beginning_of_year..a_date.end_of_year })
+  }
 
   # Calc the total of credits
   def calc_total_credit
