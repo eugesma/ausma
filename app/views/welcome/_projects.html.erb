@@ -1,5 +1,5 @@
 <h4 class="row mb-0 pb-0">
-  <div class="col-8 mb-0 pb-0"><%= fa_icon "project-diagram" %> Proyectos</div>
+  <div class="col-8 mb-0 pb-0"><%= fa_icon "project-diagram" %> Proyectos <%= @year.year %></div>
   <div class="col-4 text-right mb-0 pb-0">
   </div>
 </h4>
@@ -7,6 +7,9 @@
 <div class="col-10 mx-auto">
   <% if projects.present? %>
     <div class="row border-bottom">
+      <div class="col">
+        Fecha
+      </div>
       <div class="col">
         Nombre
       </div>
@@ -25,6 +28,9 @@
     </div>
     <% projects.each do |project| %>
       <div class="row">
+        <div class="col">
+          <%= project.project.created_at.strftime('%d/%m/%Y') %>
+        </div>
         <div class="col">
           <%= project.project.name %>
         </div>

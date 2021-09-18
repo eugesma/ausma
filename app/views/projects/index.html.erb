@@ -15,6 +15,7 @@
       <table class="table table-hover table-striped table-sm">
         <thead>
           <tr>
+            <th>Fecha</th>
             <th>Código</th>
             <th>Nombre</th>
             <th>Tipo</th>
@@ -24,6 +25,7 @@
         <tbody>
           <% @projects.each do |project| %>
             <tr>
+              <td><%= project.created_at.strftime('%d/%m/%Y') %></td>
               <td><%= project.code %></td>
               <td class="text-truncate" style="max-width: 20em;"><%= project.name %></td>
               <td><%= project.project_type_name %></td>

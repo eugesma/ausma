@@ -1,6 +1,5 @@
 class TeacherFormation < ApplicationRecord
-
-  # Relations
+  # Relationships
   belongs_to :teacher
   belongs_to :formation
   belongs_to :teacher_formation_role

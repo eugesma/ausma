@@ -1,5 +1,5 @@
 <h4 class="row mb-0 pb-0">
-  <div class="col-8 mb-0 pb-0"><%= fa_icon "file-alt" %> Publicaciones</div>
+  <div class="col-8 mb-0 pb-0"><%= fa_icon "file-alt" %> Publicaciones <%= @year.year %></div>
   <div class="col-4 text-right mb-0 pb-0">
     <%= link_to 'Registrar publicación', new_post_path(), class: "btn btn-ight text-primary" %>
   </div>
@@ -8,6 +8,9 @@
 <div class="col-10 mx-auto">
   <% if posts.present? %>
     <div class="row border-bottom">
+      <div class="col">
+        Fecha publicación
+      </div>
       <div class="col">
         Nombre
       </div>
@@ -23,6 +26,9 @@
     </div>
     <% posts.each do |post| %>
       <div class="row">
+        <div class="col">
+          <%= post.post.published_at.strftime('%d/%m/%Y') %>
+        </div>
         <div class="col">
           <%= post.name %>
         </div>
