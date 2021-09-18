@@ -1,8 +1,16 @@
 class AssignaturesController < ApplicationController
-  before_action :set_assignature, only: [:show, :edit, :update, :destroy, :delete, :assign_dedication]
+  before_action :set_assignature, only: %i[show edit update destroy delete assign_dedication]
   def index
     authorize Assignature
-    @assignatures = Assignature.all
+    @filterrific = initialize_filterrific(
+      Assignature,
+      params[:filterrific],
+      persistence_id: :assignature_filter,
+      select_options: {
+        sorted_by: Assignature.options_for_sorted_by
+      }
+    ) or return
+    @assignatures = @filterrific.find.page(params[:page]).per_page(15)
   end
 
   def show
@@ -20,7 +28,7 @@ class AssignaturesController < ApplicationController
     @teachers = Teacher.all
     @careers = Career.all
   end
-  
+
   def edit
     authorize @assignature
     @teachers = Teacher.all

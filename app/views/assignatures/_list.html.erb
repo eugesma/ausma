@@ -1,0 +1,27 @@
+<div id="filterrific_results">
+  <% if @assignatures.present? %>
+    <div class="card fixed-panel-list">
+      <table class="table table-hover table-striped table-sm">
+        <thead>
+          <tr>
+            <th><%= filterrific_sorting_link(@filterrific, :nombre) %></th>
+            <th>Carrera</th>
+            <th>Docentes</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="assignatures">
+          <%= render @assignatures %>
+        </tbody>
+      </table>
+    </div>
+    <div id="page_links">
+      <%= will_paginate @assignatures, list_classes: %w(pagination justify-content-center), renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+    </div>
+  <% else %>
+    <%= render(
+      partial: 'shared/not_found_filter',
+      locals: { object_name: 'académicas' }
+    ) %>
+  <% end %>
+</div>

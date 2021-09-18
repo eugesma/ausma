@@ -1,0 +1,31 @@
+<tr id="assignature_<%= assignature.id %>">
+  <td><%= assignature.name %></td>
+  <td><%= assignature.career.present? ? assignature.career_name : "" %></td>
+  <td><span class="badge badge-secondary"><%= assignature.teachers.count %></span></td>
+  <td class="text-right">
+    <% if policy(assignature).show? %>
+      <%= link_to assignature_path(assignature), class: 'btn btn-secondary btn-md', 
+        title: 'Ver detalles', data: { toggle: 'tooltip', placement: 'top' } do %>
+        <%= fa_icon "eye" %>
+      <% end %>
+    <% end %>
+    <% if policy(assignature).assign_dedication? %>
+      <%= link_to assign_dedication_assignature_path(assignature), class: 'btn btn-success btn-md', 
+        title: 'Asignar dedicaciones', data: { toggle: 'tooltip', placement: 'top' } do %>
+        <%= fa_icon "business-time" %>
+      <% end %>
+    <% end %>
+    <% if policy(assignature).edit? %>
+      <%= link_to edit_assignature_path(assignature), class: 'btn btn-warning btn-md', 
+        title: 'Editar', data: { toggle: 'tooltip', placement: 'top' } do %>
+        <%= fa_icon "edit" %>
+      <% end %>
+    <% end %>
+    <% if policy(assignature).destroy? %>
+      <%= link_to delete_assignature_path(assignature), remote: true,
+        class: 'btn btn-danger btn-md', title: 'Borrar', data: { toggle: 'tooltip', placement: 'top' } do %>
+        <%= fa_icon "trash" %>
+      <% end %>
+    <% end %>
+  </td>
+</tr>

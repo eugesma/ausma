@@ -1,5 +1,6 @@
 class Meeting < ApplicationRecord
   include PgSearch::Model
+  include DefaultScopes
 
   # Relationships
   has_many :teacher_meetings, dependent: :destroy
@@ -16,25 +17,10 @@ class Meeting < ApplicationRecord
 
   filterrific(
     default_filter_params: { sorted_by: 'fecha_desc' },
-    available_filters: [
-      :search_by_teacher,
-      :search_by_name,
-      :search_by_name,
-      :sorted_by
-    ]
+    available_filters: %i[search_by_teacher search_by_name search_by_name sorted_by]
   )
 
   # Scopes
-  pg_search_scope :search_by_teacher,
-                  associated_against: { profiles: %i[last_name first_name] },
-                  using: { tsearch: { prefix: true } }, # Buscar coincidencia desde las primeras letras.
-                  ignoring: :accents # Ignorar tildes.
-
-  pg_search_scope :search_by_name,
-                  against: :name,
-                  using: { tsearch: { prefix: true } }, # Buscar coincidencia desde las primeras letras.
-                  ignoring: :accents # Ignorar tildes.
-
   scope :sorted_by, lambda { |sort_option|
     direction = sort_option =~ /desc$/ ? 'desc' : 'asc'
     case sort_option.to_s

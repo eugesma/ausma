@@ -1,5 +1,6 @@
 class Formation < ApplicationRecord
   include PgSearch::Model
+  include DefaultScopes
 
   enum certificate: { no: 0, digital: 1, papel: 2 }
   enum status: { auditoria: 0, validado: 1, rechazado: 2 }
@@ -30,16 +31,6 @@ class Formation < ApplicationRecord
   )
 
   # Scopes
-  pg_search_scope :search_by_teacher,
-                  associated_against: { profiles: %i[last_name first_name] },
-                  using: { tsearch: { prefix: true } }, # Buscar coincidencia desde las primeras letras.
-                  ignoring: :accents # Ignorar tildes.
-
-  pg_search_scope :search_by_name,
-                  against: :name,
-                  using: { tsearch: {prefix: true } }, # Buscar coincidencia desde las primeras letras.
-                  ignoring: :accents # Ignorar tildes.
-
   scope :sorted_by, lambda { |sort_option|
     # extract the sort direction from the param value.
     direction = sort_option =~ /desc$/ ? 'desc' : 'asc'

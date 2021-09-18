@@ -1,0 +1,39 @@
+<%= form_for_filterrific @filterrific do |f| %>
+  <div class="row d-flex justify-content-end">
+    <div class="col d-flex justify-content-end align-items-center">
+      <%= render_filterrific_spinner %>
+      <%= link_to reset_filterrific_url, class: 'btn btn-secondary ml-2',
+        title: 'Reiniciar', data: { toggle: 'tooltip', placement: 'top' },
+        'data-disable-with' => "<i class='fa fa-redo fa-spin'></i>".html_safe do %>
+        <%= fa_icon 'redo' %>
+      <% end %>
+    </div>
+    <div class="col">
+      <%= f.text_field(
+        :search_by_name,
+        class: 'filterrific-periodically-observed form-control py-2 border-right-0 border',
+        placeholder: 'Nombre',
+        autocomplete: 'off',
+        ) 
+      %> 
+    </div>
+    <div class="col">
+      <%= f.text_field(
+        :search_by_teacher,
+        class: 'filterrific-periodically-observed form-control py-2 border-right-0 border',
+        placeholder: 'Docente',
+        autocomplete: 'off',
+        ) 
+      %>
+    </div>
+    <div class="col">
+      <div class="input-group">
+        <%= f.select(:sorted_by,
+          @filterrific.select_options[:sorted_by].map {
+            |status| [status.first, status.second]
+          },{},
+          { class: "selectpicker show-tick custom-select-pick", "data-width"=>"100%"}) %>
+      </div>
+    </div>
+  </div>
+<% end %>
