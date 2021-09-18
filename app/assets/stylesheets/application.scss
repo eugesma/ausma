@@ -114,3 +114,25 @@ body{
   opacity: 0.5;
   color: #2666ac;
 }
+
+.custom-select-pick{
+  button.dropdown-toggle{
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    &:focus{
+      outline: none !important;
+      border: none;
+    }
+  }
+  .btn-light:focus, .btn-light.focus {
+    box-shadow: 0 0 0.2rem 0.1rem $primary;
+  }
+}

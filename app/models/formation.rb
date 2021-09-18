@@ -28,7 +28,7 @@ class Formation < ApplicationRecord
 
   filterrific(
     default_filter_params: { sorted_by: 'fecha_inicio_desc' },
-    available_filters: %i[search_by_teacher search_by_name sorted_by]
+    available_filters: %i[search_by_teacher search_by_name for_statuses sorted_by]
   )
 
   # Scopes
@@ -45,6 +45,20 @@ class Formation < ApplicationRecord
       raise(ArgumentError, "Invalid sort option: #{sort_option.inspect}")
     end
   }
+
+  scope :for_statuses, lambda { |values|
+    return all if values.blank?
+
+    where(status: statuses.values_at(*Array(values)))
+  }
+
+  def self.options_for_status
+    [
+      ['Auditoria', 'auditoria', 'warning'],
+      ['Validado', 'validado', 'success'],
+      ['Rechazado', 'rechazado', 'danger']
+    ]
+  end
 
   def self.options_for_sorted_by
     [

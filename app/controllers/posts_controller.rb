@@ -8,7 +8,11 @@ class PostsController < ApplicationController
     @filterrific = initialize_filterrific(
       Post,
       params[:filterrific],
-      persistence_id: :post_filter
+      persistence_id: :post_filter,
+      select_options: {
+        sorted_by: Post.options_for_sorted_by,
+        with_status: Post.options_for_status
+      }
     ) or return
     @posts = @filterrific.find.page(params[:page]).per_page(15)
   end

@@ -10,6 +10,15 @@
     </div>
     <div class="col">
       <%= f.text_field(
+        :search_by_name,
+        class: 'filterrific-periodically-observed form-control py-2 border-right-0 border',
+        placeholder: 'Formación',
+        autocomplete: 'off',
+        ) 
+      %>
+    </div>
+    <div class="col">
+      <%= f.text_field(
         :search_by_teacher,
         class: 'filterrific-periodically-observed form-control py-2 border-right-0 border',
         placeholder: 'Docente',
@@ -18,13 +27,20 @@
       %>
     </div>
     <div class="col">
-      <%= f.text_field(
-        :search_by_name,
-        class: 'filterrific-periodically-observed form-control py-2 border-right-0 border',
-        placeholder: 'Formación',
-        autocomplete: 'off',
-        ) 
-      %>
+      <div class="input-group">
+        <%= f.select(:for_statuses,
+          @filterrific.select_options[:with_status].map {
+            |status| [status.first, status.second, data: {'content': "<span class='badge badge-"+status.third+"'>"+status.first+"</span>"}]
+          },{include_blank: false, include_hidden: false},
+          { 
+            class: "selectpicker show-tick custom-select-pick", 
+            multiple: true,
+            allow_blank: false,
+            title: 'Estado',
+            "data-width"=>"100%"
+          }
+        ) %>
+      </div>
     </div>
     <div class="col">
       <div class="input-group">

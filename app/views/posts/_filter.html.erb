@@ -2,7 +2,7 @@
   <div class="row d-flex justify-content-end">
     <div class="col d-flex justify-content-end align-items-center">
       <%= render_filterrific_spinner %>
-      <%= link_to reset_filterrific_url, class: 'btn btn-secondary ml-2',
+      <%= link_to posts_path(reset: true), class: 'btn btn-secondary ml-2',
         title: 'Reiniciar', data: { toggle: 'tooltip', placement: 'top' },
         'data-disable-with' => "<i class='fa fa-redo fa-spin'></i>".html_safe do %>
         <%= fa_icon 'redo' %>
@@ -12,7 +12,7 @@
       <%= f.text_field(
         :search_by_name,
         class: 'filterrific-periodically-observed form-control py-2 border-right-0 border',
-        placeholder: 'Reunión',
+        placeholder: 'Publicación',
         autocomplete: 'off',
         ) 
       %> 
@@ -25,6 +25,22 @@
         autocomplete: 'off',
         ) 
       %>
+    </div>
+    <div class="col">
+      <div class="input-group">
+        <%= f.select(:for_statuses,
+          @filterrific.select_options[:with_status].map {
+            |status| [status.first, status.second, data: {'content': "<span class='badge badge-"+status.third+"'>"+status.first+"</span>"}]
+          },{include_blank: false, include_hidden: false},
+          { 
+            class: "selectpicker show-tick custom-select-pick", 
+            multiple: true,
+            allow_blank: false,
+            title: 'Estado',
+            "data-width"=>"100%"
+          }
+        ) %>
+      </div>
     </div>
     <div class="col">
       <div class="input-group">

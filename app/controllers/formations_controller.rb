@@ -11,7 +11,8 @@ class FormationsController < ApplicationController
       params[:filterrific],
       persistence_id: :formations_filter,
       select_options: {
-        sorted_by: Formation.options_for_sorted_by
+        sorted_by: Formation.options_for_sorted_by,
+        with_status: Formation.options_for_status
       }
     ) or return
     @formations = @filterrific.find.page(params[:page]).per_page(15)

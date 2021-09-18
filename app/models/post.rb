@@ -22,8 +22,8 @@ class Post < ApplicationRecord
   validates_presence_of :name, :post_type, :link, :published_at, :created_by
 
   filterrific(
-    default_filter_params: { sorted_by: 'name_at_asc' },
-    available_filters: %i[search_by_teacher search_by_name sorted_by]
+    default_filter_params: { sorted_by: 'fecha_publicada_asc' },
+    available_filters: %i[search_by_teacher search_by_name for_statuses sorted_by]
   )
 
   # Scopes
@@ -40,11 +40,37 @@ class Post < ApplicationRecord
   scope :sorted_by, lambda { |sort_option|
     direction = sort_option =~ /desc$/ ? 'desc' : 'asc'
     case sort_option.to_s
-    when /^name_/s
+    when /^fecha_publicada_/s
+      # Sort by published_at
+      reorder("posts.published_at #{direction}")
+    when /^nombre_/s
       # Sort by post name
-      order("posts.name #{direction}")
+      reorder("posts.name #{direction}")
     else
       raise(ArgumentError, "Invalid sort option: #{sort_option.inspect}")
     end
   }
+
+  scope :for_statuses, lambda { |values|
+    return all if values.blank?
+
+    where(status: statuses.values_at(*Array(values)))
+  }
+
+  def self.options_for_status
+    [
+      ['Auditoria', 'auditoria', 'warning'],
+      ['Validado', 'validado', 'success'],
+      ['Rechazado', 'rechazado', 'danger']
+    ]
+  end
+
+  def self.options_for_sorted_by
+    [
+      ['Fecha (nueva primero)', 'fecha_publicada_desc'],
+      ['Fecha (antigua primero)', 'fecha_publicada_asc'],
+      ['Nombre (a-z)', 'nombre_asc'],
+      ['Nombre (z-a)', 'nombre_desc']
+    ]
+  end
 end
