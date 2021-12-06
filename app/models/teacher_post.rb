@@ -9,7 +9,7 @@ class TeacherPost < ApplicationRecord
                                 allow_destroy: true
 
   # Delegations
-  delegate :name, :post_type_name, :status, :credit, to: :post
+  delegate :name, :post_type_name, :status, :credit, to: :post, allow_nil: true
 
   # Scopes
   scope :to_year, lambda { |a_date|
